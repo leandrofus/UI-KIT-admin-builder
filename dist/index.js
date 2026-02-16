@@ -1,20 +1,21 @@
 'use strict';
 
-var chunkMXJF2CTP_js = require('./chunk-MXJF2CTP.js');
-var chunkHBWXWLG3_js = require('./chunk-HBWXWLG3.js');
-var chunkA7QXEUVF_js = require('./chunk-A7QXEUVF.js');
-var chunkSVD7KPU6_js = require('./chunk-SVD7KPU6.js');
-var chunkG2IQSWID_js = require('./chunk-G2IQSWID.js');
-var chunkBHNUSCJS_js = require('./chunk-BHNUSCJS.js');
-var chunkGUG6HX7G_js = require('./chunk-GUG6HX7G.js');
+var chunkORBJJGXX_js = require('./chunk-ORBJJGXX.js');
+var chunkJGIGTIL4_js = require('./chunk-JGIGTIL4.js');
+var chunkCXZHMULA_js = require('./chunk-CXZHMULA.js');
+var chunkTSJV3NKF_js = require('./chunk-TSJV3NKF.js');
+var chunkCGOZX2FL_js = require('./chunk-CGOZX2FL.js');
+var chunkUSZU7PLJ_js = require('./chunk-USZU7PLJ.js');
+var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
+var chunkGXJ26MCG_js = require('./chunk-GXJ26MCG.js');
 
 // src/index.ts
 var VERSION = "0.1.0";
 var LIB_INFO = {
-  name: "@dnstyle/dynamic-ui-kit",
+  name: "dynamic-ui-kit",
   version: VERSION,
   description: "JSON-driven dynamic UI components for React",
-  repository: "https://github.com/leandrofus/dnstyle-whatsappcrm"
+  repository: "https://github.com/leandrofus/UI-KIT-admin-builder"
 };
 /**
  * @fileoverview Dynamic UI Kit - Main Entry Point
@@ -37,337 +38,385 @@ var LIB_INFO = {
  * import { FieldRegistry } from '@dnstyle/dynamic-ui-kit/fields';
  */
 
+Object.defineProperty(exports, "AdvancedSearchModal", {
+  enumerable: true,
+  get: function () { return chunkORBJJGXX_js.AdvancedSearchModal; }
+});
 Object.defineProperty(exports, "DynamicModal", {
   enumerable: true,
-  get: function () { return chunkMXJF2CTP_js.DynamicModal; }
+  get: function () { return chunkORBJJGXX_js.DynamicModal; }
 });
 Object.defineProperty(exports, "FormRenderer", {
   enumerable: true,
-  get: function () { return chunkMXJF2CTP_js.FormRenderer; }
+  get: function () { return chunkORBJJGXX_js.FormRenderer; }
+});
+Object.defineProperty(exports, "KanbanRenderer", {
+  enumerable: true,
+  get: function () { return chunkORBJJGXX_js.KanbanRenderer; }
+});
+Object.defineProperty(exports, "SidebarRenderer", {
+  enumerable: true,
+  get: function () { return chunkORBJJGXX_js.SidebarRenderer; }
+});
+Object.defineProperty(exports, "TabRenderer", {
+  enumerable: true,
+  get: function () { return chunkORBJJGXX_js.TabRenderer; }
 });
 Object.defineProperty(exports, "TableRenderer", {
   enumerable: true,
-  get: function () { return chunkMXJF2CTP_js.TableRenderer; }
+  get: function () { return chunkORBJJGXX_js.TableRenderer; }
 });
 Object.defineProperty(exports, "TableToolbar", {
   enumerable: true,
-  get: function () { return chunkMXJF2CTP_js.TableToolbar; }
+  get: function () { return chunkORBJJGXX_js.TableToolbar; }
 });
 Object.defineProperty(exports, "useColumnConfig", {
   enumerable: true,
-  get: function () { return chunkHBWXWLG3_js.useColumnConfig; }
+  get: function () { return chunkJGIGTIL4_js.useColumnConfig; }
 });
 Object.defineProperty(exports, "useFormState", {
   enumerable: true,
-  get: function () { return chunkHBWXWLG3_js.useFormState; }
+  get: function () { return chunkJGIGTIL4_js.useFormState; }
 });
 Object.defineProperty(exports, "usePaginatedData", {
   enumerable: true,
-  get: function () { return chunkHBWXWLG3_js.usePaginatedData; }
+  get: function () { return chunkJGIGTIL4_js.usePaginatedData; }
+});
+Object.defineProperty(exports, "useServerTableData", {
+  enumerable: true,
+  get: function () { return chunkJGIGTIL4_js.useServerTableData; }
 });
 Object.defineProperty(exports, "useTableSelection", {
   enumerable: true,
-  get: function () { return chunkHBWXWLG3_js.useTableSelection; }
+  get: function () { return chunkJGIGTIL4_js.useTableSelection; }
 });
 Object.defineProperty(exports, "commonTransformers", {
   enumerable: true,
-  get: function () { return chunkA7QXEUVF_js.commonTransformers; }
+  get: function () { return chunkCXZHMULA_js.commonTransformers; }
 });
 Object.defineProperty(exports, "createAxiosAdapter", {
   enumerable: true,
-  get: function () { return chunkA7QXEUVF_js.createAxiosAdapter; }
+  get: function () { return chunkCXZHMULA_js.createAxiosAdapter; }
 });
 Object.defineProperty(exports, "createFormAdapter", {
   enumerable: true,
-  get: function () { return chunkA7QXEUVF_js.createFormAdapter; }
+  get: function () { return chunkCXZHMULA_js.createFormAdapter; }
 });
 Object.defineProperty(exports, "createServiceAdapter", {
   enumerable: true,
-  get: function () { return chunkA7QXEUVF_js.createServiceAdapter; }
+  get: function () { return chunkCXZHMULA_js.createServiceAdapter; }
 });
 Object.defineProperty(exports, "CheckboxField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.CheckboxField; }
+  get: function () { return chunkTSJV3NKF_js.CheckboxField; }
 });
 Object.defineProperty(exports, "CurrencyField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.CurrencyField; }
+  get: function () { return chunkTSJV3NKF_js.CurrencyField; }
 });
 Object.defineProperty(exports, "FieldRegistry", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.FieldRegistry; }
+  get: function () { return chunkTSJV3NKF_js.FieldRegistry; }
 });
 Object.defineProperty(exports, "FieldRegistryContext", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.FieldRegistryContext; }
+  get: function () { return chunkTSJV3NKF_js.FieldRegistryContext; }
 });
 Object.defineProperty(exports, "HiddenField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.HiddenField; }
+  get: function () { return chunkTSJV3NKF_js.HiddenField; }
 });
 Object.defineProperty(exports, "NumberField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.NumberField; }
+  get: function () { return chunkTSJV3NKF_js.NumberField; }
 });
 Object.defineProperty(exports, "SelectField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.SelectField; }
+  get: function () { return chunkTSJV3NKF_js.SelectField; }
 });
 Object.defineProperty(exports, "SwitchField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.SwitchField; }
+  get: function () { return chunkTSJV3NKF_js.SwitchField; }
 });
 Object.defineProperty(exports, "TextField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.TextField; }
+  get: function () { return chunkTSJV3NKF_js.TextField; }
 });
 Object.defineProperty(exports, "TextareaField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.TextareaField; }
+  get: function () { return chunkTSJV3NKF_js.TextareaField; }
 });
 Object.defineProperty(exports, "baseFields", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.baseFields; }
+  get: function () { return chunkTSJV3NKF_js.baseFields; }
 });
 Object.defineProperty(exports, "createFieldFactory", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.createFieldFactory; }
+  get: function () { return chunkTSJV3NKF_js.createFieldFactory; }
 });
 Object.defineProperty(exports, "getDefaultRegistry", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.getDefaultRegistry; }
+  get: function () { return chunkTSJV3NKF_js.getDefaultRegistry; }
 });
 Object.defineProperty(exports, "getField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.getField; }
+  get: function () { return chunkTSJV3NKF_js.getField; }
 });
 Object.defineProperty(exports, "registerField", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.registerField; }
+  get: function () { return chunkTSJV3NKF_js.registerField; }
 });
 Object.defineProperty(exports, "registerFields", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.registerFields; }
+  get: function () { return chunkTSJV3NKF_js.registerFields; }
 });
 Object.defineProperty(exports, "setDefaultRegistry", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.setDefaultRegistry; }
+  get: function () { return chunkTSJV3NKF_js.setDefaultRegistry; }
 });
 Object.defineProperty(exports, "useFieldFactory", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.useFieldFactory; }
+  get: function () { return chunkTSJV3NKF_js.useFieldFactory; }
 });
 Object.defineProperty(exports, "useFieldRegistry", {
   enumerable: true,
-  get: function () { return chunkSVD7KPU6_js.useFieldRegistry; }
-});
-Object.defineProperty(exports, "ConfigLoader", {
-  enumerable: true,
-  get: function () { return chunkG2IQSWID_js.ConfigLoader; }
+  get: function () { return chunkTSJV3NKF_js.useFieldRegistry; }
 });
 Object.defineProperty(exports, "assertValidConfig", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.assertValidConfig; }
-});
-Object.defineProperty(exports, "createConfigLoader", {
-  enumerable: true,
-  get: function () { return chunkG2IQSWID_js.createConfigLoader; }
+  get: function () { return chunkCGOZX2FL_js.assertValidConfig; }
 });
 Object.defineProperty(exports, "formatValidationErrors", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.formatValidationErrors; }
+  get: function () { return chunkCGOZX2FL_js.formatValidationErrors; }
 });
-Object.defineProperty(exports, "parseConfig", {
+Object.defineProperty(exports, "isLikelyTranslationKey", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.parseConfig; }
+  get: function () { return chunkCGOZX2FL_js.isLikelyTranslationKey; }
 });
-Object.defineProperty(exports, "parseFormConfig", {
+Object.defineProperty(exports, "translateConfig", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.parseFormConfig; }
-});
-Object.defineProperty(exports, "parseTableConfig", {
-  enumerable: true,
-  get: function () { return chunkG2IQSWID_js.parseTableConfig; }
+  get: function () { return chunkCGOZX2FL_js.translateConfig; }
 });
 Object.defineProperty(exports, "validateConfig", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.validateConfig; }
+  get: function () { return chunkCGOZX2FL_js.validateConfig; }
 });
 Object.defineProperty(exports, "validateFormConfig", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.validateFormConfig; }
+  get: function () { return chunkCGOZX2FL_js.validateFormConfig; }
 });
 Object.defineProperty(exports, "validateTableConfig", {
   enumerable: true,
-  get: function () { return chunkG2IQSWID_js.validateTableConfig; }
+  get: function () { return chunkCGOZX2FL_js.validateTableConfig; }
+});
+Object.defineProperty(exports, "ConfigLoader", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.ConfigLoader; }
+});
+Object.defineProperty(exports, "createConfigLoader", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.createConfigLoader; }
+});
+Object.defineProperty(exports, "getModalSubmitLabel", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.getModalSubmitLabel; }
+});
+Object.defineProperty(exports, "getModalTitle", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.getModalTitle; }
+});
+Object.defineProperty(exports, "parseConfig", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.parseConfig; }
+});
+Object.defineProperty(exports, "parseFormConfig", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.parseFormConfig; }
+});
+Object.defineProperty(exports, "parseModalConfig", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.parseModalConfig; }
+});
+Object.defineProperty(exports, "parseTableConfig", {
+  enumerable: true,
+  get: function () { return chunkUSZU7PLJ_js.parseTableConfig; }
 });
 Object.defineProperty(exports, "calculatePagination", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.calculatePagination; }
+  get: function () { return chunkG4EIC5OB_js.calculatePagination; }
 });
 Object.defineProperty(exports, "cn", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.cn; }
+  get: function () { return chunkG4EIC5OB_js.cn; }
 });
 Object.defineProperty(exports, "compareValues", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.compareValues; }
+  get: function () { return chunkG4EIC5OB_js.compareValues; }
 });
 Object.defineProperty(exports, "debounce", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.debounce; }
+  get: function () { return chunkG4EIC5OB_js.debounce; }
 });
 Object.defineProperty(exports, "deepMerge", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.deepMerge; }
+  get: function () { return chunkG4EIC5OB_js.deepMerge; }
 });
 Object.defineProperty(exports, "evaluateConditions", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.evaluateConditions; }
+  get: function () { return chunkG4EIC5OB_js.evaluateConditions; }
 });
 Object.defineProperty(exports, "filterBySearchTerm", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.filterBySearchTerm; }
+  get: function () { return chunkG4EIC5OB_js.filterBySearchTerm; }
 });
 Object.defineProperty(exports, "formatDate", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.formatDate; }
+  get: function () { return chunkG4EIC5OB_js.formatDate; }
 });
 Object.defineProperty(exports, "formatPhone", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.formatPhone; }
+  get: function () { return chunkG4EIC5OB_js.formatPhone; }
 });
 Object.defineProperty(exports, "formatValue", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.formatValue; }
+  get: function () { return chunkG4EIC5OB_js.formatValue; }
 });
 Object.defineProperty(exports, "generateId", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.generateId; }
+  get: function () { return chunkG4EIC5OB_js.generateId; }
 });
 Object.defineProperty(exports, "getNestedValue", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.getNestedValue; }
+  get: function () { return chunkG4EIC5OB_js.getNestedValue; }
 });
 Object.defineProperty(exports, "getRowKey", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.getRowKey; }
+  get: function () { return chunkG4EIC5OB_js.getRowKey; }
 });
 Object.defineProperty(exports, "hasNestedValue", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.hasNestedValue; }
+  get: function () { return chunkG4EIC5OB_js.hasNestedValue; }
 });
 Object.defineProperty(exports, "matchesSearchTerm", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.matchesSearchTerm; }
+  get: function () { return chunkG4EIC5OB_js.matchesSearchTerm; }
 });
 Object.defineProperty(exports, "omit", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.omit; }
+  get: function () { return chunkG4EIC5OB_js.omit; }
 });
 Object.defineProperty(exports, "paginateData", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.paginateData; }
+  get: function () { return chunkG4EIC5OB_js.paginateData; }
 });
 Object.defineProperty(exports, "pick", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.pick; }
+  get: function () { return chunkG4EIC5OB_js.pick; }
 });
 Object.defineProperty(exports, "setNestedValue", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.setNestedValue; }
+  get: function () { return chunkG4EIC5OB_js.setNestedValue; }
 });
 Object.defineProperty(exports, "sortData", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.sortData; }
+  get: function () { return chunkG4EIC5OB_js.sortData; }
 });
 Object.defineProperty(exports, "throttle", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.throttle; }
+  get: function () { return chunkG4EIC5OB_js.throttle; }
 });
 Object.defineProperty(exports, "validateEmail", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateEmail; }
+  get: function () { return chunkG4EIC5OB_js.validateEmail; }
 });
 Object.defineProperty(exports, "validateField", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateField; }
+  get: function () { return chunkG4EIC5OB_js.validateField; }
 });
 Object.defineProperty(exports, "validateForm", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateForm; }
+  get: function () { return chunkG4EIC5OB_js.validateForm; }
 });
 Object.defineProperty(exports, "validateMax", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateMax; }
+  get: function () { return chunkG4EIC5OB_js.validateMax; }
 });
 Object.defineProperty(exports, "validateMaxLength", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateMaxLength; }
+  get: function () { return chunkG4EIC5OB_js.validateMaxLength; }
 });
 Object.defineProperty(exports, "validateMin", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateMin; }
+  get: function () { return chunkG4EIC5OB_js.validateMin; }
 });
 Object.defineProperty(exports, "validateMinLength", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateMinLength; }
+  get: function () { return chunkG4EIC5OB_js.validateMinLength; }
 });
 Object.defineProperty(exports, "validatePattern", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validatePattern; }
+  get: function () { return chunkG4EIC5OB_js.validatePattern; }
 });
 Object.defineProperty(exports, "validateRequired", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateRequired; }
+  get: function () { return chunkG4EIC5OB_js.validateRequired; }
 });
 Object.defineProperty(exports, "validateUrl", {
   enumerable: true,
-  get: function () { return chunkBHNUSCJS_js.validateUrl; }
+  get: function () { return chunkG4EIC5OB_js.validateUrl; }
 });
 Object.defineProperty(exports, "I18n", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.I18n; }
+  get: function () { return chunkGXJ26MCG_js.I18n; }
 });
 Object.defineProperty(exports, "I18nContext", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.I18nContext; }
+  get: function () { return chunkGXJ26MCG_js.I18nContext; }
 });
 Object.defineProperty(exports, "I18nProvider", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.I18nProvider; }
+  get: function () { return chunkGXJ26MCG_js.I18nProvider; }
 });
 Object.defineProperty(exports, "defaultEnTranslations", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.defaultEnTranslations; }
+  get: function () { return chunkGXJ26MCG_js.defaultEnTranslations; }
 });
 Object.defineProperty(exports, "defaultEsTranslations", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.defaultEsTranslations; }
+  get: function () { return chunkGXJ26MCG_js.defaultEsTranslations; }
 });
 Object.defineProperty(exports, "getI18n", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.getI18n; }
+  get: function () { return chunkGXJ26MCG_js.getI18n; }
 });
 Object.defineProperty(exports, "initI18n", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.initI18n; }
+  get: function () { return chunkGXJ26MCG_js.initI18n; }
+});
+Object.defineProperty(exports, "resolveLabel", {
+  enumerable: true,
+  get: function () { return chunkGXJ26MCG_js.resolveLabel; }
 });
 Object.defineProperty(exports, "t", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.t; }
+  get: function () { return chunkGXJ26MCG_js.t; }
 });
 Object.defineProperty(exports, "tp", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.tp; }
+  get: function () { return chunkGXJ26MCG_js.tp; }
+});
+Object.defineProperty(exports, "tx", {
+  enumerable: true,
+  get: function () { return chunkGXJ26MCG_js.tx; }
 });
 Object.defineProperty(exports, "useI18n", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.useI18n; }
+  get: function () { return chunkGXJ26MCG_js.useI18n; }
 });
 Object.defineProperty(exports, "useTranslatedValidation", {
   enumerable: true,
-  get: function () { return chunkGUG6HX7G_js.useTranslatedValidation; }
+  get: function () { return chunkGXJ26MCG_js.useTranslatedValidation; }
 });
 exports.LIB_INFO = LIB_INFO;
 exports.VERSION = VERSION;

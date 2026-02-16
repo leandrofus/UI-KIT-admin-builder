@@ -352,8 +352,8 @@ export type {
 export const VERSION = '0.1.0';
 
 export const LIB_INFO = {
-  name: '@dnstyle/dynamic-ui-kit',
+  name: 'dynamic-ui-kit',
   version: VERSION,
   description: 'JSON-driven dynamic UI components for React',
-  repository: 'https://github.com/leandrofus/dnstyle-whatsappcrm',
+  repository: 'https://github.com/leandrofus/UI-KIT-admin-builder',
 };

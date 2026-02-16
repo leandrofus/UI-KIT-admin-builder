@@ -1,4 +1,4 @@
-# @dnstyle/dynamic-ui-kit
+# dynamic-ui-kit
 
 A framework-agnostic, JSON-driven UI component library for building dynamic tables, forms, and modals with React.
 
@@ -15,11 +15,9 @@ A framework-agnostic, JSON-driven UI component library for building dynamic tabl
 ## Installation
 
 ```bash
-npm install @dnstyle/dynamic-ui-kit
+npm install dynamic-ui-kit
 # or
-yarn add @dnstyle/dynamic-ui-kit
-# or for local development
-npm install ../path/to/dynamic-ui-kit
+yarn add dynamic-ui-kit
 ```
 
 ## Quick Start
@@ -27,7 +25,7 @@ npm install ../path/to/dynamic-ui-kit
 ### Using Hooks
 
 ```tsx
-import { usePaginatedData, useFormState } from '@dnstyle/dynamic-ui-kit';
+import { usePaginatedData, useFormState } from 'dynamic-ui-kit';
 
 function MyTable() {
   const { state, actions, getPageData } = usePaginatedData({
@@ -66,7 +64,7 @@ function MyForm() {
 ### Using Service Adapters
 
 ```tsx
-import { createServiceAdapter } from '@dnstyle/dynamic-ui-kit';
+import { createServiceAdapter } from 'dynamic-ui-kit';
 
 const productsService = createServiceAdapter({
   baseUrl: '/api',
@@ -98,7 +96,7 @@ import {
   FieldRegistry, 
   registerField, 
   useFieldFactory 
-} from '@dnstyle/dynamic-ui-kit';
+} from 'dynamic-ui-kit';
 
 // Register a custom field
 registerField({
@@ -129,7 +127,7 @@ function DynamicForm({ config }) {
 ### Validating Configuration
 
 ```tsx
-import { validateConfig, parseConfig } from '@dnstyle/dynamic-ui-kit';
+import { validateConfig, parseConfig } from 'dynamic-ui-kit';
 
 // Validate a config
 const result = validateConfig(rawConfig);
@@ -150,22 +148,22 @@ The library supports tree-shaking with multiple entry points:
 
 ```tsx
 // Main entry (all exports)
-import { usePaginatedData, validateConfig } from '@dnstyle/dynamic-ui-kit';
+import { usePaginatedData, validateConfig } from 'dynamic-ui-kit';
 
 // Core utilities
-import { formatValue, cn, debounce } from '@dnstyle/dynamic-ui-kit/core';
+import { formatValue, cn, debounce } from 'dynamic-ui-kit/core';
 
 // Hooks only
-import { useFormState, useTableSelection } from '@dnstyle/dynamic-ui-kit/hooks';
+import { useFormState, useTableSelection } from 'dynamic-ui-kit/hooks';
 
 // Adapters
-import { createServiceAdapter, createAxiosAdapter } from '@dnstyle/dynamic-ui-kit/adapters';
+import { createServiceAdapter, createAxiosAdapter } from 'dynamic-ui-kit/adapters';
 
 // Field system
-import { FieldRegistry, TextField, baseFields } from '@dnstyle/dynamic-ui-kit/fields';
+import { FieldRegistry, TextField, baseFields } from 'dynamic-ui-kit/fields';
 
 // Config system
-import { validateFormConfig, parseTableConfig } from '@dnstyle/dynamic-ui-kit/config';
+import { validateFormConfig, parseTableConfig } from 'dynamic-ui-kit/config';
 ```
 
 ## API Reference
@@ -230,8 +228,8 @@ The library supports light/dark theming:
 ### Using TableRenderer
 
 ```tsx
-import { TableRenderer } from '@dnstyle/dynamic-ui-kit';
-import '@dnstyle/dynamic-ui-kit/styles';
+import { TableRenderer } from 'dynamic-ui-kit';
+import 'dynamic-ui-kit/styles';
 
 const tableConfig = {
   columns: [
@@ -292,8 +290,8 @@ function UserTable() {
 ### Using FormRenderer
 
 ```tsx
-import { FormRenderer } from '@dnstyle/dynamic-ui-kit';
-import '@dnstyle/dynamic-ui-kit/styles';
+import { FormRenderer } from 'dynamic-ui-kit';
+import 'dynamic-ui-kit/styles';
 
 const formConfig = {
   id: 'product-form',
@@ -371,8 +369,8 @@ function ProductForm() {
 ### Using DynamicModal
 
 ```tsx
-import { DynamicModal } from '@dnstyle/dynamic-ui-kit';
-import '@dnstyle/dynamic-ui-kit/styles';
+import { DynamicModal } from 'dynamic-ui-kit';
+import 'dynamic-ui-kit/styles';
 
 function EditProductModal({ product, isOpen, onClose }) {
   return (
@@ -451,12 +449,12 @@ Import the CSS styles to use the default styling:
 
 ```tsx
 // Import all styles
-import '@dnstyle/dynamic-ui-kit/styles';
+import 'dynamic-ui-kit/styles';
 
 // Or import specific component styles
-import '@dnstyle/dynamic-ui-kit/styles/table';
-import '@dnstyle/dynamic-ui-kit/styles/form';
-import '@dnstyle/dynamic-ui-kit/styles/modal';
+import 'dynamic-ui-kit/styles/table';
+import 'dynamic-ui-kit/styles/form';
+import 'dynamic-ui-kit/styles/modal';
 ```
 
 The styles use CSS custom properties for easy theming:
@@ -490,7 +488,7 @@ The styles use CSS custom properties for easy theming:
 The library includes built-in i18n support:
 
 ```tsx
-import { I18nProvider, initI18n } from '@dnstyle/dynamic-ui-kit';
+import { I18nProvider, initI18n } from 'dynamic-ui-kit';
 
 // Initialize with Spanish
 initI18n({ locale: 'es' });
@@ -577,7 +575,7 @@ npm run dev
 
 ## License
 
-MIT © DNStyle
+MIT © Leandro Fusco
 
 ## Contributing
 

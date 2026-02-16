@@ -13,6 +13,7 @@ import {
   parseFormConfig,
   type RawFormConfig,
   type RawSectionConfig,
+  type RawFieldConfig,
   type ParserOptions,
 } from './ConfigParser';
 
@@ -37,7 +38,7 @@ export interface RawModalConfig extends Omit<RawFormConfig, 'title'> {
   closeOnEscape?: boolean;
   closeOnBackdrop?: boolean;
   /** Flat fields (no sections) - will be wrapped in a default section */
-  fields?: Record<string, unknown>[];
+  fields?: RawFieldConfig[];
   sections?: RawSectionConfig[];
   columns?: number;
   footer?: {

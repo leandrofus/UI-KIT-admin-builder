@@ -1,4 +1,4 @@
-export { useColumnConfig, useFormState, usePaginatedData, useTableSelection } from '../chunk-VDK6GOMH.mjs';
-import '../chunk-MWNP5OJS.mjs';
+export { useColumnConfig, useFormState, usePaginatedData, useServerTableData, useTableSelection } from '../chunk-7FJC5PAY.mjs';
+import '../chunk-ZYRLE26I.mjs';
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

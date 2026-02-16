@@ -202,7 +202,6 @@ export function useServerTableData<T extends DataRecord = DataRecord>(
 
   useEffect(() => {
     return () => {
-      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
       if (abortRef.current) abortRef.current.abort();
     };
   }, []);
