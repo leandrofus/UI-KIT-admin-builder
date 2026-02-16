@@ -1,0 +1,571 @@
+/**
+ * Form Component Styles
+ * 
+ * Styles for FormRenderer and its child components.
+ * Uses CSS custom properties for theming.
+ * 
+ * @module styles/form
+ */
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES
+   ========================================================================== */
+
+:root {
+  /* Form Colors */
+  --dui-form-primary: var(--v2-primary, #3b82f6);
+  --dui-form-primary-hover: var(--v2-primary-hover, #2563eb);
+  --dui-form-danger: var(--v2-danger, #ef4444);
+  --dui-form-danger-hover: var(--v2-danger-hover, #dc2626);
+  --dui-form-success: var(--v2-success, #10b981);
+  --dui-form-warning: var(--v2-warning, #f59e0b);
+
+  /* Form Backgrounds */
+  --dui-form-bg: var(--v2-surface, #ffffff);
+  --dui-form-section-bg: var(--v2-surface-2, #f9fafb);
+  --dui-form-input-bg: var(--v2-surface, #ffffff);
+  --dui-form-input-disabled-bg: var(--v2-gray-100, #f3f4f6);
+
+  /* Form Text */
+  --dui-form-text: var(--v2-on-surface, #111827);
+  --dui-form-text-muted: var(--v2-on-surface-secondary, #6b7280);
+  --dui-form-text-error: var(--v2-danger, #ef4444);
+  --dui-form-text-success: var(--v2-success, #059669);
+  --dui-form-placeholder: var(--v2-input-placeholder, #9ca3af);
+
+  /* Form Borders */
+  --dui-form-border-color: var(--v2-input-border, #d1d5db);
+  --dui-form-border-focus: var(--v2-primary, #3b82f6);
+  --dui-form-border-error: var(--v2-danger, #ef4444);
+  --dui-form-border-radius: 0.375rem;
+  
+  /* Form Spacing */
+  --dui-form-gap: 1.5rem;
+  --dui-form-padding: 1rem;
+  --dui-form-field-gap: 0.5rem;
+  
+  /* Form Typography */
+  --dui-form-font-size: 0.875rem;
+  --dui-form-font-size-sm: 0.75rem;
+  --dui-form-font-size-lg: 1rem;
+  --dui-form-line-height: 1.5;
+  --dui-form-label-weight: 500;
+  
+  /* Form Shadows */
+  --dui-form-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --dui-form-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --dui-form-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  
+  /* Form Transitions */
+  --dui-form-transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dui-form-bg: var(--v2-surface, #1f2937);
+    --dui-form-section-bg: var(--v2-surface, #111827);
+    --dui-form-input-bg: var(--v2-gray-700, #374151);
+    --dui-form-input-disabled-bg: var(--v2-gray-600, #4b5563);
+    --dui-form-text: var(--v2-on-surface, #f9fafb);
+    --dui-form-text-muted: var(--v2-on-surface-secondary, #9ca3af);
+    --dui-form-placeholder: var(--v2-input-placeholder, #6b7280);
+    --dui-form-border-color: var(--v2-gray-300, #4b5563);
+    --dui-form-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Theme override classes - allow component-level theme control */
+.dui-theme--dark {
+  --dui-form-bg: var(--v2-surface, #1f2937);
+  --dui-form-section-bg: var(--v2-surface, #111827);
+  --dui-form-input-bg: var(--v2-gray-700, #374151);
+  --dui-form-input-disabled-bg: var(--v2-gray-600, #4b5563);
+  --dui-form-text: var(--v2-on-surface, #f9fafb);
+  --dui-form-text-muted: var(--v2-on-surface-secondary, #9ca3af);
+  --dui-form-placeholder: var(--v2-input-placeholder, #6b7280);
+  --dui-form-border-color: var(--v2-gray-300, #4b5563);
+  --dui-form-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+.dui-theme--light {
+  --dui-form-bg: var(--v2-surface, #ffffff);
+  --dui-form-section-bg: var(--v2-surface-2, #f9fafb);
+  --dui-form-input-bg: var(--v2-surface, #ffffff);
+  --dui-form-input-disabled-bg: var(--v2-gray-100, #f3f4f6);
+  --dui-form-text: var(--v2-on-surface, #111827);
+  --dui-form-text-muted: var(--v2-on-surface-secondary, #6b7280);
+  --dui-form-placeholder: var(--v2-input-placeholder, #9ca3af);
+  --dui-form-border-color: var(--v2-input-border, #d1d5db);
+  --dui-form-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* ==========================================================================
+   FORM CONTAINER
+   ========================================================================== */
+
+.dui-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-form-gap);
+  background-color: var(--dui-form-bg);
+  color: var(--dui-form-text);
+  font-size: var(--dui-form-font-size);
+  line-height: var(--dui-form-line-height);
+}
+
+/* ==========================================================================
+   FORM HEADER
+   ========================================================================== */
+
+.dui-form__header {
+  padding-bottom: var(--dui-form-padding);
+  border-bottom: 1px solid var(--dui-form-border-color);
+}
+
+.dui-form__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dui-form-text);
+}
+
+.dui-form__description {
+  margin: 0.5rem 0 0 0;
+  font-size: var(--dui-form-font-size-sm);
+  color: var(--dui-form-text-muted);
+}
+
+/* ==========================================================================
+   FORM BODY
+   ========================================================================== */
+
+.dui-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-form-gap);
+}
+
+/* ==========================================================================
+   FORM SECTION
+   ========================================================================== */
+
+.dui-form-section {
+  background-color: var(--dui-form-section-bg);
+  border: 1px solid var(--dui-form-border-color);
+  border-radius: var(--dui-form-border-radius);
+  overflow: hidden;
+}
+
+.dui-form-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: var(--dui-form-padding);
+  background-color: var(--dui-form-section-bg);
+  border-bottom: 1px solid var(--dui-form-border-color);
+}
+
+.dui-form-section__header--collapsible {
+  cursor: pointer;
+  user-select: none;
+  transition: var(--dui-form-transition);
+}
+
+.dui-form-section__header--collapsible:hover {
+  background-color: var(--dui-form-border-color);
+}
+
+.dui-form-section__icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: var(--dui-form-primary);
+}
+
+.dui-form-section__title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.dui-form-section__title {
+  margin: 0;
+  font-size: var(--dui-form-font-size-lg);
+  font-weight: 600;
+  color: var(--dui-form-text);
+}
+
+.dui-form-section__description {
+  margin: 0.25rem 0 0 0;
+  font-size: var(--dui-form-font-size-sm);
+  color: var(--dui-form-text-muted);
+}
+
+.dui-form-section__collapse-icon {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--dui-form-text-muted);
+  transition: transform 200ms ease;
+}
+
+.dui-form-section__collapse-icon--collapsed {
+  transform: rotate(-90deg);
+}
+
+.dui-form-section__content {
+  padding: var(--dui-form-padding);
+  background-color: var(--dui-form-bg);
+}
+
+/* ==========================================================================
+   FORM FIELD
+   ========================================================================== */
+
+.dui-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dui-form-field-gap);
+}
+
+.dui-field--checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.dui-field--error .dui-field__input,
+.dui-field--error .dui-field__select,
+.dui-field--error .dui-field__textarea {
+  border-color: var(--dui-form-border-error);
+}
+
+/* ==========================================================================
+   FIELD LABEL
+   ========================================================================== */
+
+.dui-field__label {
+  display: block;
+  font-size: var(--dui-form-font-size-sm);
+  font-weight: var(--dui-form-label-weight);
+  color: var(--dui-form-text);
+}
+
+.dui-field__required {
+  margin-left: 0.25rem;
+  color: var(--dui-form-danger);
+}
+
+/* ==========================================================================
+   INPUT FIELDS
+   ========================================================================== */
+
+.dui-field__input,
+.dui-field__select,
+.dui-field__textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--dui-form-font-size);
+  line-height: var(--dui-form-line-height);
+  color: var(--dui-form-text);
+  background-color: var(--dui-form-input-bg);
+  border: 1px solid var(--dui-form-border-color);
+  border-radius: var(--dui-form-border-radius);
+  box-shadow: var(--dui-form-shadow-sm);
+  transition: var(--dui-form-transition);
+  outline: none;
+}
+
+.dui-field__input::placeholder,
+.dui-field__textarea::placeholder {
+  color: var(--dui-form-placeholder);
+}
+
+.dui-field__input:focus,
+.dui-field__select:focus,
+.dui-field__textarea:focus {
+  border-color: var(--dui-form-border-focus);
+  box-shadow: var(--dui-form-shadow-focus);
+}
+
+.dui-field__input:disabled,
+.dui-field__select:disabled,
+.dui-field__textarea:disabled {
+  background-color: var(--dui-form-input-disabled-bg);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dui-field__input:read-only,
+.dui-field__textarea:read-only {
+  background-color: var(--dui-form-input-disabled-bg);
+}
+
+.dui-field__textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   CHECKBOX AND SWITCH
+   ========================================================================== */
+
+.dui-field__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: var(--dui-form-font-size);
+  color: var(--dui-form-text);
+}
+
+.dui-field__checkbox,
+.dui-field__radio {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--dui-form-primary);
+}
+
+.dui-field__switch {
+  position: relative;
+  width: 2.5rem;
+  height: 1.25rem;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  background-color: var(--dui-form-border-color);
+  border: none;
+  border-radius: 9999px;
+  transition: var(--dui-form-transition);
+}
+
+.dui-field__switch::before {
+  content: '';
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 50%;
+  transition: var(--dui-form-transition);
+}
+
+.dui-field__switch:checked {
+  background-color: var(--dui-form-primary);
+}
+
+.dui-field__switch:checked::before {
+  transform: translateX(1.25rem);
+}
+
+.dui-field__switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   RADIO GROUP
+   ========================================================================== */
+
+.dui-field__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dui-field__radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dui-field__radio-group--vertical {
+  flex-direction: column;
+}
+
+.dui-field__radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: var(--dui-form-font-size);
+  color: var(--dui-form-text);
+}
+
+/* ==========================================================================
+   HELP TEXT AND ERRORS
+   ========================================================================== */
+
+.dui-field__help {
+  margin: 0;
+  font-size: var(--dui-form-font-size-sm);
+  color: var(--dui-form-text-muted);
+}
+
+.dui-field__error {
+  margin: 0;
+  font-size: var(--dui-form-font-size-sm);
+  color: var(--dui-form-text-error);
+}
+
+/* ==========================================================================
+   FORM FOOTER
+   ========================================================================== */
+
+.dui-form__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: var(--dui-form-padding);
+  border-top: 1px solid var(--dui-form-border-color);
+}
+
+/* ==========================================================================
+   FORM BUTTONS
+   ========================================================================== */
+
+.dui-form__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: var(--dui-form-font-size);
+  font-weight: 500;
+  line-height: var(--dui-form-line-height);
+  text-decoration: none;
+  border-radius: var(--dui-form-border-radius);
+  cursor: pointer;
+  transition: var(--dui-form-transition);
+  outline: none;
+}
+
+.dui-form__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dui-form__button--submit {
+  color: white;
+  background-color: var(--dui-form-primary);
+  border: 1px solid var(--dui-form-primary);
+}
+
+.dui-form__button--submit:hover:not(:disabled) {
+  background-color: var(--dui-form-primary-hover);
+  border-color: var(--dui-form-primary-hover);
+}
+
+.dui-form__button--submit:focus {
+  box-shadow: var(--dui-form-shadow-focus);
+}
+
+.dui-form__button--cancel {
+  color: var(--dui-form-text);
+  background-color: transparent;
+  border: 1px solid var(--dui-form-border-color);
+}
+
+.dui-form__button--cancel:hover:not(:disabled) {
+  background-color: var(--dui-form-section-bg);
+}
+
+.dui-form__button--danger {
+  color: white;
+  background-color: var(--dui-form-danger);
+  border: 1px solid var(--dui-form-danger);
+}
+
+.dui-form__button--danger:hover:not(:disabled) {
+  background-color: var(--dui-form-danger-hover);
+  border-color: var(--dui-form-danger-hover);
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .dui-form__footer {
+    flex-direction: column-reverse;
+  }
+
+  .dui-form__button {
+    width: 100%;
+  }
+
+  .dui-form-section__content {
+    padding: 0.75rem;
+  }
+
+  .dui-field__radio-group {
+    gap: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   ANIMATION: COLLAPSE
+   ========================================================================== */
+
+.dui-form-section__content {
+  animation: dui-form-section-expand 200ms ease-out;
+}
+
+@keyframes dui-form-section-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   UTILITY: GRID COLUMN SPAN
+   ========================================================================== */
+
+.dui-field--col-1 { grid-column: span 1; }
+.dui-field--col-2 { grid-column: span 2; }
+.dui-field--col-3 { grid-column: span 3; }
+.dui-field--col-4 { grid-column: span 4; }
+.dui-field--col-6 { grid-column: span 6; }
+.dui-field--col-12 { grid-column: span 12; }
+.dui-field--col-full { grid-column: 1 / -1; }
+
+/* ==========================================================================
+   UTILITY: VALIDATION STATES
+   ========================================================================== */
+
+.dui-field--valid .dui-field__input,
+.dui-field--valid .dui-field__select,
+.dui-field--valid .dui-field__textarea {
+  border-color: var(--dui-form-success);
+}
+
+.dui-field--valid .dui-field__label::after {
+  content: ' ✓';
+  color: var(--dui-form-success);
+}
+
+/* ==========================================================================
+   LOADING STATE
+   ========================================================================== */
+
+.dui-form--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.dui-form--loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay-bg, rgba(255, 255, 255, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

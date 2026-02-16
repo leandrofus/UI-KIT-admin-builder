@@ -1,0 +1,303 @@
+/**
+ * Table Toolbar Styles
+ * Consistent with current DNStyle UI design
+ */
+
+.dui-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--dui-table-bg, var(--v2-surface, #ffffff));
+  border-bottom: 1px solid var(--dui-table-border-color, var(--v2-gray-200, #e5e7eb));
+  flex-wrap: wrap;
+}
+
+.dui-table-toolbar-bordered {
+  border-bottom: 1px solid var(--dui-table-border-color, var(--v2-gray-200, #e5e7eb));
+}
+
+.dui-table-toolbar-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Spacer - pushes items to right */
+.dui-table-toolbar-spacer {
+  flex: 1;
+  min-width: 0.5rem;
+}
+
+/* Search Input */
+.dui-table-toolbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dui-table-toolbar-input {
+  width: 200px;
+  padding: 0.375rem 0.75rem 0.375rem 2.25rem;
+  border: 1px solid var(--v2-gray-300, #d1d5db);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  background-color: var(--v2-surface, transparent);
+  color: var(--v2-on-surface, #111827);
+  transition: all 0.2s ease;
+}
+
+.dui-table-toolbar-input:focus {
+  outline: none;
+  border-color: var(--v2-primary, #3b82f6);
+  background-color: var(--v2-surface, transparent);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.dui-table-toolbar-input::placeholder {
+  color: var(--v2-gray-400, #9ca3af);
+}
+
+.dui-table-toolbar-search svg {
+  position: absolute;
+  left: 0.625rem;
+  color: #9ca3af;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Buttons */
+.dui-table-toolbar-btn {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.dui-table-toolbar-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dui-table-toolbar-btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+/* Primary Button */
+.dui-table-toolbar-btn-primary {
+  background-color: var(--dui-table-primary, var(--v2-primary, #3b82f6));
+  color: var(--dui-table-primary-contrast, white);
+  border-color: var(--dui-table-primary, var(--v2-primary, #3b82f6));
+  padding: 0.375rem 0.875rem;
+  font-weight: 600;
+}
+
+.dui-table-toolbar-btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.dui-table-toolbar-btn-primary:active:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+/* Secondary Button */
+.dui-table-toolbar-btn-secondary {
+  background-color: transparent;
+  color: var(--dui-table-text, var(--v2-on-surface, #374151));
+  border: 1px solid var(--dui-form-border-color, var(--v2-input-border, #d1d5db));
+  padding: 0.375rem 0.75rem;
+}
+
+.dui-table-toolbar-btn-secondary:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.dui-table-toolbar-btn-secondary:active:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+/* Danger Button */
+.dui-table-toolbar-btn-danger {
+  background-color: var(--dui-danger-bg, var(--v2-danger-light, #fef2f2));
+  color: var(--dui-danger, var(--v2-danger, #dc2626));
+  border: 1px solid var(--dui-danger-border, var(--v2-danger-light, #fee2e2));
+  padding: 0.375rem 0.75rem;
+}
+
+.dui-table-toolbar-btn-danger:hover:not(:disabled) {
+  background-color: #fee2e2;
+  border-color: #fecaca;
+}
+
+.dui-table-toolbar-btn-danger:active:not(:disabled) {
+  background-color: #fecaca;
+}
+
+/* Selection Badge */
+.dui-table-toolbar-selection-badge {
+  padding: 0.375rem 0.875rem;
+  background-color: var(--dui-selection-bg, var(--v2-primary-light, #dbeafe));
+  color: var(--dui-selection-text, var(--v2-primary, #1e40af));
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Dark Mode Support via data attribute */
+[data-bs-theme="dark"] .dui-table-toolbar {
+  background-color: var(--dui-table-bg, var(--v2-surface, #111827));
+  border-bottom-color: var(--dui-table-border-color, var(--v2-gray-700, #374151));
+}
+
+[data-bs-theme="dark"] .dui-table-toolbar-input {
+  background-color: var(--v2-gray-800, #1f2937);
+  border-color: var(--v2-gray-600, #374151);
+  color: var(--v2-white, #f9fafb);
+}
+
+[data-bs-theme="dark"] .dui-table-toolbar-input:focus {
+  border-color: var(--v2-primary, #3b82f6);
+  background-color: var(--v2-gray-800, #1f2937);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+[data-bs-theme="dark"] .dui-table-toolbar-btn-secondary {
+  color: var(--v2-on-surface, #f9fafb);
+  border-color: var(--v2-gray-600, #4b5563);
+}
+
+[data-bs-theme="dark"] .dui-table-toolbar-btn-secondary:hover:not(:disabled) {
+  background-color: var(--dui-table-row-hover-bg, rgba(255,255,255,0.05));
+  border-color: var(--v2-gray-500, #6b7280);
+}
+
+[data-bs-theme="dark"] .dui-table-toolbar-selection-badge {
+  background-color: var(--dui-selection-bg-dark, var(--v2-primary-800, #1e3a8a));
+  color: var(--dui-selection-text-dark, var(--v2-primary-light, #93c5fd));
+}
+
+/* Duplicated DUI theme dark classes for compatibility */
+.dui-theme--dark .dui-table-toolbar {
+  background-color: var(--dui-table-bg, var(--v2-surface, #111827));
+  border-bottom-color: var(--dui-table-border-color, var(--v2-gray-700, #374151));
+}
+
+.dui-theme--dark .dui-table-toolbar-input {
+  background-color: var(--v2-gray-800, #1f2937);
+  border-color: var(--v2-gray-600, #374151);
+  color: var(--v2-white, #f9fafb);
+}
+
+.dui-theme--dark .dui-table-toolbar-input:focus {
+  border-color: var(--v2-primary, #3b82f6);
+  background-color: var(--v2-gray-800, #1f2937);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.dui-theme--dark .dui-table-toolbar-input::placeholder {
+  color: var(--dui-form-placeholder, var(--v2-input-placeholder, #9ca3af));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-primary:hover:not(:disabled) {
+  background-color: var(--dui-table-primary-hover, var(--v2-primary-hover, #2563eb));
+  border-color: var(--dui-table-primary-hover, var(--v2-primary-hover, #2563eb));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-primary:active:not(:disabled) {
+  background-color: var(--dui-table-primary-active, var(--v2-primary-700, #1d4ed8));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-secondary:hover:not(:disabled) {
+  background-color: var(--dui-table-row-hover-bg, rgba(255,255,255,0.02));
+  border-color: var(--dui-form-placeholder, var(--v2-gray-400, #9ca3af));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-secondary:active:not(:disabled) {
+  background-color: rgba(255,255,255,0.03);
+}
+
+.dui-theme--dark .dui-table-toolbar-selection-badge {
+  background-color: var(--dui-selection-bg-dark, var(--v2-primary-800, #1e3a8a));
+  color: var(--dui-selection-text-dark, var(--v2-primary-light, #93c5fd));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-danger:hover:not(:disabled) {
+  background-color: var(--dui-danger-hover-bg, var(--v2-danger-light, #fca5a5));
+  border-color: var(--dui-danger-border-hover, var(--v2-danger, #f87171));
+}
+
+.dui-theme--dark .dui-table-toolbar-btn-danger:active:not(:disabled) {
+  background-color: var(--dui-danger-active-bg, var(--v2-danger-400, #f87171));
+}
+
+/* Animation for refresh button */
+.dui-table-toolbar-btn:has(svg[style*="animation"]) svg {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dui-table-toolbar {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .dui-table-toolbar-input {
+    width: 150px !important;
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .dui-table-toolbar-btn {
+    width: auto;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dui-table-toolbar-selection-badge {
+    width: auto;
+    text-align: left;
+  }
+
+  .dui-table-toolbar-custom {
+    width: auto;
+    margin-left: 0;
+  }
+
+  /* Dark variant adjustments inside responsive breakpoint */
+  .dui-theme--dark .dui-table-toolbar-input:focus {
+    border-color: var(--v2-primary, #3b82f6);
+    background-color: var(--v2-gray-800, #1f2937);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  .dui-theme--dark .dui-table-toolbar-input::placeholder {
+    color: var(--dui-form-placeholder, var(--v2-input-placeholder, #9ca3af));
+  }
+
+  .dui-theme--dark .dui-table-toolbar-btn-secondary:hover:not(:disabled) {
+    background-color: var(--v2-gray-700, #374151);
+    border-color: var(--v2-gray-500, #6b7280);
+  }
+
+  .dui-theme--dark .dui-table-toolbar-selection-badge {
+    background-color: var(--dui-selection-bg-dark, var(--v2-primary-800, #1e3a8a));
+    color: var(--dui-selection-text-dark, var(--v2-primary-light, #93c5fd));
+  }
+}

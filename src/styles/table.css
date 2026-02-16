@@ -1,0 +1,802 @@
+/**
+ * Dynamic UI Kit - Table Styles
+ * 
+ * CSS styles for the TableRenderer component.
+ * Uses CSS custom properties for easy theming.
+ * 
+ * @module styles/table
+ */
+
+/* ============================================================================
+   CSS Custom Properties (Variables)
+   ============================================================================ */
+
+:root {
+  /* Colors - delegate to global v2 theme variables with sensible fallbacks */
+  --dui-table-bg: var(--v2-surface, #ffffff);
+  --dui-table-border-color: var(--v2-gray-200, #e5e7eb);
+  --dui-table-header-bg: var(--v2-surface-2, #f9fafb);
+  --dui-table-header-text: var(--v2-on-surface, #374151);
+  --dui-table-row-hover-bg: var(--v2-gray-100, #f3f4f6);
+  --dui-table-row-selected-bg: var(--v2-primary-light, #eff6ff);
+  --dui-table-row-stripe-bg: var(--v2-surface-2, #f9fafb);
+  --dui-table-text: var(--v2-on-surface, #1f2937);
+  --dui-table-text-secondary: var(--v2-on-surface-secondary, #6b7280);
+  --dui-table-primary: var(--v2-primary, #3b82f6);
+  --dui-table-primary-hover: var(--v2-primary-hover, #2563eb);
+  
+  /* Spacing */
+  --dui-table-cell-padding-x: 1rem;
+  --dui-table-cell-padding-y: 0.75rem;
+  --dui-table-compact-padding-x: 0.5rem;
+  --dui-table-compact-padding-y: 0.375rem;
+
+  /* Computed row height (used for consistent empty state) */
+  --dui-table-row-height: calc(var(--dui-table-cell-padding-y) * 2 + 1rem);
+  
+  /* Typography */
+  --dui-table-font-size: 0.875rem;
+  --dui-table-header-font-weight: 600;
+  
+  /* Borders */
+  --dui-table-border-radius: 0.5rem;
+  --dui-table-border-width: 1px;
+  
+  /* Shadows */
+  --dui-table-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --dui-table-transition: 150ms ease-in-out;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dui-table-bg: var(--v2-surface, #1f2937);
+    --dui-table-border-color: var(--v2-gray-300, #374151);
+    --dui-table-header-bg: var(--v2-surface, #111827);
+    --dui-table-header-text: var(--v2-on-surface, #f9fafb);
+    --dui-table-row-hover-bg: rgba(255, 255, 255, 0.05);
+    --dui-table-row-selected-bg: rgba(59, 130, 246, 0.15);
+    --dui-table-row-stripe-bg: var(--v2-surface, #111827);
+    --dui-table-text: var(--v2-on-surface, #f9fafb);
+    --dui-table-text-secondary: var(--v2-on-surface-secondary, #9ca3af);
+  }
+}
+
+/* Explicit dark theme selector (Bootstrap compatibility) */
+[data-bs-theme="dark"] {
+  --dui-table-bg: var(--v2-surface, #1f2937);
+  --dui-table-border-color: var(--v2-gray-300, #374151);
+  --dui-table-header-bg: var(--v2-surface, #111827);
+  --dui-table-header-text: var(--v2-on-surface, #f9fafb);
+  --dui-table-row-hover-bg: rgba(255, 255, 255, 0.05);
+  --dui-table-row-selected-bg: rgba(59, 130, 246, 0.15);
+  --dui-table-row-stripe-bg: var(--v2-surface, #111827);
+  --dui-table-text: var(--v2-on-surface, #f9fafb);
+  --dui-table-text-secondary: var(--v2-on-surface-secondary, #9ca3af);
+}
+
+/* Theme override classes - allow component-level theme control */
+.dui-theme--dark {
+  --dui-table-bg: var(--v2-surface, #1f2937);
+  --dui-table-border-color: var(--v2-gray-300, #374151);
+  --dui-table-header-bg: var(--v2-surface, #111827);
+  --dui-table-header-text: var(--v2-on-surface, #f9fafb);
+  --dui-table-row-hover-bg: rgba(255, 255, 255, 0.05);
+  --dui-table-row-selected-bg: rgba(59, 130, 246, 0.15);
+  --dui-table-row-stripe-bg: var(--v2-surface, #111827);
+  --dui-table-text: var(--v2-on-surface, #f9fafb);
+  --dui-table-text-secondary: var(--v2-on-surface-secondary, #9ca3af);
+}
+
+.dui-theme--light {
+  --dui-table-bg: var(--v2-surface, #ffffff);
+  --dui-table-border-color: var(--v2-gray-200, #e5e7eb);
+  --dui-table-header-bg: var(--v2-surface-2, #f9fafb);
+  --dui-table-header-text: var(--v2-on-surface, #374151);
+  --dui-table-row-hover-bg: var(--v2-gray-100, #f3f4f6);
+  --dui-table-row-selected-bg: var(--v2-primary-light, #eff6ff);
+  --dui-table-row-stripe-bg: var(--v2-surface-2, #f9fafb);
+  --dui-table-text: var(--v2-on-surface, #1f2937);
+  --dui-table-text-secondary: var(--v2-on-surface-secondary, #6b7280);
+}
+
+/* ============================================================================
+   Container Styles
+   ============================================================================ */
+
+.dui-table-container {
+  position: relative;
+  width: 100%;
+  background-color: var(--dui-table-bg);
+  border-radius: var(--dui-table-border-radius);
+  box-shadow: var(--dui-table-shadow);
+  overflow: hidden;
+}
+
+.dui-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  /* Reserve space for scrollbar to prevent layout shift when content height changes */
+  scrollbar-gutter: stable;
+}
+
+/* ============================================================================
+   Table Base Styles
+   ============================================================================ */
+
+.dui-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--dui-table-font-size);
+  color: var(--dui-table-text);
+}
+
+/* ============================================================================
+   Header Styles
+   ============================================================================ */
+
+.dui-table-head {
+  background-color: var(--dui-table-header-bg);
+  border-bottom: var(--dui-table-border-width) solid var(--dui-table-border-color);
+}
+
+.dui-table-header-row {
+  border-bottom: var(--dui-table-border-width) solid var(--dui-table-border-color);
+}
+
+.dui-table-th {
+  padding: var(--dui-table-cell-padding-y) var(--dui-table-cell-padding-x);
+  text-align: left;
+  font-weight: var(--dui-table-header-font-weight);
+  color: var(--dui-table-header-text);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.dui-table-th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dui-table-th-text {
+  flex: 1;
+}
+
+.dui-table-th-sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--dui-table-transition);
+}
+
+/* .dui-table-th-sortable:hover {
+  background-color: var(--dui-table-row-hover-bg);
+} */
+
+/* Alignment */
+.dui-table-th-left { text-align: left; }
+.dui-table-th-center { text-align: center; }
+.dui-table-th-right { text-align: right; }
+
+/* Special columns */
+.dui-table-th-checkbox,
+.dui-table-td-checkbox,
+.dui-table-th-radio,
+.dui-table-td-radio,
+.dui-table-th-rownum,
+.dui-table-td-rownum {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.dui-table-th-status,
+.dui-table-td-status {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.dui-table-th-actions {
+  width: auto;
+  text-align: center;
+}
+
+/* Resize handle */
+.dui-table-th-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.dui-table-th-resize-handle::after {
+  content: '';
+  width: 2px;
+  height: 36%;
+  background: rgba(0,0,0,0.28);
+  border-radius: 2px;
+  transition: opacity 120ms ease-in-out, transform 120ms ease-in-out;
+  opacity: 0.6;
+}
+
+.dui-table-th-resize-handle:hover::after {
+  opacity: 1;
+  transform: scaleX(1.05);
+}
+
+/* ============================================================================
+   Body Styles
+   ============================================================================ */
+
+.dui-table-body {
+  background-color: var(--dui-table-bg);
+  /* Maintain minimum height even when table is empty (match one row height)
+     Use computed row height to keep consistent across theme/sizes */
+  min-height: var(--dui-table-row-height);
+}
+
+.dui-table-row {
+  border-bottom: var(--dui-table-border-width) solid var(--dui-table-border-color);
+  transition: background-color var(--dui-table-transition);
+}
+
+.dui-table-row:last-child {
+  border-bottom: none;
+}
+
+.dui-table-td {
+  padding: var(--dui-table-cell-padding-y) var(--dui-table-cell-padding-x);
+  vertical-align: middle;
+}
+
+/* Alignment */
+.dui-table-td-left { text-align: left; }
+.dui-table-td-center { text-align: center; }
+.dui-table-td-right { text-align: right; }
+
+/* Special cells */
+.dui-table-td-checkbox,
+.dui-table-td-radio,
+.dui-table-td-rownum {
+  text-align: center;
+  color: var(--dui-table-text-secondary);
+}
+
+.dui-table-td-actions {
+  text-align: center;
+}
+
+/* Sticky columns */
+.dui-table-th-actions,
+.dui-table-td-actions {
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  background-color: inherit;
+  border-left: var(--dui-table-border-width) solid var(--dui-table-border-color);
+}
+
+.dui-table-th-actions {
+  z-index: 15; /* Higher than sticky header but consistent with right position */
+}
+
+.dui-table-sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background-color: inherit;
+}
+
+.dui-table-th.dui-table-sticky-left {
+  z-index: 15;
+}
+
+/* Shadow indicator for sticky column when scrolling */
+.dui-table-wrapper:has(.dui-table-row) .dui-table-td-actions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -8px;
+  width: 8px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.05));
+}
+
+.dui-table-wrapper:has(.dui-table-row) .dui-table-sticky-left-last::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -8px;
+  width: 8px;
+  pointer-events: none;
+  background: linear-gradient(to left, transparent, rgba(0,0,0,0.05));
+}
+
+[data-bs-theme="dark"] .dui-table-td-actions::before {
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.2));
+}
+
+[data-bs-theme="dark"] .dui-table-sticky-left-last::after {
+  background: linear-gradient(to left, transparent, rgba(0,0,0,0.2));
+}
+
+.dui-table-td-empty {
+  text-align: center;
+  padding: 3rem var(--dui-table-cell-padding-x);
+}
+
+/* ============================================================================
+   Row Modifiers
+   ============================================================================ */
+
+/* Hoverable rows */
+.dui-table-hoverable .dui-table-row:hover {
+  background-color: var(--dui-table-row-hover-bg);
+}
+
+/* Striped rows */
+.dui-table-striped .dui-table-row:nth-child(even) {
+  background-color: var(--dui-table-row-stripe-bg);
+}
+
+/* Selected rows */
+.dui-table-row-selected {
+  background-color: var(--dui-table-row-selected-bg) !important;
+}
+
+/* Clickable rows */
+.dui-table-row-clickable {
+  cursor: pointer;
+}
+
+/* Bordered table */
+.dui-table-bordered .dui-table-th,
+.dui-table-bordered .dui-table-td {
+  border: var(--dui-table-border-width) solid var(--dui-table-border-color);
+}
+
+/* Compact table */
+.dui-table-compact .dui-table-th,
+.dui-table-compact .dui-table-td {
+  padding: var(--dui-table-compact-padding-y) var(--dui-table-compact-padding-x);
+}
+
+/* Sticky header */
+.dui-table-sticky-header .dui-table-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ============================================================================
+   Sort Indicator
+   ============================================================================ */
+
+.dui-table-sort-icon {
+  flex-shrink: 0;
+  color: var(--dui-table-text-secondary);
+  transition: color var(--dui-table-transition), transform var(--dui-table-transition);
+}
+
+.dui-table-sort-inactive {
+  opacity: 0.4;
+}
+
+.dui-table-th-sortable:hover .dui-table-sort-inactive {
+  opacity: 0.7;
+}
+
+/* ============================================================================
+   Checkbox & Radio
+   ============================================================================ */
+
+.dui-table-checkbox,
+.dui-table-radio {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: var(--dui-table-primary);
+}
+
+/* ============================================================================
+   Badges
+   ============================================================================ */
+
+.dui-table-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  text-transform: capitalize;
+}
+
+/* Status badges */
+.dui-table-badge-active,
+.dui-table-badge-success,
+.dui-table-badge-completed {
+  background-color: var(--v2-success-light, #dcfce7);
+  color: var(--v2-success, #166534);
+}
+
+.dui-table-badge-inactive,
+.dui-table-badge-cancelled,
+.dui-table-badge-failed {
+  background-color: var(--v2-danger-light, #fee2e2);
+  color: var(--v2-danger, #1a1a1a);
+}
+
+.dui-table-badge-pending,
+.dui-table-badge-processing {
+  background-color: var(--v2-warning-light, #fef3c7);
+  color: var(--v2-warning, #1a1a1a);
+}
+
+.dui-table-badge-draft,
+.dui-table-badge-new {
+  background-color: var(--v2-primary-light, #dbeafe);
+  color: var(--v2-primary, #1e40af);
+}
+
+/* Dark Mode Badges Override */
+[data-bs-theme="dark"] .dui-table-badge-active,
+[data-bs-theme="dark"] .dui-table-badge-success,
+[data-bs-theme="dark"] .dui-table-badge-completed {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+[data-bs-theme="dark"] .dui-table-badge-inactive,
+[data-bs-theme="dark"] .dui-table-badge-cancelled,
+[data-bs-theme="dark"] .dui-table-badge-failed {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+[data-bs-theme="dark"] .dui-table-badge-pending,
+[data-bs-theme="dark"] .dui-table-badge-processing {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+[data-bs-theme="dark"] .dui-table-badge-draft,
+[data-bs-theme="dark"] .dui-table-badge-new {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+/* Fallback for DUI theme class */
+.dui-theme--dark .dui-table-badge-active,
+.dui-theme--dark .dui-table-badge-success,
+.dui-theme--dark .dui-table-badge-completed {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+/* ============================================================================
+   Links
+   ============================================================================ */
+
+.dui-table-link {
+  color: var(--dui-table-primary);
+  text-decoration: none;
+  transition: color var(--dui-table-transition);
+}
+
+.dui-table-link:hover {
+  color: var(--dui-table-primary-hover);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   Empty State
+   ============================================================================ */
+
+/* Keep empty state compact and match single-row height so table doesn't jump */
+.dui-table-empty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  min-height: var(--dui-table-row-height);
+  color: var(--dui-table-text-secondary);
+  gap: 0.75rem;
+}
+
+.dui-table-empty-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  opacity: 0.6;
+}
+
+.dui-table-empty-text {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ============================================================================
+   Loading State
+   ============================================================================ */
+
+.dui-table-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: var(--dui-table-text-secondary);
+}
+
+.dui-table-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--dui-table-border-color);
+  border-top-color: var(--dui-table-primary);
+  border-radius: 50%;
+  animation: dui-spin 0.8s linear infinite;
+}
+
+.dui-table-loading-text {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.dui-table-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 20;
+}
+
+[data-bs-theme="dark"] .dui-table-loading-overlay {
+  background-color: rgba(31, 41, 55, 0.8);
+}
+
+@keyframes dui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   Error State
+   ============================================================================ */
+
+.dui-table-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #991b1b;
+}
+
+.dui-table-error-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.dui-table-error-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.dui-table-error-detail {
+  font-size: 0.75rem;
+  color: var(--dui-table-text-secondary);
+  margin: 0;
+}
+
+/* ============================================================================
+   Pagination
+   ============================================================================ */
+
+.dui-table-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-top: var(--dui-table-border-width) solid var(--dui-table-border-color);
+  background-color: var(--dui-table-header-bg);
+}
+
+.dui-table-pagination-info {
+  font-size: 0.875rem;
+  color: var(--dui-table-text-secondary);
+}
+
+.dui-table-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dui-table-pagination-pagesize {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--dui-table-text-secondary);
+}
+
+.dui-table-pagination-select {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border: var(--dui-table-border-width) solid var(--dui-table-border-color);
+  border-radius: 0.25rem;
+  background-color: var(--dui-table-bg);
+  color: var(--dui-table-text);
+  cursor: pointer;
+}
+
+.dui-table-pagination-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dui-table-pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--dui-table-text);
+  background-color: var(--dui-table-bg);
+  border: var(--dui-table-border-width) solid var(--dui-table-border-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all var(--dui-table-transition);
+}
+
+.dui-table-pagination-btn:hover:not(:disabled) {
+  background-color: var(--dui-table-row-hover-bg);
+  border-color: var(--dui-table-text-secondary);
+}
+
+.dui-table-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dui-table-pagination-btn-active {
+  background-color: var(--dui-table-primary);
+  border-color: var(--dui-table-primary);
+  color: white;
+}
+
+.dui-table-pagination-btn-active:hover:not(:disabled) {
+  background-color: var(--dui-table-primary-hover);
+  border-color: var(--dui-table-primary-hover);
+}
+
+.dui-table-pagination-ellipsis {
+  padding: 0 0.25rem;
+  color: var(--dui-table-text-secondary);
+}
+
+/* ============================================================================
+   Status Indicators
+   ============================================================================ */
+
+.dui-table-status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.dui-table-status-dot--active {
+  background-color: #10b981; /* Green-500 */
+  box-shadow: 0 0 4px rgba(16, 185, 129, 0.4);
+}
+
+.dui-table-status-dot--inactive {
+  background-color: #9ca3af; /* Gray-400 */
+  opacity: 0.5;
+}
+
+[data-bs-theme="dark"] .dui-table-status-dot--active {
+  background-color: #34d399; /* Green-400 */
+}
+
+[data-bs-theme="dark"] .dui-table-status-dot--inactive {
+  background-color: #4b5563; /* Gray-600 */
+}
+
+@media (max-width: 640px) {
+  .dui-table-pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .dui-table-pagination-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================================================
+   Tree Table Styles
+   ============================================================================ */
+
+.dui-table-td-tree-toggle {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.dui-table-tree-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--dui-table-text-secondary);
+  cursor: pointer;
+  transition: all var(--dui-table-transition);
+}
+
+.dui-table-tree-btn:hover {
+  background-color: var(--dui-table-row-hover-bg);
+  color: var(--dui-table-primary);
+}
+
+.dui-table-tree-icon {
+  display: inline-block;
+  transition: transform var(--dui-table-transition);
+}
+
+.dui-table-tree-icon--expanded {
+  transform: rotate(90deg);
+}
+
+.dui-table-row-child .dui-table-td:first-child {
+  padding-left: 2rem;
+}
+
+.dui-table-subrow-container {
+  padding: 0;
+  background-color: var(--dui-table-row-stripe-bg);
+}
