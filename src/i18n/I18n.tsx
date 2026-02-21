@@ -115,29 +115,18 @@ export class I18n {
 
   constructor(config: Partial<I18nConfig> = {}) {
     // Truly empty defaults
-    const baseDefaults: I18nConfig = {
+    this.config = {
       defaultLocale: config.defaultLocale || 'en',
       fallbackLocale: config.fallbackLocale || 'en',
-      locales: config.locales || [
-        { code: 'en', name: 'English', direction: 'ltr' },
-      ],
+      locales: config.locales || [{ code: 'en', name: 'English', direction: 'ltr' }],
       translations: config.translations || {},
       debug: config.debug || false,
     };
 
-    // Deep-merge provided translations into the base defaults
-    const providedTranslations = config.translations || {};
-    const mergedTranslations: Record<string, TranslationDictionary> = { ...providedTranslations };
-
     // Apply global UI kit custom translations if any
     Object.keys(uiKitGlobalTranslations).forEach(locale => {
-      mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, uiKitGlobalTranslations[locale]);
+      this.config.translations[locale] = deepMerge(this.config.translations[locale] || {}, uiKitGlobalTranslations[locale]);
     });
-
-    this.config = {
-      ...baseDefaults,
-      translations: mergedTranslations,
-    };
 
     this.currentLocale = this.config.defaultLocale;
     this.hasAppliedGlobals = Object.keys(uiKitGlobalTranslations).length > 0;
@@ -274,6 +263,9 @@ export class I18n {
       if (this.config.debug) {
         console.warn(`[i18n] Missing translation: ${key} (${this.currentLocale})`);
       }
+
+      // If fallback provided, return it first
+      if (fallback) return fallback;
 
       // ALWAYS return the key indicator if translation is missing.
       // This forces the host app to provide all necessary translations.

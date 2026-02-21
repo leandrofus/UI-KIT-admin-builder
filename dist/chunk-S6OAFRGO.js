@@ -1,6 +1,6 @@
 'use strict';
 
-var chunkJOGM2EW4_js = require('./chunk-JOGM2EW4.js');
+var chunkDZTEXKQN_js = require('./chunk-DZTEXKQN.js');
 
 // src/config-system/ConfigValidator.ts
 var DEFAULT_FIELD_TYPES = [
@@ -446,7 +446,7 @@ function isLikelyTranslationKey(s) {
   return /[.]/.test(s) && /^[A-Za-z0-9._-]+$/.test(s);
 }
 function translateConfig(obj, i18nInstance) {
-  const i18n = i18nInstance ?? chunkJOGM2EW4_js.getI18n();
+  const i18n = i18nInstance ?? chunkDZTEXKQN_js.getI18n();
   function rec(value) {
     if (Array.isArray(value)) return value.map(rec);
     if (value !== null && typeof value === "object") {
@@ -476,5 +476,5 @@ exports.translateConfig = translateConfig;
 exports.validateConfig = validateConfig;
 exports.validateFormConfig = validateFormConfig;
 exports.validateTableConfig = validateTableConfig;
-//# sourceMappingURL=chunk-2TXOJY2D.js.map
-//# sourceMappingURL=chunk-2TXOJY2D.js.map
+//# sourceMappingURL=chunk-S6OAFRGO.js.map
+//# sourceMappingURL=chunk-S6OAFRGO.js.map

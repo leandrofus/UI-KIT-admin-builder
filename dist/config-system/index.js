@@ -1,38 +1,38 @@
 'use strict';
 
-var chunk2TXOJY2D_js = require('../chunk-2TXOJY2D.js');
+var chunkS6OAFRGO_js = require('../chunk-S6OAFRGO.js');
 var chunkUSZU7PLJ_js = require('../chunk-USZU7PLJ.js');
-require('../chunk-JOGM2EW4.js');
+require('../chunk-DZTEXKQN.js');
 
 
 
 Object.defineProperty(exports, "assertValidConfig", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.assertValidConfig; }
+  get: function () { return chunkS6OAFRGO_js.assertValidConfig; }
 });
 Object.defineProperty(exports, "formatValidationErrors", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.formatValidationErrors; }
+  get: function () { return chunkS6OAFRGO_js.formatValidationErrors; }
 });
 Object.defineProperty(exports, "isLikelyTranslationKey", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.isLikelyTranslationKey; }
+  get: function () { return chunkS6OAFRGO_js.isLikelyTranslationKey; }
 });
 Object.defineProperty(exports, "translateConfig", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.translateConfig; }
+  get: function () { return chunkS6OAFRGO_js.translateConfig; }
 });
 Object.defineProperty(exports, "validateConfig", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.validateConfig; }
+  get: function () { return chunkS6OAFRGO_js.validateConfig; }
 });
 Object.defineProperty(exports, "validateFormConfig", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.validateFormConfig; }
+  get: function () { return chunkS6OAFRGO_js.validateFormConfig; }
 });
 Object.defineProperty(exports, "validateTableConfig", {
   enumerable: true,
-  get: function () { return chunk2TXOJY2D_js.validateTableConfig; }
+  get: function () { return chunkS6OAFRGO_js.validateTableConfig; }
 });
 Object.defineProperty(exports, "ConfigLoader", {
   enumerable: true,

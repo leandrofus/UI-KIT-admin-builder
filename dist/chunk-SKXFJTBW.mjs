@@ -1,5 +1,5 @@
 import { cn, evaluateConditions, getNestedValue, validateField } from './chunk-ZYRLE26I.mjs';
-import { useI18n, resolveLabel } from './chunk-ZCAJXFW7.mjs';
+import { useI18n, resolveLabel } from './chunk-4LYQCQVT.mjs';
 import React, { createContext, forwardRef, useCallback, useState, useMemo, useContext } from 'react';
 import { jsxs, jsx } from 'react/jsx-runtime';
 
@@ -803,5 +803,5 @@ var baseFields = {
 };
 
 export { CheckboxField, CurrencyField, FieldRegistry, FieldRegistryContext, HiddenField, NumberField, SelectField, SwitchField, TextField, TextareaField, baseFields, createFieldFactory, getDefaultRegistry, getField, registerField, registerFields, setDefaultRegistry, useFieldFactory, useFieldRegistry };
-//# sourceMappingURL=chunk-HOHHO3SI.mjs.map
-//# sourceMappingURL=chunk-HOHHO3SI.mjs.map
+//# sourceMappingURL=chunk-SKXFJTBW.mjs.map
+//# sourceMappingURL=chunk-SKXFJTBW.mjs.map

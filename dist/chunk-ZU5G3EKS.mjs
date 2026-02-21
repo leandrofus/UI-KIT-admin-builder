@@ -1,27 +1,21 @@
-'use strict';
-
-var chunkUSZU7PLJ_js = require('./chunk-USZU7PLJ.js');
-var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
-var chunkJOGM2EW4_js = require('./chunk-JOGM2EW4.js');
-var React2 = require('react');
-var jsxRuntime = require('react/jsx-runtime');
-var reactDom = require('react-dom');
-var core = require('@dnd-kit/core');
-var sortable = require('@dnd-kit/sortable');
-
-function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
-
-var React2__default = /*#__PURE__*/_interopDefault(React2);
+import { getModalTitle, getModalSubmitLabel } from './chunk-PWH3M2ZV.mjs';
+import { evaluateConditions, cn, getNestedValue, validateField } from './chunk-ZYRLE26I.mjs';
+import { useI18n, resolveLabel, t } from './chunk-4LYQCQVT.mjs';
+import React2, { forwardRef, useState, useMemo, useCallback, useImperativeHandle, useEffect, useRef } from 'react';
+import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
+import { createPortal } from 'react-dom';
+import { useSensors, useSensor, PointerSensor, DndContext, closestCenter, DragOverlay, useDroppable } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 
 var Icons = {
-  search: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.5 5.5a7.5 7.5 0 0 0 10.5 10.5Z" }) }),
-  refresh: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992M2.763 9.348c.547-4.055 4.29-7.298 8.888-7.298 4.694 0 8.502 3.362 8.996 7.748h4.992v-.001M2.723 13.467c.12.95.904 1.676 1.9 1.676h15.692c.996 0 1.78-.726 1.9-1.676m-17.492 0a2.25 2.25 0 0 0-1.853-2.965 2.25 2.25 0 0 0-2.236 2.965m19.5 0a2.25 2.25 0 0 0 1.853-2.965 2.25 2.25 0 0 0 2.236 2.965" }) }),
-  plus: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }) }),
-  trash: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L19.18 2.318c.169-.897-.134-1.638-1.034-1.638h-5.096c-.9 0-1.203.74-1.034 1.638L9.26 9M4.25 9L4.596 18c.305 1.619 1.045 2.5 2.589 2.5h6.63c1.544 0 2.284-.881 2.589-2.5l.346-9m-4.215 0h3.02m-9.755 0c.342.052.682.107 1.022.166" }) }),
-  advancedSearch: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M10.5 6a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15ZM21 21l-5.197-5.197" }) }),
-  toggle: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" }) }),
-  table: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5a1.125 1.125 0 0 0 1.125 1.125m17.25 0a1.125 1.125 0 0 0 1.125-1.125m-1.125 1.125a1.125 1.125 0 0 1-1.125-1.125M3.375 11.25h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 11.25a1.125 1.125 0 0 0 1.125 1.125m17.25 0a1.125 1.125 0 0 0 1.125-1.125m-1.125 1.125a1.125 1.125 0 0 1-1.125-1.125M3.375 3h17.25m-17.25 0a1.125 1.125 0 0 1-1.125 1.125M3.375 3a1.125 1.125 0 0 0 1.125-1.125m17.25 0a1.125 1.125 0 0 0 1.125 1.125m-1.125-1.125a1.125 1.125 0 0 1-1.125 1.125" }) }),
-  kanban: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 6.75v10.5m1.125-10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125H7.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Zm5.625 0h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125h-1.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Zm5.625 0h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125h-1.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Z" }) })
+  search: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.5 5.5a7.5 7.5 0 0 0 10.5 10.5Z" }) }),
+  refresh: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992M2.763 9.348c.547-4.055 4.29-7.298 8.888-7.298 4.694 0 8.502 3.362 8.996 7.748h4.992v-.001M2.723 13.467c.12.95.904 1.676 1.9 1.676h15.692c.996 0 1.78-.726 1.9-1.676m-17.492 0a2.25 2.25 0 0 0-1.853-2.965 2.25 2.25 0 0 0-2.236 2.965m19.5 0a2.25 2.25 0 0 0 1.853-2.965 2.25 2.25 0 0 0 2.236 2.965" }) }),
+  plus: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }) }),
+  trash: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L19.18 2.318c.169-.897-.134-1.638-1.034-1.638h-5.096c-.9 0-1.203.74-1.034 1.638L9.26 9M4.25 9L4.596 18c.305 1.619 1.045 2.5 2.589 2.5h6.63c1.544 0 2.284-.881 2.589-2.5l.346-9m-4.215 0h3.02m-9.755 0c.342.052.682.107 1.022.166" }) }),
+  advancedSearch: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M10.5 6a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15ZM21 21l-5.197-5.197" }) }),
+  toggle: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" }) }),
+  table: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5a1.125 1.125 0 0 0 1.125 1.125m17.25 0a1.125 1.125 0 0 0 1.125-1.125m-1.125 1.125a1.125 1.125 0 0 1-1.125-1.125M3.375 11.25h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 11.25a1.125 1.125 0 0 0 1.125 1.125m17.25 0a1.125 1.125 0 0 0 1.125-1.125m-1.125 1.125a1.125 1.125 0 0 1-1.125-1.125M3.375 3h17.25m-17.25 0a1.125 1.125 0 0 1-1.125 1.125M3.375 3a1.125 1.125 0 0 0 1.125-1.125m17.25 0a1.125 1.125 0 0 0 1.125 1.125m-1.125-1.125a1.125 1.125 0 0 1-1.125 1.125" }) }),
+  kanban: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 6.75v10.5m1.125-10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125H7.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Zm5.625 0h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125h-1.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Zm5.625 0h1.125a1.125 1.125 0 0 1 1.125 1.125v1.125a1.125 1.125 0 0 1-1.125 1.125h-1.125a1.125 1.125 0 0 1-1.125-1.125V7.875a1.125 1.125 0 0 1 1.125-1.125Z" }) })
 };
 function TableToolbar(props) {
   const {
@@ -56,88 +50,88 @@ function TableToolbar(props) {
     disabled = false,
     bordered = true
   } = props;
-  const [localSearch, setLocalSearch] = React2.useState(searchValue);
-  const handleSearchChange = React2.useCallback((value) => {
+  const [localSearch, setLocalSearch] = useState(searchValue);
+  const handleSearchChange = useCallback((value) => {
     setLocalSearch(value);
     onSearch?.(value);
   }, [onSearch]);
   const hasTools = showSearch || showRefresh || showCreate || showAdvancedSearch || props.showColumnsButton || props.showExport && onExport;
   if (!hasTools && selectedCount === 0 && !renderCustomContent) {
-    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
+    return /* @__PURE__ */ jsx(Fragment, {});
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs(
+  return /* @__PURE__ */ jsxs(
     "div",
     {
-      className: chunkG4EIC5OB_js.cn(
+      className: cn(
         "dui-table-toolbar",
         bordered && "dui-table-toolbar-bordered",
         disabled && "dui-table-toolbar-disabled",
         className
       ),
       children: [
-        showSearch && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-toolbar-search", children: [
+        showSearch && /* @__PURE__ */ jsxs("div", { className: "dui-table-toolbar-search", children: [
           Icons.search,
-          /* @__PURE__ */ jsxRuntime.jsx(
+          /* @__PURE__ */ jsx(
             "input",
             {
               type: "text",
               value: localSearch,
               onChange: (e) => handleSearchChange(e.target.value),
-              placeholder: searchPlaceholder || chunkJOGM2EW4_js.t("table.search", { default: "Buscar..." }),
+              placeholder: searchPlaceholder || t("table.search", { default: "Buscar..." }),
               disabled,
               className: "v2-input v2-input-with-icon"
             }
           )
         ] }),
-        showAdvancedSearch && onAdvancedSearch && /* @__PURE__ */ jsxRuntime.jsxs(
+        showAdvancedSearch && onAdvancedSearch && /* @__PURE__ */ jsxs(
           "button",
           {
             type: "button",
             onClick: onAdvancedSearch,
             disabled,
             className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-            title: chunkJOGM2EW4_js.t("table.advancedSearch", { default: "B\xFAsqueda avanzada" }),
+            title: t("table.advancedSearch", { default: "B\xFAsqueda avanzada" }),
             children: [
               Icons.advancedSearch,
-              chunkJOGM2EW4_js.t("table.advancedSearch", { default: "Avanzada" })
+              t("table.advancedSearch", { default: "Avanzada" })
             ]
           }
         ),
-        showViewSwitcher && onViewChange && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-view-switcher", style: { display: "flex", background: "var(--bg-tertiary)", padding: "2px", borderRadius: "8px", marginLeft: "0.5rem" }, children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
+        showViewSwitcher && onViewChange && /* @__PURE__ */ jsxs("div", { className: "dui-table-view-switcher", style: { display: "flex", background: "var(--bg-tertiary)", padding: "2px", borderRadius: "8px", marginLeft: "0.5rem" }, children: [
+          /* @__PURE__ */ jsx(
             "button",
             {
               type: "button",
               onClick: () => onViewChange("table"),
-              className: chunkG4EIC5OB_js.cn(
+              className: cn(
                 "dui-table-toolbar-btn px-2 py-1 border-0",
                 activeView === "table" ? "bg-white shadow-sm dark:bg-gray-700 dark:text-white" : "bg-transparent text-muted"
               ),
               style: { borderRadius: "6px", minWidth: "40px", display: "flex", alignItems: "center", justifyContent: "center" },
-              title: chunkJOGM2EW4_js.t("table.viewTable", { default: "Vista Tabla" }),
+              title: t("table.viewTable", { default: "Vista Tabla" }),
               children: Icons.table
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsx(
+          /* @__PURE__ */ jsx(
             "button",
             {
               type: "button",
               onClick: () => onViewChange("kanban"),
-              className: chunkG4EIC5OB_js.cn(
+              className: cn(
                 "dui-table-toolbar-btn px-2 py-1 border-0",
                 activeView === "kanban" ? "bg-white shadow-sm dark:bg-gray-700 dark:text-white" : "bg-transparent text-muted"
               ),
               style: { borderRadius: "6px", minWidth: "40px", display: "flex", alignItems: "center", justifyContent: "center" },
-              title: chunkJOGM2EW4_js.t("table.viewKanban", { default: "Vista Kanban" }),
+              title: t("table.viewKanban", { default: "Vista Kanban" }),
               children: Icons.kanban
             }
           )
         ] }),
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-toolbar-spacer" }),
-        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-toolbar-actions", style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
-          selectedCount > 0 ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-table-toolbar-selection-badge", style: { marginRight: "0.5rem" }, children: chunkJOGM2EW4_js.t("table.selected", { count: selectedCount }) }),
-            onDeleteSelected && /* @__PURE__ */ jsxRuntime.jsxs(
+        /* @__PURE__ */ jsx("div", { className: "dui-table-toolbar-spacer" }),
+        /* @__PURE__ */ jsxs("div", { className: "dui-table-toolbar-actions", style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+          selectedCount > 0 ? /* @__PURE__ */ jsxs(Fragment, { children: [
+            /* @__PURE__ */ jsx("span", { className: "dui-table-toolbar-selection-badge", style: { marginRight: "0.5rem" }, children: t("table.selected", { count: selectedCount }) }),
+            onDeleteSelected && /* @__PURE__ */ jsxs(
               "button",
               {
                 type: "button",
@@ -146,50 +140,50 @@ function TableToolbar(props) {
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-danger",
                 children: [
                   Icons.trash,
-                  deleteLabel || chunkJOGM2EW4_js.t("table.delete")
+                  deleteLabel || t("table.delete")
                 ]
               }
             ),
-            onToggleEnabled && /* @__PURE__ */ jsxRuntime.jsx(
+            onToggleEnabled && /* @__PURE__ */ jsx(
               "button",
               {
                 type: "button",
                 onClick: onToggleEnabled,
                 disabled,
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                title: chunkJOGM2EW4_js.t("table.toggleEnabled", { default: "Habilitar/Deshabilitar" }),
+                title: t("table.toggleEnabled", { default: "Habilitar/Deshabilitar" }),
                 children: Icons.toggle
               }
             ),
-            onClearSelection && /* @__PURE__ */ jsxRuntime.jsx(
+            onClearSelection && /* @__PURE__ */ jsx(
               "button",
               {
                 type: "button",
                 onClick: onClearSelection,
                 disabled,
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                children: chunkJOGM2EW4_js.t("table.clearSelection")
+                children: t("table.clearSelection")
               }
             ),
-            /* @__PURE__ */ jsxRuntime.jsx("div", { style: { width: 1, height: 24, background: "var(--border-color)", margin: "0 0.25rem" } })
+            /* @__PURE__ */ jsx("div", { style: { width: 1, height: 24, background: "var(--border-color)", margin: "0 0.25rem" } })
           ] }) : (
             /* Normal Actions (Refresh, Create) */
-            /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              showRefresh && onRefresh && /* @__PURE__ */ jsxRuntime.jsxs(
+            /* @__PURE__ */ jsxs(Fragment, { children: [
+              showRefresh && onRefresh && /* @__PURE__ */ jsxs(
                 "button",
                 {
                   type: "button",
                   onClick: onRefresh,
                   disabled: disabled || refreshLoading,
                   className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                  title: chunkJOGM2EW4_js.t("table.refresh", { default: "Refrescar" }),
+                  title: t("table.refresh", { default: "Refrescar" }),
                   children: [
                     Icons.refresh,
-                    chunkJOGM2EW4_js.t("table.refresh", { default: "Refrescar" })
+                    t("table.refresh", { default: "Refrescar" })
                   ]
                 }
               ),
-              showCreate && onCreate && /* @__PURE__ */ jsxRuntime.jsxs(
+              showCreate && onCreate && /* @__PURE__ */ jsxs(
                 "button",
                 {
                   type: "button",
@@ -198,50 +192,50 @@ function TableToolbar(props) {
                   className: "dui-table-toolbar-btn dui-table-toolbar-btn-primary",
                   children: [
                     Icons.plus,
-                    createLabel || chunkJOGM2EW4_js.t("table.create", { default: "Crear" })
+                    createLabel || t("table.create", { default: "Crear" })
                   ]
                 }
               )
             ] })
           ),
-          props.showExport && onExport && /* @__PURE__ */ jsxRuntime.jsxs(
+          props.showExport && onExport && /* @__PURE__ */ jsxs(
             "button",
             {
               type: "button",
               onClick: onExport,
               disabled,
               className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-              title: chunkJOGM2EW4_js.t("export", { default: "Exportar" }),
+              title: t("export", { default: "Exportar" }),
               children: [
-                /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" }) }),
-                selectedCount > 0 ? "" : chunkJOGM2EW4_js.t("export", { default: "Exportar" })
+                /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" }) }),
+                selectedCount > 0 ? "" : t("export", { default: "Exportar" })
               ]
             }
           ),
-          props.showColumnsButton && onOpenColumns && /* @__PURE__ */ jsxRuntime.jsxs(
+          props.showColumnsButton && onOpenColumns && /* @__PURE__ */ jsxs(
             "button",
             {
               type: "button",
               onClick: onOpenColumns,
               disabled,
               className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-              title: chunkJOGM2EW4_js.t("columns.title", { default: "Columnas" }),
+              title: t("columns.title", { default: "Columnas" }),
               children: [
-                chunkJOGM2EW4_js.t("columns.title", { default: "Columnas" }),
-                columnsNeedsSync && /* @__PURE__ */ jsxRuntime.jsx("span", { style: { display: "inline-block", width: 8, height: 8, background: "#ef4444", borderRadius: 8, marginLeft: 8 } })
+                t("columns.title", { default: "Columnas" }),
+                columnsNeedsSync && /* @__PURE__ */ jsx("span", { style: { display: "inline-block", width: 8, height: 8, background: "#ef4444", borderRadius: 8, marginLeft: 8 } })
               ]
             }
           ),
-          renderCustomContent && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-toolbar-custom", children: renderCustomContent() })
+          renderCustomContent && /* @__PURE__ */ jsx("div", { className: "dui-table-toolbar-custom", children: renderCustomContent() })
         ] })
       ]
     }
   );
 }
 function DefaultEmptyState() {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-empty", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
+  const { t: t6 } = useI18n();
+  return /* @__PURE__ */ jsxs("div", { className: "dui-table-empty", children: [
+    /* @__PURE__ */ jsx(
       "svg",
       {
         className: "dui-table-empty-icon",
@@ -250,7 +244,7 @@ function DefaultEmptyState() {
         stroke: "currentColor",
         width: "48",
         height: "48",
-        children: /* @__PURE__ */ jsxRuntime.jsx(
+        children: /* @__PURE__ */ jsx(
           "path",
           {
             strokeLinecap: "round",
@@ -261,20 +255,20 @@ function DefaultEmptyState() {
         )
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-table-empty-text", children: t6("table.empty") })
+    /* @__PURE__ */ jsx("p", { className: "dui-table-empty-text", children: t6("table.empty") })
   ] });
 }
 function DefaultLoadingState() {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-loading", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-loading-spinner" }),
-    /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-table-loading-text", children: t6("table.loading") })
+  const { t: t6 } = useI18n();
+  return /* @__PURE__ */ jsxs("div", { className: "dui-table-loading", children: [
+    /* @__PURE__ */ jsx("div", { className: "dui-table-loading-spinner" }),
+    /* @__PURE__ */ jsx("p", { className: "dui-table-loading-text", children: t6("table.loading") })
   ] });
 }
 function DefaultErrorState({ error }) {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-error", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
+  const { t: t6 } = useI18n();
+  return /* @__PURE__ */ jsxs("div", { className: "dui-table-error", children: [
+    /* @__PURE__ */ jsx(
       "svg",
       {
         className: "dui-table-error-icon",
@@ -283,7 +277,7 @@ function DefaultErrorState({ error }) {
         stroke: "currentColor",
         width: "48",
         height: "48",
-        children: /* @__PURE__ */ jsxRuntime.jsx(
+        children: /* @__PURE__ */ jsx(
           "path",
           {
             strokeLinecap: "round",
@@ -294,23 +288,23 @@ function DefaultErrorState({ error }) {
         )
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-table-error-text", children: t6("table.error") }),
-    /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-table-error-detail", children: error })
+    /* @__PURE__ */ jsx("p", { className: "dui-table-error-text", children: t6("table.error") }),
+    /* @__PURE__ */ jsx("p", { className: "dui-table-error-detail", children: error })
   ] });
 }
 function SortIndicator({ direction }) {
   if (!direction) {
-    return /* @__PURE__ */ jsxRuntime.jsx("svg", { className: "dui-table-sort-icon dui-table-sort-inactive", viewBox: "0 0 24 24", width: "16", height: "16", fill: "currentColor", children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M7 10l5-5 5 5H7z M7 14l5 5 5-5H7z" }) });
+    return /* @__PURE__ */ jsx("svg", { className: "dui-table-sort-icon dui-table-sort-inactive", viewBox: "0 0 24 24", width: "16", height: "16", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M7 10l5-5 5 5H7z M7 14l5 5 5-5H7z" }) });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     "svg",
     {
-      className: chunkG4EIC5OB_js.cn("dui-table-sort-icon", direction === "desc" && "dui-table-sort-desc"),
+      className: cn("dui-table-sort-icon", direction === "desc" && "dui-table-sort-desc"),
       viewBox: "0 0 24 24",
       width: "16",
       height: "16",
       fill: "currentColor",
-      children: direction === "asc" ? /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M7 14l5-5 5 5H7z" }) : /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M7 10l5 5 5-5H7z" })
+      children: direction === "asc" ? /* @__PURE__ */ jsx("path", { d: "M7 14l5-5 5 5H7z" }) : /* @__PURE__ */ jsx("path", { d: "M7 10l5 5 5-5H7z" })
     }
   );
 }
@@ -320,13 +314,13 @@ function Checkbox({
   onChange,
   disabled
 }) {
-  const ref = React2__default.default.useRef(null);
-  React2.useEffect(() => {
+  const ref = React2.useRef(null);
+  useEffect(() => {
     if (ref.current) {
       ref.current.indeterminate = indeterminate ?? false;
     }
   }, [indeterminate]);
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     "input",
     {
       ref,
@@ -412,9 +406,9 @@ function formatCellValue(value, column, row, emptyValuePlaceholder) {
     case "status": {
       const namespace = column.translationNamespace || (column.type === "status" ? "status" : void 0);
       if (Array.isArray(value)) {
-        return /* @__PURE__ */ jsxRuntime.jsx("div", { style: { display: "flex", flexWrap: "wrap", gap: "4px", alignItems: "center" }, children: value.map((item, i) => {
-          const display = item && typeof item === "object" ? item.label ?? item.name ?? String(item) : chunkJOGM2EW4_js.resolveLabel(String(item), void 0, namespace);
-          return /* @__PURE__ */ jsxRuntime.jsx("span", { className: chunkG4EIC5OB_js.cn("dui-table-badge"), children: display }, i);
+        return /* @__PURE__ */ jsx("div", { style: { display: "flex", flexWrap: "wrap", gap: "4px", alignItems: "center" }, children: value.map((item, i) => {
+          const display = item && typeof item === "object" ? item.label ?? item.name ?? String(item) : resolveLabel(String(item), void 0, namespace);
+          return /* @__PURE__ */ jsx("span", { className: cn("dui-table-badge"), children: display }, i);
         }) });
       }
       const variants = column.variants;
@@ -423,13 +417,13 @@ function formatCellValue(value, column, row, emptyValuePlaceholder) {
           (v) => String(v.value).toLowerCase() === String(value).toLowerCase() || String(v.id).toLowerCase() === String(value).toLowerCase()
         );
         if (variant) {
-          const display = chunkJOGM2EW4_js.resolveLabel(variant.label || variant.name || String(variant.value), void 0, namespace);
+          const display = resolveLabel(variant.label || variant.name || String(variant.value), void 0, namespace);
           const colorValue = variant.color || "gray";
           const isHex = /^#|^rgb|^hsl/.test(colorValue);
-          return /* @__PURE__ */ jsxRuntime.jsx(
+          return /* @__PURE__ */ jsx(
             "span",
             {
-              className: chunkG4EIC5OB_js.cn("dui-table-badge", !isHex && `dui-table-badge-${colorValue.toLowerCase()}`),
+              className: cn("dui-table-badge", !isHex && `dui-table-badge-${colorValue.toLowerCase()}`),
               style: isHex ? { backgroundColor: colorValue, color: "#fff", border: "none" } : void 0,
               children: display
             }
@@ -440,19 +434,19 @@ function formatCellValue(value, column, row, emptyValuePlaceholder) {
         const obj = value;
         const display = obj.label ?? obj.name ?? obj.businessName ?? obj.value ?? JSON.stringify(obj);
         const color = obj.color;
-        return /* @__PURE__ */ jsxRuntime.jsx(
+        return /* @__PURE__ */ jsx(
           "span",
           {
-            className: chunkG4EIC5OB_js.cn("dui-table-badge"),
+            className: cn("dui-table-badge"),
             style: color ? { backgroundColor: color, color: "#fff" } : void 0,
-            children: chunkJOGM2EW4_js.resolveLabel(String(display), void 0, namespace)
+            children: resolveLabel(String(display), void 0, namespace)
           }
         );
       }
-      return /* @__PURE__ */ jsxRuntime.jsx("span", { className: chunkG4EIC5OB_js.cn("dui-table-badge", `dui-table-badge-${String(value).toLowerCase()}`), children: chunkJOGM2EW4_js.resolveLabel(String(value), void 0, namespace) });
+      return /* @__PURE__ */ jsx("span", { className: cn("dui-table-badge", `dui-table-badge-${String(value).toLowerCase()}`), children: resolveLabel(String(value), void 0, namespace) });
     }
     case "link":
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         "a",
         {
           href: String(value),
@@ -463,10 +457,10 @@ function formatCellValue(value, column, row, emptyValuePlaceholder) {
         }
       );
     case "html":
-      return /* @__PURE__ */ jsxRuntime.jsx("div", { dangerouslySetInnerHTML: { __html: String(value) } });
+      return /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: String(value) } });
     default:
       if (Array.isArray(value)) {
-        return value.map((v, i) => /* @__PURE__ */ jsxRuntime.jsx("span", { children: v && typeof v === "object" ? v.label ?? v.name ?? String(v) : String(v) }, i));
+        return value.map((v, i) => /* @__PURE__ */ jsx("span", { children: v && typeof v === "object" ? v.label ?? v.name ?? String(v) : String(v) }, i));
       }
       if (value && typeof value === "object") {
         const obj = value;
@@ -496,10 +490,10 @@ function Pagination({
   onPageChange,
   onPageSizeChange
 }) {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
+  const { t: t6 } = useI18n();
   const startRecord = totalCount === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const endRecord = Math.min(currentPage * pageSize, totalCount);
-  const pageNumbers = React2.useMemo(() => {
+  const pageNumbers = useMemo(() => {
     const pages = [];
     const maxVisiblePages = 9;
     if (totalPages <= maxVisiblePages) {
@@ -525,30 +519,30 @@ function Pagination({
     }
     return pages;
   }, [currentPage, totalPages]);
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-pagination", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-pagination-info", children: t6(
+  return /* @__PURE__ */ jsxs("div", { className: "dui-table-pagination", children: [
+    /* @__PURE__ */ jsx("div", { className: "dui-table-pagination-info", children: t6(
       "table.pagination.showing",
       { start: startRecord, end: endRecord, total: totalCount },
       `Showing ${startRecord} to ${endRecord} of ${totalCount} entries`
     ) }),
-    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-pagination-controls", children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-pagination-pagesize", children: [
-        /* @__PURE__ */ jsxRuntime.jsxs("label", { children: [
+    /* @__PURE__ */ jsxs("div", { className: "dui-table-pagination-controls", children: [
+      /* @__PURE__ */ jsxs("div", { className: "dui-table-pagination-pagesize", children: [
+        /* @__PURE__ */ jsxs("label", { children: [
           t6("table.pagination.pageSize", {}, "Page size"),
           ":"
         ] }),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "select",
           {
             value: pageSize,
             onChange: (e) => onPageSizeChange(Number(e.target.value)),
             className: "dui-table-pagination-select",
-            children: pageSizeOptions.map((size) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: size, children: size }, size))
+            children: pageSizeOptions.map((size) => /* @__PURE__ */ jsx("option", { value: size, children: size }, size))
           }
         )
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs("nav", { className: "dui-table-pagination-nav", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxs("nav", { className: "dui-table-pagination-nav", children: [
+        /* @__PURE__ */ jsx(
           "button",
           {
             className: "dui-table-pagination-btn",
@@ -558,7 +552,7 @@ function Pagination({
             children: "\xAB"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "button",
           {
             className: "dui-table-pagination-btn",
@@ -568,10 +562,10 @@ function Pagination({
             children: "\u2039"
           }
         ),
-        pageNumbers.map((page, index) => page === "ellipsis" ? /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-table-pagination-ellipsis", children: "\u2026" }, `ellipsis-${index}`) : /* @__PURE__ */ jsxRuntime.jsx(
+        pageNumbers.map((page, index) => page === "ellipsis" ? /* @__PURE__ */ jsx("span", { className: "dui-table-pagination-ellipsis", children: "\u2026" }, `ellipsis-${index}`) : /* @__PURE__ */ jsx(
           "button",
           {
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               "dui-table-pagination-btn",
               page === currentPage && "dui-table-pagination-btn-active"
             ),
@@ -580,7 +574,7 @@ function Pagination({
           },
           page
         )),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "button",
           {
             className: "dui-table-pagination-btn",
@@ -590,7 +584,7 @@ function Pagination({
             children: "\u203A"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "button",
           {
             className: "dui-table-pagination-btn",
@@ -605,23 +599,23 @@ function Pagination({
   ] });
 }
 function useSimpleSelection(data, rowKeyProp, mode, initialSelection, onSelectionChange) {
-  const [internalSelected, setInternalSelected] = React2.useState(/* @__PURE__ */ new Set());
-  const selected = React2.useMemo(() => {
+  const [internalSelected, setInternalSelected] = useState(/* @__PURE__ */ new Set());
+  const selected = useMemo(() => {
     if (initialSelection !== void 0) {
       return new Set(initialSelection);
     }
     return internalSelected;
   }, [initialSelection, internalSelected]);
-  const getKey = React2.useCallback((row) => {
+  const getKey = useCallback((row) => {
     if (typeof rowKeyProp === "function") {
       return rowKeyProp(row);
     }
     return row[rowKeyProp];
   }, [rowKeyProp]);
-  const isSelected = React2.useCallback((key) => {
+  const isSelected = useCallback((key) => {
     return selected.has(key);
   }, [selected]);
-  const updateSelection = React2.useCallback((newSet) => {
+  const updateSelection = useCallback((newSet) => {
     if (initialSelection === void 0) {
       setInternalSelected(newSet);
     }
@@ -629,7 +623,7 @@ function useSimpleSelection(data, rowKeyProp, mode, initialSelection, onSelectio
       onSelectionChange(Array.from(newSet));
     }
   }, [initialSelection, onSelectionChange]);
-  const toggle = React2.useCallback((key) => {
+  const toggle = useCallback((key) => {
     const next = new Set(selected);
     if (mode === "single") {
       if (selected.has(key)) {
@@ -647,7 +641,7 @@ function useSimpleSelection(data, rowKeyProp, mode, initialSelection, onSelectio
     }
     updateSelection(next);
   }, [mode, selected, updateSelection]);
-  const toggleAll = React2.useCallback(() => {
+  const toggleAll = useCallback(() => {
     let next;
     if (selected.size === data.length) {
       next = /* @__PURE__ */ new Set();
@@ -656,10 +650,10 @@ function useSimpleSelection(data, rowKeyProp, mode, initialSelection, onSelectio
     }
     updateSelection(next);
   }, [data, getKey, selected.size, updateSelection]);
-  const clear = React2.useCallback(() => {
+  const clear = useCallback(() => {
     updateSelection(/* @__PURE__ */ new Set());
   }, [updateSelection]);
-  const selectedIds = React2.useMemo(() => Array.from(selected), [selected]);
+  const selectedIds = useMemo(() => Array.from(selected), [selected]);
   const isAllSelected = data.length > 0 && selected.size === data.length;
   const isSomeSelected = selected.size > 0 && selected.size < data.length;
   return {
@@ -693,9 +687,9 @@ function TableRendererInner(props, ref) {
     rowKey = "id",
     className,
     style,
-    renderEmpty = () => /* @__PURE__ */ jsxRuntime.jsx(DefaultEmptyState, {}),
-    renderLoading = () => /* @__PURE__ */ jsxRuntime.jsx(DefaultLoadingState, {}),
-    renderError = (err) => /* @__PURE__ */ jsxRuntime.jsx(DefaultErrorState, { error: err }),
+    renderEmpty = () => /* @__PURE__ */ jsx(DefaultEmptyState, {}),
+    renderLoading = () => /* @__PURE__ */ jsx(DefaultLoadingState, {}),
+    renderError = (err) => /* @__PURE__ */ jsx(DefaultErrorState, { error: err }),
     renderHeader,
     renderRow,
     renderActions,
@@ -740,26 +734,26 @@ function TableRendererInner(props, ref) {
     toolbarDisabled = false,
     IconComponent
   } = props;
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
-  const [internalPage, setInternalPage] = React2.useState(1);
-  const [internalPageSize, setInternalPageSize] = React2.useState(
+  const { t: t6 } = useI18n();
+  const [internalPage, setInternalPage] = useState(1);
+  const [internalPageSize, setInternalPageSize] = useState(
     config.pagination?.pageSize ?? 10
   );
-  const [sortState, setSortState] = React2.useState(null);
-  const [filters, setFilters] = React2.useState({});
+  const [sortState, setSortState] = useState(null);
+  const [filters, setFilters] = useState({});
   const isPageControlled = externalPage !== void 0;
   const currentPage = isPageControlled ? externalPage : internalPage;
   const currentPageSize = externalPageSize ?? internalPageSize;
   const totalCount = externalTotalCount ?? data.length;
   const totalPages = Math.max(1, Math.ceil(totalCount / currentPageSize));
-  const visibleColumns = React2.useMemo(() => {
+  const visibleColumns = useMemo(() => {
     return config.columns.filter((col) => {
       if (col.visible === false) return false;
       if (!col.showWhen) return true;
-      return chunkG4EIC5OB_js.evaluateConditions(col.showWhen, {}, featureFlags);
+      return evaluateConditions(col.showWhen, {}, featureFlags);
     });
   }, [config.columns, featureFlags]);
-  const getKey = React2.useCallback((row) => {
+  const getKey = useCallback((row) => {
     if (typeof rowKey === "function") {
       return rowKey(row);
     }
@@ -772,27 +766,27 @@ function TableRendererInner(props, ref) {
     externalSelectedIds,
     onSelectionChange
   );
-  const showStatusColumn = React2.useMemo(() => {
+  const showStatusColumn = useMemo(() => {
     return data.slice(0, 50).some(
       (row) => row.isEnabled !== void 0 || row.active !== void 0 || row.isActive !== void 0 || row.available !== void 0 || row.quantityAvailable !== void 0
     );
   }, [data]);
-  const [internalExpandedKeys, setInternalExpandedKeys] = React2.useState(/* @__PURE__ */ new Set());
-  const handlePageChange = React2.useCallback((newPage) => {
+  const [internalExpandedKeys, setInternalExpandedKeys] = useState(/* @__PURE__ */ new Set());
+  const handlePageChange = useCallback((newPage) => {
     if (isPageControlled && onPageChange) {
       onPageChange(newPage);
     } else {
       setInternalPage(newPage);
     }
   }, [isPageControlled, onPageChange]);
-  const handlePageSizeChange = React2.useCallback((newPageSize) => {
+  const handlePageSizeChange = useCallback((newPageSize) => {
     if (onPageSizeChange) {
       onPageSizeChange(newPageSize);
     }
     setInternalPageSize(newPageSize);
     handlePageChange(1);
   }, [onPageSizeChange, handlePageChange]);
-  const handleSortChange = React2.useCallback((column) => {
+  const handleSortChange = useCallback((column) => {
     if (!column.sortable) return;
     const newSort = sortState?.key === column.key ? sortState.direction === "asc" ? { key: column.key, direction: "desc" } : sortState.direction === "desc" ? null : { key: column.key, direction: "asc" } : { key: column.key, direction: "asc" };
     setSortState(newSort);
@@ -800,23 +794,23 @@ function TableRendererInner(props, ref) {
       onSortChange(newSort);
     }
   }, [sortState, onSortChange]);
-  const clearFilters = React2.useCallback(() => {
+  const clearFilters = useCallback(() => {
     setFilters({});
     if (onFilterChange) {
       onFilterChange({});
     }
   }, [onFilterChange]);
-  const resetPage = React2.useCallback(() => {
+  const resetPage = useCallback(() => {
     handlePageChange(1);
   }, [handlePageChange]);
-  React2.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     clearFilters,
     clearSelection: selection.clear,
     resetPage,
     getFilters: () => filters,
     getSelectedIds: () => selection.selectedIds
   }), [clearFilters, selection.clear, resetPage, filters, selection.selectedIds]);
-  const processedData = React2.useMemo(() => {
+  const processedData = useMemo(() => {
     let working = [...data];
     if (!onSortChange && sortState) {
       const col = config.columns.find((c) => c.key === sortState.key);
@@ -859,8 +853,8 @@ function TableRendererInner(props, ref) {
     }
     return "light";
   })();
-  const [resizing, setResizing] = React2.useState(null);
-  const stickyLeftOffsets = React2.useMemo(() => {
+  const [resizing, setResizing] = useState(null);
+  const stickyLeftOffsets = useMemo(() => {
     const offsets = {};
     let currentOffset = 0;
     if (selectable) {
@@ -881,7 +875,7 @@ function TableRendererInner(props, ref) {
     }
     return offsets;
   }, [selectable, showRowNumbers, showStatusColumn, visibleColumns]);
-  const startColumnResize = React2.useCallback((e, key) => {
+  const startColumnResize = useCallback((e, key) => {
     e.preventDefault();
     e.stopPropagation();
     const el = e.target.closest("th");
@@ -889,7 +883,7 @@ function TableRendererInner(props, ref) {
     const startWidth = el.getBoundingClientRect().width;
     setResizing({ key: String(key), startX: e.clientX, startWidth });
   }, []);
-  React2.useEffect(() => {
+  useEffect(() => {
     try {
       config.columns.forEach((c) => {
         if (c.resizable === void 0) c.resizable = true;
@@ -897,7 +891,7 @@ function TableRendererInner(props, ref) {
     } catch (e) {
     }
   }, [config.columns]);
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!resizing) return;
     const onMove = (ev) => {
       const dx = ev.clientX - (resizing.startX || 0);
@@ -936,7 +930,7 @@ function TableRendererInner(props, ref) {
       window.removeEventListener("mouseup", onUp);
     };
   }, [resizing, config.columns]);
-  React2.useEffect(() => {
+  useEffect(() => {
     try {
       const storageKey = `dn:col_widths:${config.id || "table"}`;
       const raw = localStorage.getItem(storageKey);
@@ -964,14 +958,14 @@ function TableRendererInner(props, ref) {
   const MIN_CHAR_DISPLAY2 = 6;
   const CHAR_PX2 = 8;
   const MIN_PX2 = MIN_CHAR_DISPLAY2 * CHAR_PX2;
-  const tableElRef = React2__default.default.useRef(null);
+  const tableElRef = React2.useRef(null);
   if (loading && data.length === 0) {
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style, children: renderLoading() });
+    return /* @__PURE__ */ jsx("div", { className: cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style, children: renderLoading() });
   }
   if (error && data.length === 0) {
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style, children: renderError(error) });
+    return /* @__PURE__ */ jsx("div", { className: cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style, children: renderError(error) });
   }
-  const tableClasses = chunkG4EIC5OB_js.cn(
+  const tableClasses = cn(
     "dui-table",
     striped && "dui-table-striped",
     hoverable && "dui-table-hoverable",
@@ -983,8 +977,8 @@ function TableRendererInner(props, ref) {
     ...style,
     ...maxHeight ? { maxHeight, overflowY: "auto" } : {}
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style: containerStyle, children: [
-    showToolbar && /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs("div", { className: cn("dui-table-container", effectiveTheme === "dark" ? "dui-theme--dark" : "dui-theme--light", className), style: containerStyle, children: [
+    showToolbar && /* @__PURE__ */ jsx(
       TableToolbar,
       {
         showSearch: showToolbarSearch,
@@ -1011,14 +1005,14 @@ function TableRendererInner(props, ref) {
         columns: config.columns
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-wrapper", style: preventLayoutShift ? { scrollbarGutter: "stable" } : {}, children: /* @__PURE__ */ jsxRuntime.jsxs("table", { className: tableClasses, children: [
-      /* @__PURE__ */ jsxRuntime.jsx("thead", { className: "dui-table-head", children: renderHeader ? renderHeader(visibleColumns) : /* @__PURE__ */ jsxRuntime.jsxs("tr", { className: "dui-table-row dui-table-header-row", children: [
-        selectable && selectionMode === "multiple" && /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx("div", { className: "dui-table-wrapper", style: preventLayoutShift ? { scrollbarGutter: "stable" } : {}, children: /* @__PURE__ */ jsxs("table", { className: tableClasses, children: [
+      /* @__PURE__ */ jsx("thead", { className: "dui-table-head", children: renderHeader ? renderHeader(visibleColumns) : /* @__PURE__ */ jsxs("tr", { className: "dui-table-row dui-table-header-row", children: [
+        selectable && selectionMode === "multiple" && /* @__PURE__ */ jsx(
           "th",
           {
-            className: chunkG4EIC5OB_js.cn("dui-table-th dui-table-th-checkbox dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
+            className: cn("dui-table-th dui-table-th-checkbox dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
             style: { left: stickyLeftOffsets["selection"], backgroundColor: "var(--dui-table-header-bg)" },
-            children: /* @__PURE__ */ jsxRuntime.jsx(
+            children: /* @__PURE__ */ jsx(
               Checkbox,
               {
                 checked: selection.isAllSelected,
@@ -1028,35 +1022,35 @@ function TableRendererInner(props, ref) {
             )
           }
         ),
-        selectable && selectionMode === "single" && /* @__PURE__ */ jsxRuntime.jsx(
+        selectable && selectionMode === "single" && /* @__PURE__ */ jsx(
           "th",
           {
-            className: chunkG4EIC5OB_js.cn("dui-table-th dui-table-th-radio dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
+            className: cn("dui-table-th dui-table-th-radio dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
             style: { left: stickyLeftOffsets["selection"], backgroundColor: "var(--dui-table-header-bg)" }
           }
         ),
-        showRowNumbers && /* @__PURE__ */ jsxRuntime.jsx(
+        showRowNumbers && /* @__PURE__ */ jsx(
           "th",
           {
-            className: chunkG4EIC5OB_js.cn("dui-table-th dui-table-th-rownum dui-table-sticky-left", visibleColumns.length === 0 && !showStatusColumn && "dui-table-sticky-left-last"),
+            className: cn("dui-table-th dui-table-th-rownum dui-table-sticky-left", visibleColumns.length === 0 && !showStatusColumn && "dui-table-sticky-left-last"),
             style: { left: stickyLeftOffsets["rownum"], backgroundColor: "var(--dui-table-header-bg)" },
             children: "#"
           }
         ),
-        showStatusColumn && /* @__PURE__ */ jsxRuntime.jsx(
+        showStatusColumn && /* @__PURE__ */ jsx(
           "th",
           {
-            className: chunkG4EIC5OB_js.cn("dui-table-th dui-table-th-status dui-table-sticky-left", visibleColumns.length === 0 && "dui-table-sticky-left-last"),
+            className: cn("dui-table-th dui-table-th-status dui-table-sticky-left", visibleColumns.length === 0 && "dui-table-sticky-left-last"),
             style: { width: "2.5rem", textAlign: "center", left: stickyLeftOffsets["status"], backgroundColor: "var(--dui-table-header-bg)" }
           }
         ),
         visibleColumns.map((column, index) => {
           const isActionsCol = column.key === "actions" || column.type === "actions" || column.dataType === "actions";
           const isFirstDataCol = index === 0;
-          return /* @__PURE__ */ jsxRuntime.jsxs(
+          return /* @__PURE__ */ jsxs(
             "th",
             {
-              className: chunkG4EIC5OB_js.cn(
+              className: cn(
                 "dui-table-th",
                 column.sortable && "dui-table-th-sortable",
                 column.align && `dui-table-th-${column.align}`,
@@ -1073,22 +1067,22 @@ function TableRendererInner(props, ref) {
               },
               onClick: () => column.sortable && handleSortChange(column),
               children: [
-                /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-th-content", children: [
-                  /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-table-th-text", children: (function getColumnLabel() {
+                /* @__PURE__ */ jsxs("div", { className: "dui-table-th-content", children: [
+                  /* @__PURE__ */ jsx("span", { className: "dui-table-th-text", children: (function getColumnLabel() {
                     const headerStr = typeof column.header === "string" ? column.header : "";
                     const namespace = column.translationNamespace;
                     const tByKey = t6(`columns.labels.${String(column.key)}`);
                     if (tByKey && tByKey !== `columns.labels.${String(column.key)}`) return tByKey;
-                    return chunkJOGM2EW4_js.resolveLabel(headerStr || String(column.key), void 0, namespace);
+                    return resolveLabel(headerStr || String(column.key), void 0, namespace);
                   })() }),
-                  column.sortable && /* @__PURE__ */ jsxRuntime.jsx(
+                  column.sortable && /* @__PURE__ */ jsx(
                     SortIndicator,
                     {
                       direction: sortState?.key === column.key ? sortState.direction : null
                     }
                   )
                 ] }),
-                column.resizable && /* @__PURE__ */ jsxRuntime.jsx(
+                column.resizable && /* @__PURE__ */ jsx(
                   "div",
                   {
                     className: "dui-table-th-resize-handle",
@@ -1103,9 +1097,9 @@ function TableRendererInner(props, ref) {
             column.key
           );
         }),
-        renderActions && /* @__PURE__ */ jsxRuntime.jsx("th", { className: "dui-table-th dui-table-th-actions", style: { backgroundColor: "var(--dui-table-header-bg)" }, children: t6("table.actions") })
+        renderActions && /* @__PURE__ */ jsx("th", { className: "dui-table-th dui-table-th-actions", style: { backgroundColor: "var(--dui-table-header-bg)" }, children: t6("table.actions") })
       ] }) }),
-      /* @__PURE__ */ jsxRuntime.jsx("tbody", { className: "dui-table-body", children: displayData.length === 0 ? /* @__PURE__ */ jsxRuntime.jsx("tr", { children: /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx("tbody", { className: "dui-table-body", children: displayData.length === 0 ? /* @__PURE__ */ jsx("tr", { children: /* @__PURE__ */ jsx(
         "td",
         {
           colSpan: visibleColumns.length + (selectable ? 1 : 0) + (showRowNumbers ? 1 : 0) + (showStatusColumn ? 1 : 0) + (renderActions ? 1 : 0) + (isTreeTable ? 1 : 0),
@@ -1132,11 +1126,11 @@ function TableRendererInner(props, ref) {
           }
           onToggleExpand?.(row, nextExpanded);
         };
-        return /* @__PURE__ */ jsxRuntime.jsxs(React2__default.default.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntime.jsxs(
+        return /* @__PURE__ */ jsxs(React2.Fragment, { children: [
+          /* @__PURE__ */ jsxs(
             "tr",
             {
-              className: chunkG4EIC5OB_js.cn(
+              className: cn(
                 "dui-table-row",
                 isRowSelected && "dui-table-row-selected",
                 onRowClick && "dui-table-row-clickable",
@@ -1154,14 +1148,14 @@ function TableRendererInner(props, ref) {
                 e.stopPropagation();
               },
               children: [
-                isTreeTable && /* @__PURE__ */ jsxRuntime.jsx("td", { className: "dui-table-td dui-table-td-tree-toggle", onClick: (e) => e.stopPropagation(), children: (row.hasChildren || row.isVariable || row.children?.length > 0) && /* @__PURE__ */ jsxRuntime.jsx("button", { type: "button", onClick: toggleExpand, className: "dui-table-tree-btn", children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: chunkG4EIC5OB_js.cn("dui-table-tree-icon", isExpanded && "dui-table-tree-icon--expanded"), children: IconComponent ? /* @__PURE__ */ jsxRuntime.jsx(IconComponent, { name: "chevron-right" }) : isExpanded ? "\u25BC" : "\u25B6" }) }) }),
-                selectable && selectionMode === "multiple" && /* @__PURE__ */ jsxRuntime.jsx(
+                isTreeTable && /* @__PURE__ */ jsx("td", { className: "dui-table-td dui-table-td-tree-toggle", onClick: (e) => e.stopPropagation(), children: (row.hasChildren || row.isVariable || row.children?.length > 0) && /* @__PURE__ */ jsx("button", { type: "button", onClick: toggleExpand, className: "dui-table-tree-btn", children: /* @__PURE__ */ jsx("span", { className: cn("dui-table-tree-icon", isExpanded && "dui-table-tree-icon--expanded"), children: IconComponent ? /* @__PURE__ */ jsx(IconComponent, { name: "chevron-right" }) : isExpanded ? "\u25BC" : "\u25B6" }) }) }),
+                selectable && selectionMode === "multiple" && /* @__PURE__ */ jsx(
                   "td",
                   {
-                    className: chunkG4EIC5OB_js.cn("dui-table-td dui-table-td-checkbox dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
+                    className: cn("dui-table-td dui-table-td-checkbox dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
                     style: { left: stickyLeftOffsets["selection"], backgroundColor: "inherit" },
                     onClick: (e) => e.stopPropagation(),
-                    children: /* @__PURE__ */ jsxRuntime.jsx("div", { style: { display: "flex", alignItems: "center", justifyContent: "center" }, children: /* @__PURE__ */ jsxRuntime.jsx(
+                    children: /* @__PURE__ */ jsx("div", { style: { display: "flex", alignItems: "center", justifyContent: "center" }, children: /* @__PURE__ */ jsx(
                       Checkbox,
                       {
                         checked: isRowSelected,
@@ -1170,13 +1164,13 @@ function TableRendererInner(props, ref) {
                     ) })
                   }
                 ),
-                selectable && selectionMode === "single" && /* @__PURE__ */ jsxRuntime.jsx(
+                selectable && selectionMode === "single" && /* @__PURE__ */ jsx(
                   "td",
                   {
-                    className: chunkG4EIC5OB_js.cn("dui-table-td dui-table-td-radio dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
+                    className: cn("dui-table-td dui-table-td-radio dui-table-sticky-left", visibleColumns.length === 0 && !showRowNumbers && !showStatusColumn && "dui-table-sticky-left-last"),
                     style: { left: stickyLeftOffsets["selection"], backgroundColor: "inherit" },
                     onClick: (e) => e.stopPropagation(),
-                    children: /* @__PURE__ */ jsxRuntime.jsx("div", { style: { display: "flex", alignItems: "center", justifyContent: "center" }, children: /* @__PURE__ */ jsxRuntime.jsx(
+                    children: /* @__PURE__ */ jsx("div", { style: { display: "flex", alignItems: "center", justifyContent: "center" }, children: /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "radio",
@@ -1187,27 +1181,27 @@ function TableRendererInner(props, ref) {
                     ) })
                   }
                 ),
-                showRowNumbers && /* @__PURE__ */ jsxRuntime.jsx(
+                showRowNumbers && /* @__PURE__ */ jsx(
                   "td",
                   {
-                    className: chunkG4EIC5OB_js.cn("dui-table-td dui-table-td-rownum dui-table-sticky-left", visibleColumns.length === 0 && !showStatusColumn && "dui-table-sticky-left-last"),
+                    className: cn("dui-table-td dui-table-td-rownum dui-table-sticky-left", visibleColumns.length === 0 && !showStatusColumn && "dui-table-sticky-left-last"),
                     style: { left: stickyLeftOffsets["rownum"], backgroundColor: "inherit" },
                     children: rowIndex + 1
                   }
                 ),
-                showStatusColumn && /* @__PURE__ */ jsxRuntime.jsx(
+                showStatusColumn && /* @__PURE__ */ jsx(
                   "td",
                   {
-                    className: chunkG4EIC5OB_js.cn("dui-table-td dui-table-td-status dui-table-sticky-left", visibleColumns.length === 0 && "dui-table-sticky-left-last"),
+                    className: cn("dui-table-td dui-table-td-status dui-table-sticky-left", visibleColumns.length === 0 && "dui-table-sticky-left-last"),
                     style: { textAlign: "center", width: "2.5rem", left: stickyLeftOffsets["status"], backgroundColor: "inherit" },
                     onClick: (e) => e.stopPropagation(),
                     children: (function renderStatusDot() {
                       const active = row.isEnabled ?? row.active ?? row.isActive ?? row.available ?? (row.quantityAvailable !== void 0 ? row.quantityAvailable > 0 : void 0);
                       if (active === void 0) return null;
-                      return /* @__PURE__ */ jsxRuntime.jsx(
+                      return /* @__PURE__ */ jsx(
                         "span",
                         {
-                          className: chunkG4EIC5OB_js.cn(
+                          className: cn(
                             "dui-table-status-dot",
                             active ? "dui-table-status-dot--active" : "dui-table-status-dot--inactive"
                           ),
@@ -1222,10 +1216,10 @@ function TableRendererInner(props, ref) {
                   const isFirstDataCol = colIndex === 0;
                   if (column.type === "actions" || column.dataType === "actions") {
                     const actions = column.actions || [];
-                    return /* @__PURE__ */ jsxRuntime.jsx(
+                    return /* @__PURE__ */ jsx(
                       "td",
                       {
-                        className: chunkG4EIC5OB_js.cn(
+                        className: cn(
                           "dui-table-td",
                           column.align && `dui-table-td-${column.align}`,
                           "dui-table-td-actions"
@@ -1240,7 +1234,7 @@ function TableRendererInner(props, ref) {
                           zIndex: 5
                         },
                         onClick: (e) => e.stopPropagation(),
-                        children: /* @__PURE__ */ jsxRuntime.jsx("div", { style: {
+                        children: /* @__PURE__ */ jsx("div", { style: {
                           display: "flex",
                           gap: 8,
                           justifyContent: column.align === "center" ? "center" : column.align === "right" ? "flex-end" : void 0
@@ -1248,7 +1242,7 @@ function TableRendererInner(props, ref) {
                           let renderedIcon = action.icon;
                           if (typeof action.icon === "string") {
                             if (IconComponent) {
-                              renderedIcon = /* @__PURE__ */ jsxRuntime.jsx(IconComponent, { name: action.icon, className: "w-4 h-4" });
+                              renderedIcon = /* @__PURE__ */ jsx(IconComponent, { name: action.icon, className: "w-4 h-4" });
                             }
                           }
                           const getVariantClass = (v) => {
@@ -1260,17 +1254,17 @@ function TableRendererInner(props, ref) {
                             if (v === "danger") return "btn-ghost text-danger";
                             return `btn-ghost text-${v}`;
                           };
-                          return /* @__PURE__ */ jsxRuntime.jsx(
+                          return /* @__PURE__ */ jsx(
                             "button",
                             {
                               type: "button",
-                              title: typeof action.label === "string" ? chunkJOGM2EW4_js.resolveLabel(action.label) : void 0,
+                              title: typeof action.label === "string" ? resolveLabel(action.label) : void 0,
                               className: `btn btn-sm ${getVariantClass(action.variant)}`,
                               onClick: (e) => {
                                 e.stopPropagation();
                                 action.onClick?.(row, rowIndex);
                               },
-                              children: renderedIcon ? renderedIcon : typeof action.label === "string" ? chunkJOGM2EW4_js.resolveLabel(action.label) : action.label
+                              children: renderedIcon ? renderedIcon : typeof action.label === "string" ? resolveLabel(action.label) : action.label
                             },
                             action.id
                           );
@@ -1286,10 +1280,10 @@ function TableRendererInner(props, ref) {
                     row,
                     emptyValue
                   );
-                  return /* @__PURE__ */ jsxRuntime.jsx(
+                  return /* @__PURE__ */ jsx(
                     "td",
                     {
-                      className: chunkG4EIC5OB_js.cn(
+                      className: cn(
                         "dui-table-td",
                         column.align && `dui-table-td-${column.align}`,
                         isFirstDataCol && "dui-table-sticky-left dui-table-sticky-left-last"
@@ -1307,7 +1301,7 @@ function TableRendererInner(props, ref) {
                     column.key
                   );
                 }),
-                renderActions && /* @__PURE__ */ jsxRuntime.jsx(
+                renderActions && /* @__PURE__ */ jsx(
                   "td",
                   {
                     className: "dui-table-td dui-table-td-actions",
@@ -1319,15 +1313,15 @@ function TableRendererInner(props, ref) {
               ]
             }
           ),
-          isExpanded && renderSubRow && /* @__PURE__ */ jsxRuntime.jsx("tr", { className: "dui-table-row-sub", children: /* @__PURE__ */ jsxRuntime.jsx("td", { colSpan: visibleColumns.length + (selectable ? 1 : 0) + (showRowNumbers ? 1 : 0) + (showStatusColumn ? 1 : 0) + (renderActions ? 1 : 0) + (isTreeTable ? 1 : 0), children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-subrow-content", children: renderSubRow(row) }) }) }),
+          isExpanded && renderSubRow && /* @__PURE__ */ jsx("tr", { className: "dui-table-row-sub", children: /* @__PURE__ */ jsx("td", { colSpan: visibleColumns.length + (selectable ? 1 : 0) + (showRowNumbers ? 1 : 0) + (showStatusColumn ? 1 : 0) + (renderActions ? 1 : 0) + (isTreeTable ? 1 : 0), children: /* @__PURE__ */ jsx("div", { className: "dui-table-subrow-content", children: renderSubRow(row) }) }) }),
           isExpanded && row.children && row.children.map((child, childIdx) => {
             return null;
           })
         ] }, key);
       }) })
     ] }) }),
-    loading && data.length > 0 && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-loading-overlay", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-loading-spinner" }) }),
-    config.pagination?.enabled !== false && totalPages > 0 && /* @__PURE__ */ jsxRuntime.jsx(
+    loading && data.length > 0 && /* @__PURE__ */ jsx("div", { className: "dui-table-loading-overlay", children: /* @__PURE__ */ jsx("div", { className: "dui-table-loading-spinner" }) }),
+    config.pagination?.enabled !== false && totalPages > 0 && /* @__PURE__ */ jsx(
       Pagination,
       {
         currentPage,
@@ -1341,7 +1335,7 @@ function TableRendererInner(props, ref) {
     )
   ] });
 }
-var TableRenderer = React2.forwardRef(TableRendererInner);
+var TableRenderer = forwardRef(TableRendererInner);
 TableRenderer.displayName = "TableRenderer";
 var TabRenderer = ({
   tabs,
@@ -1350,46 +1344,46 @@ var TabRenderer = ({
   className,
   variant = "underline"
 }) => {
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn("dui-tabs-container", className), children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn(
+  return /* @__PURE__ */ jsx("div", { className: cn("dui-tabs-container", className), children: /* @__PURE__ */ jsx("div", { className: cn(
     "flex items-center gap-1 border-b dark:border-gray-700",
     variant === "pills" && "border-none gap-2"
   ), children: tabs.map((tab) => {
     const isActive = tab.id === activeTab;
     if (variant === "pills") {
-      return /* @__PURE__ */ jsxRuntime.jsxs(
+      return /* @__PURE__ */ jsxs(
         "button",
         {
           type: "button",
           onClick: () => !tab.disabled && onChange(tab.id),
           disabled: tab.disabled,
-          className: chunkG4EIC5OB_js.cn(
+          className: cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
             isActive ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30" : "text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-gray-400",
             tab.disabled && "opacity-50 cursor-not-allowed"
           ),
           children: [
-            tab.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-lg", children: tab.icon }),
-            /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkJOGM2EW4_js.resolveLabel(tab.label) })
+            tab.icon && /* @__PURE__ */ jsx("span", { className: "text-lg", children: tab.icon }),
+            /* @__PURE__ */ jsx("span", { children: resolveLabel(tab.label) })
           ]
         },
         tab.id
       );
     }
-    return /* @__PURE__ */ jsxRuntime.jsxs(
+    return /* @__PURE__ */ jsxs(
       "button",
       {
         type: "button",
         onClick: () => !tab.disabled && onChange(tab.id),
         disabled: tab.disabled,
-        className: chunkG4EIC5OB_js.cn(
+        className: cn(
           "relative flex items-center gap-2 px-6 py-4 text-sm font-semibold transition-all duration-200 focus:outline-none",
           isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200",
           tab.disabled && "opacity-50 cursor-not-allowed"
         ),
         children: [
-          tab.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-lg", children: tab.icon }),
-          /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkJOGM2EW4_js.resolveLabel(tab.label) }),
-          isActive && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-t-full shadow-[0_-2px_10px_rgba(37,99,235,0.5)]" })
+          tab.icon && /* @__PURE__ */ jsx("span", { className: "text-lg", children: tab.icon }),
+          /* @__PURE__ */ jsx("span", { children: resolveLabel(tab.label) }),
+          isActive && /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-t-full shadow-[0_-2px_10px_rgba(37,99,235,0.5)]" })
         ]
       },
       tab.id
@@ -1406,7 +1400,7 @@ function DefaultFieldRenderer({
   onChange,
   onBlur
 }) {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
+  const { t: t6 } = useI18n();
   const inputId = `field-${field.name}`;
   const hasError = touched && !!error;
   const getInputType = () => {
@@ -1440,12 +1434,12 @@ function DefaultFieldRenderer({
     }
   };
   if (field.type === "select" || field.type === "multiselect") {
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-        chunkJOGM2EW4_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("dui-field", hasError && "dui-field--error"), children: [
+      /* @__PURE__ */ jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(
+      /* @__PURE__ */ jsxs(
         "select",
         {
           id: inputId,
@@ -1457,27 +1451,27 @@ function DefaultFieldRenderer({
           className: "dui-field__select",
           multiple: field.type === "multiselect",
           children: [
-            !field.required && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunkJOGM2EW4_js.resolveLabel("select_placeholder", "Select...") }),
-            field.options?.map((option) => /* @__PURE__ */ jsxRuntime.jsx(
+            !field.required && /* @__PURE__ */ jsx("option", { value: "", children: resolveLabel("select_placeholder", "Select...") }),
+            field.options?.map((option) => /* @__PURE__ */ jsx(
               "option",
               {
                 value: String(option.value),
                 disabled: option.disabled,
-                children: chunkJOGM2EW4_js.resolveLabel(String(option.label))
+                children: resolveLabel(String(option.label))
               },
               String(option.value)
             ))
           ]
         }
       ),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: field.helpText }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
+      field.helpText && /* @__PURE__ */ jsx("p", { className: "dui-field__help", children: field.helpText }),
+      hasError && /* @__PURE__ */ jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   if (field.type === "checkbox" || field.type === "switch") {
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field dui-field--checkbox", hasError && "dui-field--error"), children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("label", { className: "dui-field__checkbox-label", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxs("div", { className: cn("dui-field dui-field--checkbox", hasError && "dui-field--error"), children: [
+      /* @__PURE__ */ jsxs("label", { className: "dui-field__checkbox-label", children: [
+        /* @__PURE__ */ jsx(
           "input",
           {
             type: "checkbox",
@@ -1490,20 +1484,20 @@ function DefaultFieldRenderer({
             className: field.type === "switch" ? "dui-field__switch" : "dui-field__checkbox"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkJOGM2EW4_js.resolveLabel(String(field.label)) }),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
+        /* @__PURE__ */ jsx("span", { children: resolveLabel(String(field.label)) }),
+        field.required && /* @__PURE__ */ jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkJOGM2EW4_js.resolveLabel(String(field.helpText)) }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
+      field.helpText && /* @__PURE__ */ jsx("p", { className: "dui-field__help", children: resolveLabel(String(field.helpText)) }),
+      hasError && /* @__PURE__ */ jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   if (field.type === "textarea") {
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-        chunkJOGM2EW4_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("dui-field", hasError && "dui-field--error"), children: [
+      /* @__PURE__ */ jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(
         "textarea",
         {
           id: inputId,
@@ -1513,28 +1507,28 @@ function DefaultFieldRenderer({
           onBlur,
           disabled: disabled || field.disabled,
           readOnly: readOnly || field.readOnly,
-          placeholder: field.placeholder ? chunkJOGM2EW4_js.resolveLabel(String(field.placeholder)) : void 0,
+          placeholder: field.placeholder ? resolveLabel(String(field.placeholder)) : void 0,
           maxLength: field.maxLength,
           className: "dui-field__textarea",
           rows: 4
         }
       ),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkJOGM2EW4_js.resolveLabel(String(field.helpText)) }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
+      field.helpText && /* @__PURE__ */ jsx("p", { className: "dui-field__help", children: resolveLabel(String(field.helpText)) }),
+      hasError && /* @__PURE__ */ jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   if (field.type === "radio") {
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "dui-field__label", children: [
-        chunkJOGM2EW4_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("dui-field", hasError && "dui-field--error"), children: [
+      /* @__PURE__ */ jsxs("span", { className: "dui-field__label", children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn(
+      /* @__PURE__ */ jsx("div", { className: cn(
         "dui-field__radio-group",
         field.layout === "horizontal" && "dui-field__radio-group--horizontal",
         field.layout === "vertical" && "dui-field__radio-group--vertical"
-      ), children: field.options?.map((option) => /* @__PURE__ */ jsxRuntime.jsxs("label", { className: "dui-field__radio-label", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+      ), children: field.options?.map((option) => /* @__PURE__ */ jsxs("label", { className: "dui-field__radio-label", children: [
+        /* @__PURE__ */ jsx(
           "input",
           {
             type: "radio",
@@ -1547,10 +1541,10 @@ function DefaultFieldRenderer({
             className: "dui-field__radio"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkJOGM2EW4_js.resolveLabel(String(option.label)) })
+        /* @__PURE__ */ jsx("span", { children: resolveLabel(String(option.label)) })
       ] }, String(option.value))) }),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkJOGM2EW4_js.resolveLabel(String(field.helpText)) }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
+      field.helpText && /* @__PURE__ */ jsx("p", { className: "dui-field__help", children: resolveLabel(String(field.helpText)) }),
+      hasError && /* @__PURE__ */ jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   let displayValue = value;
@@ -1581,12 +1575,12 @@ function DefaultFieldRenderer({
       displayValue = value;
     }
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
-    /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-      chunkJOGM2EW4_js.resolveLabel(String(field.label)),
-      field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
+  return /* @__PURE__ */ jsxs("div", { className: cn("dui-field", hasError && "dui-field--error"), children: [
+    /* @__PURE__ */ jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
+      resolveLabel(String(field.label)),
+      field.required && /* @__PURE__ */ jsx("span", { className: "dui-field__required", children: "*" })
     ] }),
-    /* @__PURE__ */ jsxRuntime.jsx(
+    /* @__PURE__ */ jsx(
       "input",
       {
         type: getInputType(),
@@ -1614,15 +1608,15 @@ function DefaultFieldRenderer({
         onBlur,
         disabled: disabled || field.disabled,
         readOnly: readOnly || field.readOnly,
-        placeholder: field.placeholder ? chunkJOGM2EW4_js.resolveLabel(String(field.placeholder)) : void 0,
+        placeholder: field.placeholder ? resolveLabel(String(field.placeholder)) : void 0,
         min: field.min,
         max: field.max,
         maxLength: field.maxLength,
         className: "dui-field__input"
       }
     ),
-    field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkJOGM2EW4_js.resolveLabel(String(field.helpText)) }),
-    hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
+    field.helpText && /* @__PURE__ */ jsx("p", { className: "dui-field__help", children: resolveLabel(String(field.helpText)) }),
+    hasError && /* @__PURE__ */ jsx("p", { className: "dui-field__error", children: error })
   ] });
 }
 function DefaultSectionRenderer({
@@ -1631,29 +1625,29 @@ function DefaultSectionRenderer({
   toggleCollapse,
   children
 }) {
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-form-section", children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(
+  return /* @__PURE__ */ jsxs("div", { className: "dui-form-section", children: [
+    /* @__PURE__ */ jsxs(
       "div",
       {
-        className: chunkG4EIC5OB_js.cn(
+        className: cn(
           "dui-form-section__header",
           section.collapsible && "dui-form-section__header--collapsible"
         ),
         onClick: section.collapsible ? toggleCollapse : void 0,
         children: [
-          section.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-form-section__icon", children: section.icon }),
-          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-form-section__title-group", children: [
-            /* @__PURE__ */ jsxRuntime.jsx("h3", { className: "dui-form-section__title", children: typeof section.title === "string" ? chunkJOGM2EW4_js.resolveLabel(section.title) : section.title }),
-            section.description && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-form-section__description", children: typeof section.description === "string" ? chunkJOGM2EW4_js.resolveLabel(section.description) : section.description })
+          section.icon && /* @__PURE__ */ jsx("span", { className: "dui-form-section__icon", children: section.icon }),
+          /* @__PURE__ */ jsxs("div", { className: "dui-form-section__title-group", children: [
+            /* @__PURE__ */ jsx("h3", { className: "dui-form-section__title", children: typeof section.title === "string" ? resolveLabel(section.title) : section.title }),
+            section.description && /* @__PURE__ */ jsx("p", { className: "dui-form-section__description", children: typeof section.description === "string" ? resolveLabel(section.description) : section.description })
           ] }),
-          section.collapsible && /* @__PURE__ */ jsxRuntime.jsx("span", { className: chunkG4EIC5OB_js.cn(
+          section.collapsible && /* @__PURE__ */ jsx("span", { className: cn(
             "dui-form-section__collapse-icon",
             isCollapsed && "dui-form-section__collapse-icon--collapsed"
           ), children: "\u25BC" })
         ]
       }
     ),
-    !isCollapsed && /* @__PURE__ */ jsxRuntime.jsx(
+    !isCollapsed && /* @__PURE__ */ jsx(
       "div",
       {
         className: "dui-form-section__content",
@@ -1689,18 +1683,18 @@ function FormRendererInner(props, ref) {
     footer,
     header
   } = props;
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
-  const [internalValues, setInternalValues] = React2.useState(initialValues);
-  const [internalErrors, setInternalErrors] = React2.useState({});
-  const [touched, setTouched] = React2.useState({});
-  const [isSubmitting, setIsSubmitting] = React2.useState(false);
-  const [activeTab, setActiveTab] = React2.useState(() => {
+  const { t: t6 } = useI18n();
+  const [internalValues, setInternalValues] = useState(initialValues);
+  const [internalErrors, setInternalErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeTab, setActiveTab] = useState(() => {
     if (config.tabs && config.tabs.length > 0) {
       return config.tabs[0].id;
     }
     return "";
   });
-  const [collapsedSections, setCollapsedSections] = React2.useState(() => {
+  const [collapsedSections, setCollapsedSections] = useState(() => {
     const initial = /* @__PURE__ */ new Set();
     (config.sections || []).forEach((section) => {
       if (section.defaultCollapsed) {
@@ -1712,36 +1706,36 @@ function FormRendererInner(props, ref) {
   const isControlled = controlledValues !== void 0;
   const values = isControlled ? controlledValues : internalValues;
   const errors = controlledErrors || internalErrors;
-  const initialValuesRef = React2__default.default.useRef(initialValues);
-  const isFieldVisible = React2.useCallback((field) => {
+  const initialValuesRef = React2.useRef(initialValues);
+  const isFieldVisible = useCallback((field) => {
     if (field.type === "hidden") return false;
     if (!field.showWhen) return true;
-    return chunkG4EIC5OB_js.evaluateConditions(field.showWhen, values, featureFlags);
+    return evaluateConditions(field.showWhen, values, featureFlags);
   }, [values, featureFlags]);
-  const isSectionVisible = React2.useCallback((section) => {
+  const isSectionVisible = useCallback((section) => {
     if (!section.showWhen) return true;
-    return chunkG4EIC5OB_js.evaluateConditions(section.showWhen, values, featureFlags);
+    return evaluateConditions(section.showWhen, values, featureFlags);
   }, [values, featureFlags]);
-  const isTabVisible = React2.useCallback((tab) => {
+  const isTabVisible = useCallback((tab) => {
     if (!tab.showWhen) return true;
-    return chunkG4EIC5OB_js.evaluateConditions(tab.showWhen, values, featureFlags);
+    return evaluateConditions(tab.showWhen, values, featureFlags);
   }, [values, featureFlags]);
-  const getComputedValue = React2.useCallback((field) => {
+  const getComputedValue = useCallback((field) => {
     if (!field.computed || !field.computed.formula) {
-      return chunkG4EIC5OB_js.getNestedValue(values, field.name);
+      return getNestedValue(values, field.name);
     }
     const { formula, deps } = field.computed;
     const hasAllDeps = deps.every((dep) => {
-      const depValue = chunkG4EIC5OB_js.getNestedValue(values, dep);
+      const depValue = getNestedValue(values, dep);
       return depValue !== void 0 && depValue !== null && depValue !== "";
     });
     if (!hasAllDeps) {
-      return chunkG4EIC5OB_js.getNestedValue(values, field.name);
+      return getNestedValue(values, field.name);
     }
     try {
       const context = {};
       for (const dep of deps) {
-        const depValue = chunkG4EIC5OB_js.getNestedValue(values, dep);
+        const depValue = getNestedValue(values, dep);
         context[dep] = typeof depValue === "number" ? depValue : parseFloat(String(depValue)) || 0;
       }
       let expression = formula;
@@ -1754,19 +1748,19 @@ function FormRendererInner(props, ref) {
       const result = fn();
       return typeof result === "number" && !isNaN(result) ? result : void 0;
     } catch {
-      return chunkG4EIC5OB_js.getNestedValue(values, field.name);
+      return getNestedValue(values, field.name);
     }
   }, [values]);
-  const getVisibleFields = React2.useCallback(() => {
+  const getVisibleFields = useCallback(() => {
     const sections = config.tabs ? config.tabs.filter(isTabVisible).flatMap((t7) => t7.sections) : config.sections || [];
     return sections.filter(isSectionVisible).flatMap((section) => section.fields.filter(isFieldVisible));
   }, [config.tabs, config.sections, isTabVisible, isSectionVisible, isFieldVisible]);
-  const validateField2 = React2.useCallback((field) => {
-    const value = field.computed ? getComputedValue(field) : chunkG4EIC5OB_js.getNestedValue(values, field.name);
-    const result = chunkG4EIC5OB_js.validateField(value, field, values);
+  const validateField2 = useCallback((field) => {
+    const value = field.computed ? getComputedValue(field) : getNestedValue(values, field.name);
+    const result = validateField(value, field, values);
     return result.valid ? void 0 : result.message;
   }, [values, getComputedValue]);
-  const validateAll = React2.useCallback(() => {
+  const validateAll = useCallback(() => {
     const visibleFields = getVisibleFields();
     const newErrors = {};
     let isValid = true;
@@ -1785,7 +1779,7 @@ function FormRendererInner(props, ref) {
     }
     return isValid;
   }, [getVisibleFields, validateField2, isControlled, onValidationError]);
-  const setValue = React2.useCallback((name, value) => {
+  const setValue = useCallback((name, value) => {
     const newValues = { ...values, [name]: value };
     if (!isControlled) {
       setInternalValues(newValues);
@@ -1794,7 +1788,7 @@ function FormRendererInner(props, ref) {
       onChange(name, value, newValues);
     }
   }, [values, isControlled, onChange]);
-  const setValues = React2.useCallback((newValues) => {
+  const setValues = useCallback((newValues) => {
     const merged = { ...values, ...newValues };
     if (!isControlled) {
       setInternalValues(merged);
@@ -1805,17 +1799,17 @@ function FormRendererInner(props, ref) {
       }
     }
   }, [values, isControlled, onChange]);
-  const reset = React2.useCallback(() => {
+  const reset = useCallback(() => {
     if (!isControlled) {
       setInternalValues(initialValuesRef.current);
       setInternalErrors({});
     }
     setTouched({});
   }, [isControlled]);
-  const isDirty = React2.useCallback(() => {
+  const isDirty = useCallback(() => {
     return JSON.stringify(values) !== JSON.stringify(initialValuesRef.current);
   }, [values]);
-  const handleSubmit = React2.useCallback(async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     if (e) {
       e.preventDefault();
     }
@@ -1836,7 +1830,7 @@ function FormRendererInner(props, ref) {
       }
     }
   }, [loading, isSubmitting, getVisibleFields, validateAll, onSubmit, values]);
-  const handleFieldChange = React2.useCallback((name, value) => {
+  const handleFieldChange = useCallback((name, value) => {
     setValue(name, value);
     if (config.validationMode === "onChange") {
       const field = getVisibleFields().find((f) => f.name === name);
@@ -1851,7 +1845,7 @@ function FormRendererInner(props, ref) {
       }
     }
   }, [setValue, config.validationMode, getVisibleFields, validateField2, isControlled]);
-  const handleFieldBlur = React2.useCallback((name) => {
+  const handleFieldBlur = useCallback((name) => {
     setTouched((prev) => ({ ...prev, [name]: true }));
     if (onBlur) {
       onBlur(name);
@@ -1869,7 +1863,7 @@ function FormRendererInner(props, ref) {
       }
     }
   }, [onBlur, config.validationMode, getVisibleFields, validateField2, isControlled]);
-  const toggleSectionCollapse = React2.useCallback((sectionId) => {
+  const toggleSectionCollapse = useCallback((sectionId) => {
     setCollapsedSections((prev) => {
       const next = new Set(prev);
       if (next.has(sectionId)) {
@@ -1880,7 +1874,7 @@ function FormRendererInner(props, ref) {
       return next;
     });
   }, []);
-  React2.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     getValues: () => values,
     setValues,
     setValue,
@@ -1890,9 +1884,9 @@ function FormRendererInner(props, ref) {
     isDirty,
     submit: handleSubmit
   }), [values, setValues, setValue, validateAll, reset, errors, isDirty, handleSubmit]);
-  const renderFieldElement = React2.useCallback((field) => {
+  const renderFieldElement = useCallback((field) => {
     if (!isFieldVisible(field)) return null;
-    const fieldValue = field.computed ? getComputedValue(field) : chunkG4EIC5OB_js.getNestedValue(values, field.name);
+    const fieldValue = field.computed ? getComputedValue(field) : getNestedValue(values, field.name);
     const renderProps = {
       field,
       value: fieldValue,
@@ -1905,7 +1899,7 @@ function FormRendererInner(props, ref) {
       onBlur: () => handleFieldBlur(field.name)
     };
     if (customRenderField) {
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         "div",
         {
           style: { gridColumn: field.colSpan ? `span ${field.colSpan}` : void 0 },
@@ -1914,11 +1908,11 @@ function FormRendererInner(props, ref) {
         field.name
       );
     }
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsx(
       "div",
       {
         style: { gridColumn: field.colSpan ? `span ${field.colSpan}` : void 0 },
-        children: /* @__PURE__ */ jsxRuntime.jsx(DefaultFieldRenderer, { ...renderProps })
+        children: /* @__PURE__ */ jsx(DefaultFieldRenderer, { ...renderProps })
       },
       field.name
     );
@@ -1935,7 +1929,7 @@ function FormRendererInner(props, ref) {
     handleFieldBlur,
     customRenderField
   ]);
-  const renderSectionElement = React2.useCallback((section) => {
+  const renderSectionElement = useCallback((section) => {
     if (!isSectionVisible(section)) return null;
     const isCollapsed = collapsedSections.has(section.id);
     const visibleFields = section.fields.filter(isFieldVisible);
@@ -1948,9 +1942,9 @@ function FormRendererInner(props, ref) {
       children
     };
     if (customRenderSection) {
-      return /* @__PURE__ */ jsxRuntime.jsx(React2__default.default.Fragment, { children: customRenderSection(sectionProps) }, section.id);
+      return /* @__PURE__ */ jsx(React2.Fragment, { children: customRenderSection(sectionProps) }, section.id);
     }
-    return /* @__PURE__ */ jsxRuntime.jsx(DefaultSectionRenderer, { ...sectionProps }, section.id);
+    return /* @__PURE__ */ jsx(DefaultSectionRenderer, { ...sectionProps }, section.id);
   }, [
     isSectionVisible,
     collapsedSections,
@@ -1959,7 +1953,7 @@ function FormRendererInner(props, ref) {
     toggleSectionCollapse,
     customRenderSection
   ]);
-  const renderedSections = React2.useMemo(() => {
+  const renderedSections = useMemo(() => {
     let sectionsToRender = [];
     if (config.tabs && config.tabs.length > 0) {
       const currentTab = config.tabs.find((t7) => t7.id === activeTab);
@@ -1969,7 +1963,7 @@ function FormRendererInner(props, ref) {
     } else {
       sectionsToRender = config.sections || [];
     }
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "grid grid-cols-6 gap-6", children: sectionsToRender.map((section) => {
+    return /* @__PURE__ */ jsx("div", { className: "grid grid-cols-6 gap-6", children: sectionsToRender.map((section) => {
       const content = renderSectionElement(section);
       if (!content) return null;
       const width = section.width || "full";
@@ -1977,23 +1971,23 @@ function FormRendererInner(props, ref) {
       if (width === "1/2") colSpan = "col-span-3";
       if (width === "1/3") colSpan = "col-span-2";
       if (width === "2/3") colSpan = "col-span-4";
-      return /* @__PURE__ */ jsxRuntime.jsx("div", { className: colSpan, children: content }, section.id);
+      return /* @__PURE__ */ jsx("div", { className: colSpan, children: content }, section.id);
     }) });
   }, [config.tabs, config.sections, activeTab, renderSectionElement]);
   const submitLabel = config.submitLabel || t6("form.submit");
   const cancelLabel = config.cancelLabel || t6("form.cancel");
   const isFormDisabled = disabled || loading || isSubmitting;
-  return /* @__PURE__ */ jsxRuntime.jsxs(
+  return /* @__PURE__ */ jsxs(
     "form",
     {
       onSubmit: handleSubmit,
-      className: chunkG4EIC5OB_js.cn("dui-form", className),
+      className: cn("dui-form", className),
       children: [
-        (config.title || header) && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-form__header", children: header || /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "dui-form__title", children: config.title }),
-          config.description && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-form__description", children: config.description })
+        (config.title || header) && /* @__PURE__ */ jsx("div", { className: "dui-form__header", children: header || /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx("h2", { className: "dui-form__title", children: config.title }),
+          config.description && /* @__PURE__ */ jsx("p", { className: "dui-form__description", children: config.description })
         ] }) }),
-        config.tabs && config.tabs.length > 0 && /* @__PURE__ */ jsxRuntime.jsx(
+        config.tabs && config.tabs.length > 0 && /* @__PURE__ */ jsx(
           TabRenderer,
           {
             tabs: config.tabs.filter(isTabVisible).map((t7) => ({
@@ -2006,9 +2000,9 @@ function FormRendererInner(props, ref) {
             className: "mb-6"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-form__body", children: renderedSections }),
-        (footer || !hideButtons && (onSubmit || onCancel || config.showCancel)) && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-form__footer", children: footer || /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-          (onCancel || config.showCancel) && /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx("div", { className: "dui-form__body", children: renderedSections }),
+        (footer || !hideButtons && (onSubmit || onCancel || config.showCancel)) && /* @__PURE__ */ jsx("div", { className: "dui-form__footer", children: footer || /* @__PURE__ */ jsxs(Fragment, { children: [
+          (onCancel || config.showCancel) && /* @__PURE__ */ jsx(
             "button",
             {
               type: "button",
@@ -2018,7 +2012,7 @@ function FormRendererInner(props, ref) {
               children: cancelLabel
             }
           ),
-          onSubmit && /* @__PURE__ */ jsxRuntime.jsx(
+          onSubmit && /* @__PURE__ */ jsx(
             "button",
             {
               type: "submit",
@@ -2032,7 +2026,7 @@ function FormRendererInner(props, ref) {
     }
   );
 }
-var FormRenderer = React2.forwardRef(FormRendererInner);
+var FormRenderer = forwardRef(FormRendererInner);
 FormRenderer.displayName = "FormRenderer";
 var SIZE_MAP = {
   sm: "dui-modal--sm",
@@ -2042,14 +2036,14 @@ var SIZE_MAP = {
   full: "dui-modal--full"
 };
 function ConfirmDialog({ open, onConfirm, onCancel, config, loading, entityName }) {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
+  const { t: t6 } = useI18n();
   if (!open) return null;
   const resolvedEntity = entityName || t6("entities.unknown", void 0, "Item");
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-modal__confirm-overlay", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__confirm-dialog", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("h4", { className: "dui-modal__confirm-title", children: typeof config.title === "string" ? t6(config.title, { entity: resolvedEntity }) : config.title }),
-    /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-modal__confirm-message", children: typeof config.message === "string" ? t6(config.message, { entity: resolvedEntity }) : config.message }),
-    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__confirm-actions", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx("div", { className: "dui-modal__confirm-overlay", children: /* @__PURE__ */ jsxs("div", { className: "dui-modal__confirm-dialog", children: [
+    /* @__PURE__ */ jsx("h4", { className: "dui-modal__confirm-title", children: typeof config.title === "string" ? t6(config.title, { entity: resolvedEntity }) : config.title }),
+    /* @__PURE__ */ jsx("p", { className: "dui-modal__confirm-message", children: typeof config.message === "string" ? t6(config.message, { entity: resolvedEntity }) : config.message }),
+    /* @__PURE__ */ jsxs("div", { className: "dui-modal__confirm-actions", children: [
+      /* @__PURE__ */ jsx(
         "button",
         {
           type: "button",
@@ -2059,13 +2053,13 @@ function ConfirmDialog({ open, onConfirm, onCancel, config, loading, entityName 
           children: config.cancelLabel || t6("modal.cancel")
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(
         "button",
         {
           type: "button",
           onClick: onConfirm,
           disabled: loading,
-          className: chunkG4EIC5OB_js.cn(
+          className: cn(
             "dui-modal__button",
             config.confirmVariant === "danger" ? "dui-modal__button--danger" : "dui-modal__button--primary"
           ),
@@ -2106,27 +2100,27 @@ function DynamicModalInner(props, ref) {
     theme = "system",
     entityName
   } = props;
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
+  const { t: t6 } = useI18n();
   const effectiveMode = mode ?? "edit";
   const resolvedEntity = entityName || t6("entities.unknown", void 0, "Item");
-  const title = typeof titleProp === "string" ? titleProp : chunkUSZU7PLJ_js.getModalTitle(titleProp, effectiveMode);
-  const submitLabel = submitLabelProp == null ? effectiveMode === "create" ? t6("modal.create", { entity: resolvedEntity }) : t6("modal.save") : typeof submitLabelProp === "string" ? submitLabelProp : chunkUSZU7PLJ_js.getModalSubmitLabel(submitLabelProp, effectiveMode);
+  const title = typeof titleProp === "string" ? titleProp : getModalTitle(titleProp, effectiveMode);
+  const submitLabel = submitLabelProp == null ? effectiveMode === "create" ? t6("modal.create", { entity: resolvedEntity }) : t6("modal.save") : typeof submitLabelProp === "string" ? submitLabelProp : getModalSubmitLabel(submitLabelProp, effectiveMode);
   const isViewMode = effectiveMode === "view";
-  const formRef = React2.useRef(null);
-  const modalRef = React2.useRef(null);
-  const [activeTab, setActiveTab] = React2.useState(tabs?.[0]?.id || "");
-  const [internalValues, setInternalValues] = React2.useState(initialValues);
-  const [isSubmitting, setIsSubmitting] = React2.useState(false);
-  const [isDeleting, setIsDeleting] = React2.useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = React2.useState(false);
-  React2.useEffect(() => {
+  const formRef = useRef(null);
+  const modalRef = useRef(null);
+  const [activeTab, setActiveTab] = useState(tabs?.[0]?.id || "");
+  const [internalValues, setInternalValues] = useState(initialValues);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  useEffect(() => {
     if (open) {
       setInternalValues(initialValues);
       setActiveTab(tabs?.[0]?.id || "");
       setShowDeleteConfirm(false);
     }
   }, [open, initialValues, tabs]);
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!open || !closeOnEscape) return;
     const handleKeyDown = (e) => {
       if (e.key === "Escape" && !showDeleteConfirm) {
@@ -2136,7 +2130,7 @@ function DynamicModalInner(props, ref) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, closeOnEscape, onClose, showDeleteConfirm]);
-  React2.useEffect(() => {
+  useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
@@ -2146,7 +2140,7 @@ function DynamicModalInner(props, ref) {
       document.body.style.overflow = "";
     };
   }, [open]);
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!open || !modalRef.current) return;
     const focusableElements = modalRef.current.querySelectorAll(
       'button, [href], input, selectextarea, [tabindex]:not([tabindex="-1"])'
@@ -2171,15 +2165,15 @@ function DynamicModalInner(props, ref) {
     firstElement?.focus();
     return () => document.removeEventListener("keydown", handleTab);
   }, [open]);
-  const handleBackdropClick = React2.useCallback((e) => {
+  const handleBackdropClick = useCallback((e) => {
     if (e.target === e.currentTarget && closeOnBackdropClick && !showDeleteConfirm) {
       onClose();
     }
   }, [closeOnBackdropClick, onClose, showDeleteConfirm]);
-  const handleFormChange = React2.useCallback((name, value, values) => {
+  const handleFormChange = useCallback((name, value, values) => {
     setInternalValues(values);
   }, []);
-  const handleSubmit = React2.useCallback(async () => {
+  const handleSubmit = useCallback(async () => {
     if (loading || isSubmitting) return;
     const isValid = formRef.current?.validate();
     if (!isValid) return;
@@ -2193,7 +2187,7 @@ function DynamicModalInner(props, ref) {
       }
     }
   }, [loading, isSubmitting, internalValues, onSubmit]);
-  const handleDelete = React2.useCallback(async () => {
+  const handleDelete = useCallback(async () => {
     if (!onDelete) return;
     setIsDeleting(true);
     try {
@@ -2203,14 +2197,14 @@ function DynamicModalInner(props, ref) {
       setIsDeleting(false);
     }
   }, [onDelete]);
-  const handleDeleteClick = React2.useCallback(() => {
+  const handleDeleteClick = useCallback(() => {
     if (deleteConfirmation) {
       setShowDeleteConfirm(true);
     } else if (onDelete) {
       handleDelete();
     }
   }, [deleteConfirmation, onDelete, handleDelete]);
-  React2.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     getValues: () => formRef.current?.getValues() || internalValues,
     setValues: (values) => {
       formRef.current?.setValues(values);
@@ -2224,41 +2218,41 @@ function DynamicModalInner(props, ref) {
     close: onClose,
     submit: handleSubmit
   }), [internalValues, initialValues, onClose, handleSubmit]);
-  const currentTab = React2.useMemo(() => {
+  const currentTab = useMemo(() => {
     return tabs?.find((tab) => tab.id === activeTab);
   }, [tabs, activeTab]);
-  const currentFormConfig = React2.useMemo(() => {
+  const currentFormConfig = useMemo(() => {
     if (config) return config;
     return currentTab?.content;
   }, [config, currentTab]);
-  const renderTabs = React2.useCallback(() => {
+  const renderTabs = useCallback(() => {
     if (!tabs || tabs.length === 0) return null;
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-modal__tabs", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntime.jsxs(
+    return /* @__PURE__ */ jsx("div", { className: "dui-modal__tabs", children: tabs.map((tab) => /* @__PURE__ */ jsxs(
       "button",
       {
         type: "button",
         onClick: () => setActiveTab(tab.id),
         disabled: tab.disabled,
-        className: chunkG4EIC5OB_js.cn(
+        className: cn(
           "dui-modal__tab",
           activeTab === tab.id && "dui-modal__tab--active",
           tab.disabled && "dui-modal__tab--disabled"
         ),
         children: [
-          tab.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-modal__tab-icon", children: tab.icon }),
-          /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-modal__tab-label", children: tab.label }),
-          tab.badge !== void 0 && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-modal__tab-badge", children: tab.badge })
+          tab.icon && /* @__PURE__ */ jsx("span", { className: "dui-modal__tab-icon", children: tab.icon }),
+          /* @__PURE__ */ jsx("span", { className: "dui-modal__tab-label", children: tab.label }),
+          tab.badge !== void 0 && /* @__PURE__ */ jsx("span", { className: "dui-modal__tab-badge", children: tab.badge })
         ]
       },
       tab.id
     )) });
   }, [tabs, activeTab]);
-  const renderContent = React2.useCallback(() => {
+  const renderContent = useCallback(() => {
     if (currentTab?.render) {
       return currentTab.render(internalValues);
     }
     if (currentFormConfig) {
-      return /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsx(
         FormRenderer,
         {
           ref: formRef,
@@ -2287,13 +2281,13 @@ function DynamicModalInner(props, ref) {
     renderField,
     renderSection
   ]);
-  const renderActions = React2.useCallback(() => {
+  const renderActions = useCallback(() => {
     if (footer) return footer;
     const leftActions = actions.filter((a) => a.position === "left");
     const rightActions = actions.filter((a) => a.position !== "left");
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__footer", children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__footer-left", children: [
-        !isViewMode && onDelete && /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxs("div", { className: "dui-modal__footer", children: [
+      /* @__PURE__ */ jsxs("div", { className: "dui-modal__footer-left", children: [
+        !isViewMode && onDelete && /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
@@ -2303,43 +2297,43 @@ function DynamicModalInner(props, ref) {
             children: isDeleting ? t6("modal.deleting", { entity: resolvedEntity }) : t6("modal.delete", { entity: resolvedEntity })
           }
         ),
-        leftActions.map((action) => /* @__PURE__ */ jsxRuntime.jsxs(
+        leftActions.map((action) => /* @__PURE__ */ jsxs(
           "button",
           {
             type: "button",
             onClick: action.onClick,
             disabled: action.disabled || action.loading,
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               "dui-modal__button",
               `dui-modal__button--${action.variant || "secondary"}`
             ),
             children: [
-              action.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-modal__button-icon", children: action.icon }),
+              action.icon && /* @__PURE__ */ jsx("span", { className: "dui-modal__button-icon", children: action.icon }),
               action.loading ? t6("modal.loading") : action.label
             ]
           },
           action.id
         ))
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__footer-right", children: [
-        rightActions.map((action) => /* @__PURE__ */ jsxRuntime.jsxs(
+      /* @__PURE__ */ jsxs("div", { className: "dui-modal__footer-right", children: [
+        rightActions.map((action) => /* @__PURE__ */ jsxs(
           "button",
           {
             type: "button",
             onClick: action.onClick,
             disabled: action.disabled || action.loading,
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               "dui-modal__button",
               `dui-modal__button--${action.variant || "secondary"}`
             ),
             children: [
-              action.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-modal__button-icon", children: action.icon }),
+              action.icon && /* @__PURE__ */ jsx("span", { className: "dui-modal__button-icon", children: action.icon }),
               action.loading ? t6("modal.loading") : action.label
             ]
           },
           action.id
         )),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
@@ -2349,7 +2343,7 @@ function DynamicModalInner(props, ref) {
             children: t6("modal.cancel")
           }
         ),
-        !isViewMode && onSubmit && /* @__PURE__ */ jsxRuntime.jsx(
+        !isViewMode && onSubmit && /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
@@ -2377,11 +2371,11 @@ function DynamicModalInner(props, ref) {
     t6
   ]);
   if (!open) return null;
-  const overlayClass = chunkG4EIC5OB_js.cn(
+  const overlayClass = cn(
     "dui-modal__overlay",
     theme === "dark" ? "dui-theme--dark" : theme === "light" ? "dui-theme--light" : ""
   );
-  const modalContent = /* @__PURE__ */ jsxRuntime.jsx(
+  const modalContent = /* @__PURE__ */ jsx(
     "div",
     {
       className: overlayClass,
@@ -2389,23 +2383,23 @@ function DynamicModalInner(props, ref) {
       role: "dialog",
       "aria-modal": "true",
       "aria-labelledby": "modal-title",
-      children: /* @__PURE__ */ jsxRuntime.jsxs(
+      children: /* @__PURE__ */ jsxs(
         "div",
         {
           ref: modalRef,
-          className: chunkG4EIC5OB_js.cn(
+          className: cn(
             "dui-modal",
             SIZE_MAP[size],
             className
           ),
           onClick: (e) => e.stopPropagation(),
           children: [
-            header || /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__header", children: [
-              /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__header-content", children: [
-                /* @__PURE__ */ jsxRuntime.jsx("h2", { id: "modal-title", className: "dui-modal__title", children: title }),
-                subtitle && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-modal__subtitle", children: subtitle })
+            header || /* @__PURE__ */ jsxs("div", { className: "dui-modal__header", children: [
+              /* @__PURE__ */ jsxs("div", { className: "dui-modal__header-content", children: [
+                /* @__PURE__ */ jsx("h2", { id: "modal-title", className: "dui-modal__title", children: title }),
+                subtitle && /* @__PURE__ */ jsx("p", { className: "dui-modal__subtitle", children: subtitle })
               ] }),
-              showCloseButton && /* @__PURE__ */ jsxRuntime.jsx(
+              showCloseButton && /* @__PURE__ */ jsx(
                 "button",
                 {
                   type: "button",
@@ -2417,10 +2411,10 @@ function DynamicModalInner(props, ref) {
               )
             ] }),
             renderTabs(),
-            error && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-modal__error", children: error }),
-            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-modal__body", children: renderContent() }),
+            error && /* @__PURE__ */ jsx("div", { className: "dui-modal__error", children: error }),
+            /* @__PURE__ */ jsx("div", { className: "dui-modal__body", children: renderContent() }),
             renderActions(),
-            deleteConfirmation && /* @__PURE__ */ jsxRuntime.jsx(
+            deleteConfirmation && /* @__PURE__ */ jsx(
               ConfirmDialog,
               {
                 open: showDeleteConfirm,
@@ -2436,11 +2430,11 @@ function DynamicModalInner(props, ref) {
       )
     }
   );
-  return reactDom.createPortal(modalContent, document.body);
+  return createPortal(modalContent, document.body);
 }
-var DynamicModal = React2.forwardRef(DynamicModalInner);
+var DynamicModal = forwardRef(DynamicModalInner);
 DynamicModal.displayName = "DynamicModal";
-var DefaultLink = ({ to, children, className, onClick }) => /* @__PURE__ */ jsxRuntime.jsx("a", { href: to, className, onClick: (e) => {
+var DefaultLink = ({ to, children, className, onClick }) => /* @__PURE__ */ jsx("a", { href: to, className, onClick: (e) => {
   if (onClick) onClick(e);
 }, children });
 var SidebarRenderer = ({
@@ -2457,10 +2451,10 @@ var SidebarRenderer = ({
   footerContent,
   onLogout
 }) => {
-  const [openMenu, setOpenMenu] = React2.useState(null);
-  const [anchorRect, setAnchorRect] = React2.useState(null);
-  const buttonRefs = React2.useRef({});
-  const translate = passedT || chunkJOGM2EW4_js.t;
+  const [openMenu, setOpenMenu] = useState(null);
+  const [anchorRect, setAnchorRect] = useState(null);
+  const buttonRefs = useRef({});
+  const translate = passedT || t;
   const isActive = (path) => {
     if (!path) return false;
     if (path === "/" || path === "/dashboard") return currentPath === path;
@@ -2485,7 +2479,7 @@ var SidebarRenderer = ({
       setAnchorRect(element.getBoundingClientRect());
     }
   };
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!openMenu) return;
     function onDocClick(e) {
       const target = e.target;
@@ -2518,11 +2512,11 @@ var SidebarRenderer = ({
     }
     if (item.type === "separator") {
       if (collapsed) return null;
-      return /* @__PURE__ */ jsxRuntime.jsx("li", { className: "none text-gray-100", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" }) }, `sep-${index}`);
+      return /* @__PURE__ */ jsx("li", { className: "none text-gray-100", children: /* @__PURE__ */ jsx("div", { className: "h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" }) }, `sep-${index}`);
     }
     if (item.type === "link") {
       const active = isActive(item.path);
-      return /* @__PURE__ */ jsxRuntime.jsx("li", { children: /* @__PURE__ */ jsxRuntime.jsxs(
+      return /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
         LinkComponent,
         {
           to: item.path,
@@ -2533,15 +2527,15 @@ var SidebarRenderer = ({
           },
           className: `group relative flex items-center gap-3 px-4 rounded-xl transition-all duration-200 ${active ? "bg-gradient-to-r from-blue-400/20 to-blue-400/20 shadow-lg shadow-blue-500/30" : "hover:bg-white/5 hover:shadow-md hover:shadow-blue-500/10"}`,
           children: [
-            /* @__PURE__ */ jsxRuntime.jsx(
+            /* @__PURE__ */ jsx(
               "div",
               {
                 className: `flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${active ? "" : ""}`,
-                children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-xl", children: item.icon || "\u{1F4C4}" })
+                children: /* @__PURE__ */ jsx("span", { className: "text-xl", children: item.icon || "\u{1F4C4}" })
               }
             ),
-            !collapsed && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-sm tracking-wide", children: translate(item.label) }),
-            active && !collapsed && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "ml-auto w-2 h-2 bg-white rounded-full animate-pulse" })
+            !collapsed && /* @__PURE__ */ jsx("span", { className: "font-semibold text-sm tracking-wide", children: translate(item.label) }),
+            active && !collapsed && /* @__PURE__ */ jsx("div", { className: "ml-auto w-2 h-2 bg-white rounded-full animate-pulse" })
           ]
         }
       ) }, item.id || item.path || index);
@@ -2549,23 +2543,23 @@ var SidebarRenderer = ({
     if (item.type === "dropdown") {
       const anyChildActive = isChildActive(item);
       const isOpen = openMenu === item.id;
-      return /* @__PURE__ */ jsxRuntime.jsx("li", { children: /* @__PURE__ */ jsxRuntime.jsxs(
+      return /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
         "button",
         {
           ref: (el) => buttonRefs.current[item.id] = el,
           onClick: (e) => toggleMenu(item.id, e.currentTarget),
           className: `group w-full relative flex items-center gap-3 px-4 rounded-xl transition-all duration-200 text-left ${isOpen || anyChildActive ? "bg-gradient-to-r from-blue-400/20 to-blue-400/20 shadow-lg shadow-blue-500/30" : "hover:bg-white/5 hover:shadow-md hover:shadow-blue-500/10"}`,
           children: [
-            /* @__PURE__ */ jsxRuntime.jsx(
+            /* @__PURE__ */ jsx(
               "div",
               {
                 className: `flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200`,
-                children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-xl", children: item.icon || "\u{1F4C1}" })
+                children: /* @__PURE__ */ jsx("span", { className: "text-xl", children: item.icon || "\u{1F4C1}" })
               }
             ),
-            !collapsed && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-sm tracking-wide flex-1", children: translate(item.label) }),
-              /* @__PURE__ */ jsxRuntime.jsx(
+            !collapsed && /* @__PURE__ */ jsxs(Fragment, { children: [
+              /* @__PURE__ */ jsx("span", { className: "font-semibold text-sm tracking-wide flex-1", children: translate(item.label) }),
+              /* @__PURE__ */ jsx(
                 "span",
                 {
                   className: `transition-transform duration-300 text-xs ${isOpen ? "rotate-90" : ""}`,
@@ -2589,8 +2583,8 @@ var SidebarRenderer = ({
         return child.roles.includes(userRole);
       });
       if (visibleChildren.length === 0) return null;
-      return reactDom.createPortal(
-        /* @__PURE__ */ jsxRuntime.jsx(
+      return createPortal(
+        /* @__PURE__ */ jsx(
           "ul",
           {
             "data-portal": "true",
@@ -2603,9 +2597,9 @@ var SidebarRenderer = ({
               const isFirst = idx === 0;
               const isLast = idx === visibleChildren.length - 1;
               if (child.type === "separator") {
-                return /* @__PURE__ */ jsxRuntime.jsx("li", { className: "border-t border-gray-200/50 dark:border-white/10" }, idx);
+                return /* @__PURE__ */ jsx("li", { className: "border-t border-gray-200/50 dark:border-white/10" }, idx);
               }
-              return /* @__PURE__ */ jsxRuntime.jsx("li", { children: /* @__PURE__ */ jsxRuntime.jsxs(
+              return /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
                 LinkComponent,
                 {
                   to: child.path,
@@ -2615,8 +2609,8 @@ var SidebarRenderer = ({
                   },
                   className: `group flex items-center gap-3 px-5 py-3.5 text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/40 dark:hover:to-purple-900/40 transition-all duration-200 ${isFirst ? "first:rounded-t-2xl" : ""} ${isLast ? "last:rounded-b-2xl" : ""}`,
                   children: [
-                    /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-xl group-hover:scale-110 transition-transform", children: child.icon || "\u2022" }),
-                    /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-sm", children: translate(child.label) })
+                    /* @__PURE__ */ jsx("span", { className: "text-xl group-hover:scale-110 transition-transform", children: child.icon || "\u2022" }),
+                    /* @__PURE__ */ jsx("span", { className: "font-semibold text-sm", children: translate(child.label) })
                   ]
                 }
               ) }, child.id || child.path || idx);
@@ -2628,34 +2622,34 @@ var SidebarRenderer = ({
       );
     });
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntime.jsxs(
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs(
       "div",
       {
         className: `fixed top-0 left-0 h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white z-40 transition-all duration-300 overflow-y-auto overflow-x-hidden ${collapsed ? "w-20" : "w-72"}`,
         children: [
-          /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAzIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" }),
-          /* @__PURE__ */ jsxRuntime.jsxs(
+          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAzIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" }),
+          /* @__PURE__ */ jsxs(
             "div",
             {
               className: `relative flex items-center ${collapsed ? "justify-center" : "justify-between"} p-5 border-b border-white/10 backdrop-blur-sm`,
               children: [
                 logoContent,
-                /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ jsxRuntime.jsxs(
+                /* @__PURE__ */ jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ jsxs(
                   "button",
                   {
                     onClick: toggleSidebar,
                     className: "relative hover:bg-white/10 rounded-lg transition-all duration-200 group z-20 focus:outline-none focus:ring-2 focus:ring-white/30 p-1",
                     title: collapsed ? translate("nav.expand") : translate("nav.collapse"),
                     children: [
-                      /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity" }),
-                      /* @__PURE__ */ jsxRuntime.jsx(
+                      /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity" }),
+                      /* @__PURE__ */ jsx(
                         "svg",
                         {
                           className: "relative w-5 h-5 text-white",
                           viewBox: "0 0 20 20",
                           fill: "currentColor",
-                          children: /* @__PURE__ */ jsxRuntime.jsx(
+                          children: /* @__PURE__ */ jsx(
                             "path",
                             {
                               fillRule: "evenodd",
@@ -2671,21 +2665,21 @@ var SidebarRenderer = ({
               ]
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsxs("ul", { className: "relative space-y-1 mt-4", children: [
+          /* @__PURE__ */ jsxs("ul", { className: "relative space-y-1 mt-4", children: [
             filteredItems.map(renderItem),
-            onLogout && /* @__PURE__ */ jsxRuntime.jsx("li", { children: /* @__PURE__ */ jsxRuntime.jsxs(
+            onLogout && /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
               "button",
               {
                 onClick: onLogout,
                 className: "group w-full relative flex items-center gap-3 px-4 rounded-xl transition-all duration-200 mt-2",
                 children: [
-                  /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200", children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-xl", children: "\u{1F6AA}" }) }),
-                  !collapsed && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-sm tracking-wide", children: translate("nav.logout") })
+                  /* @__PURE__ */ jsx("div", { className: "flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200", children: /* @__PURE__ */ jsx("span", { className: "text-xl", children: "\u{1F6AA}" }) }),
+                  !collapsed && /* @__PURE__ */ jsx("span", { className: "font-semibold text-sm tracking-wide", children: translate("nav.logout") })
                 ]
               }
             ) })
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600" })
+          /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600" })
         ]
       }
     ),
@@ -2744,20 +2738,20 @@ function KanbanCard({ item, onClick, isOverlay }) {
     transform,
     transition,
     isDragging
-  } = sortable.useSortable({ id: item.id });
+  } = useSortable({ id: item.id });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.3 : 1,
     cursor: isDragging ? "grabbing" : "grab"
   };
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     "div",
     {
       ref: setNodeRef,
       ...attributes,
       ...listeners,
-      className: chunkG4EIC5OB_js.cn(
+      className: cn(
         "dui-kanban-card card mb-2 shadow-sm border-0",
         isOverlay && "dui-kanban-card-overlay",
         isDragging && "dui-kanban-card-dragging"
@@ -2769,17 +2763,17 @@ function KanbanCard({ item, onClick, isOverlay }) {
         borderLeft: item.color ? `4px solid ${item.color}` : "none",
         transition: "all 0.2s ease"
       },
-      children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "card-body p-3", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "d-flex justify-content-between align-items-start mb-2", children: /* @__PURE__ */ jsxRuntime.jsx("h6", { className: "card-title fw-bold text-truncate mb-0", style: { maxWidth: "90%", fontSize: "0.9rem" }, title: item.title, children: item.title }) }),
-        item.subtitle && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "card-subtitle text-muted mb-2", style: { fontSize: "0.75rem", lineHeight: "1.2" }, children: item.subtitle }),
-        item.metadata && Object.keys(item.metadata).length > 0 && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-kanban-card-metadata mb-2", children: Object.entries(item.metadata).map(([key, value]) => /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-secondary d-flex justify-content-between", style: { fontSize: "0.7rem" }, children: [
-          /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-muted dark:text-gray-400", children: [
+      children: /* @__PURE__ */ jsxs("div", { className: "card-body p-3", children: [
+        /* @__PURE__ */ jsx("div", { className: "d-flex justify-content-between align-items-start mb-2", children: /* @__PURE__ */ jsx("h6", { className: "card-title fw-bold text-truncate mb-0", style: { maxWidth: "90%", fontSize: "0.9rem" }, title: item.title, children: item.title }) }),
+        item.subtitle && /* @__PURE__ */ jsx("p", { className: "card-subtitle text-muted mb-2", style: { fontSize: "0.75rem", lineHeight: "1.2" }, children: item.subtitle }),
+        item.metadata && Object.keys(item.metadata).length > 0 && /* @__PURE__ */ jsx("div", { className: "dui-kanban-card-metadata mb-2", children: Object.entries(item.metadata).map(([key, value]) => /* @__PURE__ */ jsxs("div", { className: "text-secondary d-flex justify-content-between", style: { fontSize: "0.7rem" }, children: [
+          /* @__PURE__ */ jsxs("span", { className: "text-muted dark:text-gray-400", children: [
             key,
             ":"
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsx("span", { className: "fw-medium text-dark dark:text-gray-200", children: String(value) })
+          /* @__PURE__ */ jsx("span", { className: "fw-medium text-dark dark:text-gray-200", children: String(value) })
         ] }, key)) }),
-        item.tags && item.tags.length > 0 && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "d-flex flex-wrap gap-1 mt-auto", children: item.tags.map((tag, idx) => /* @__PURE__ */ jsxRuntime.jsx(
+        item.tags && item.tags.length > 0 && /* @__PURE__ */ jsx("div", { className: "d-flex flex-wrap gap-1 mt-auto", children: item.tags.map((tag, idx) => /* @__PURE__ */ jsx(
           "span",
           {
             className: "badge rounded-pill",
@@ -2799,13 +2793,13 @@ function KanbanCard({ item, onClick, isOverlay }) {
   );
 }
 function KanbanColumn({ definition, items, onCardClick }) {
-  const { setNodeRef, isOver } = core.useDroppable({
+  const { setNodeRef, isOver } = useDroppable({
     id: definition.id
   });
-  return /* @__PURE__ */ jsxRuntime.jsxs(
+  return /* @__PURE__ */ jsxs(
     "div",
     {
-      className: chunkG4EIC5OB_js.cn(
+      className: cn(
         "dui-kanban-column d-flex flex-column h-100",
         isOver && "dui-kanban-column-over"
       ),
@@ -2818,7 +2812,7 @@ function KanbanColumn({ definition, items, onCardClick }) {
         transition: "background-color 0.2s ease"
       },
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "div",
           {
             className: "p-3 border-bottom d-flex justify-content-between align-items-center",
@@ -2828,9 +2822,9 @@ function KanbanColumn({ definition, items, onCardClick }) {
               borderTop: `4px solid ${definition.color || "#9ca3af"}`,
               backgroundColor: "var(--bg-primary)"
             },
-            children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "d-flex align-items-center gap-2", children: [
-              /* @__PURE__ */ jsxRuntime.jsx("span", { className: "fw-bold text-primary dark:text-gray-100", style: { fontSize: "0.85rem", letterSpacing: "0.025em" }, children: definition.title }),
-              /* @__PURE__ */ jsxRuntime.jsx(
+            children: /* @__PURE__ */ jsxs("div", { className: "d-flex align-items-center gap-2", children: [
+              /* @__PURE__ */ jsx("span", { className: "fw-bold text-primary dark:text-gray-100", style: { fontSize: "0.85rem", letterSpacing: "0.025em" }, children: definition.title }),
+              /* @__PURE__ */ jsx(
                 "span",
                 {
                   className: "badge rounded-pill bg-light dark:bg-gray-700 text-muted dark:text-gray-300 border dark:border-gray-600",
@@ -2841,7 +2835,7 @@ function KanbanColumn({ definition, items, onCardClick }) {
             ] })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsxs(
+        /* @__PURE__ */ jsxs(
           "div",
           {
             ref: setNodeRef,
@@ -2852,9 +2846,9 @@ function KanbanColumn({ definition, items, onCardClick }) {
               backgroundColor: isOver ? "var(--primary-50)" : "transparent"
             },
             children: [
-              /* @__PURE__ */ jsxRuntime.jsx(sortable.SortableContext, { items: items.map((i) => i.id), strategy: sortable.verticalListSortingStrategy, children: items.map((item) => /* @__PURE__ */ jsxRuntime.jsx(KanbanCard, { item, onClick: onCardClick }, item.id)) }),
-              items.length === 0 && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-center text-muted mt-5", style: { fontSize: "0.75rem", opacity: 0.5 }, children: [
-                /* @__PURE__ */ jsxRuntime.jsx("div", { className: "mb-2", children: /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M12 2v20M2 12h20" }) }) }),
+              /* @__PURE__ */ jsx(SortableContext, { items: items.map((i) => i.id), strategy: verticalListSortingStrategy, children: items.map((item) => /* @__PURE__ */ jsx(KanbanCard, { item, onClick: onCardClick }, item.id)) }),
+              items.length === 0 && /* @__PURE__ */ jsxs("div", { className: "text-center text-muted mt-5", style: { fontSize: "0.75rem", opacity: 0.5 }, children: [
+                /* @__PURE__ */ jsx("div", { className: "mb-2", children: /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: /* @__PURE__ */ jsx("path", { d: "M12 2v20M2 12h20" }) }) }),
                 "Sin elementos"
               ] })
             ]
@@ -2865,9 +2859,9 @@ function KanbanColumn({ definition, items, onCardClick }) {
   );
 }
 function KanbanBoard({ columns, items, onItemMove, onCardClick }) {
-  const [activeId, setActiveId] = React2.useState(null);
-  const sensors = core.useSensors(
-    core.useSensor(core.PointerSensor, {
+  const [activeId, setActiveId] = useState(null);
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
       activationConstraint: {
         distance: 10
       }
@@ -2900,15 +2894,15 @@ function KanbanBoard({ columns, items, onItemMove, onCardClick }) {
   const getItemsForColumn = (columnId) => {
     return items.filter((i) => i.status.toLowerCase() === columnId.toLowerCase());
   };
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-kanban-board d-flex flex-nowrap gap-4 h-100 p-3", style: { overflowX: "auto", alignItems: "flex-start" }, children: /* @__PURE__ */ jsxRuntime.jsxs(
-    core.DndContext,
+  return /* @__PURE__ */ jsx("div", { className: "dui-kanban-board d-flex flex-nowrap gap-4 h-100 p-3", style: { overflowX: "auto", alignItems: "flex-start" }, children: /* @__PURE__ */ jsxs(
+    DndContext,
     {
       sensors,
-      collisionDetection: core.closestCenter,
+      collisionDetection: closestCenter,
       onDragStart: handleDragStart,
       onDragEnd: handleDragEnd,
       children: [
-        columns.map((col) => /* @__PURE__ */ jsxRuntime.jsx(
+        columns.map((col) => /* @__PURE__ */ jsx(
           KanbanColumn,
           {
             definition: col,
@@ -2917,7 +2911,7 @@ function KanbanBoard({ columns, items, onItemMove, onCardClick }) {
           },
           col.id
         )),
-        /* @__PURE__ */ jsxRuntime.jsx(core.DragOverlay, { children: activeItem ? /* @__PURE__ */ jsxRuntime.jsx("div", { style: { opacity: 0.8, transform: "rotate(2deg)" }, children: /* @__PURE__ */ jsxRuntime.jsx(KanbanCard, { item: activeItem, isOverlay: true }) }) : null })
+        /* @__PURE__ */ jsx(DragOverlay, { children: activeItem ? /* @__PURE__ */ jsx("div", { style: { opacity: 0.8, transform: "rotate(2deg)" }, children: /* @__PURE__ */ jsx(KanbanCard, { item: activeItem, isOverlay: true }) }) : null })
       ]
     }
   ) });
@@ -2931,7 +2925,7 @@ function KanbanRenderer({
   onCardClick,
   loading
 }) {
-  const items = React2.useMemo(() => {
+  const items = useMemo(() => {
     return data.map((record) => {
       if (mapRecord) return mapRecord(record);
       const idKey = mapping.id || "id";
@@ -2950,9 +2944,9 @@ function KanbanRenderer({
     });
   }, [data, mapRecord, mapping]);
   if (loading) {
-    return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "d-flex justify-content-center align-items-center h-100 py-5", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "spinner-border text-primary", role: "status", children: /* @__PURE__ */ jsxRuntime.jsx("span", { className: "visually-hidden", children: "Cargando..." }) }) });
+    return /* @__PURE__ */ jsx("div", { className: "d-flex justify-content-center align-items-center h-100 py-5", children: /* @__PURE__ */ jsx("div", { className: "spinner-border text-primary", role: "status", children: /* @__PURE__ */ jsx("span", { className: "visually-hidden", children: "Cargando..." }) }) });
   }
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-kanban-renderer h-100", style: { minHeight: "500px" }, children: /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx("div", { className: "dui-kanban-renderer h-100", style: { minHeight: "500px" }, children: /* @__PURE__ */ jsx(
     KanbanBoard,
     {
       columns,
@@ -2974,10 +2968,10 @@ function AdvancedSearchModal({
   excludeFields = [],
   renderField
 }) {
-  const { t: t6 } = chunkJOGM2EW4_js.useI18n();
+  const { t: t6 } = useI18n();
   const modalTitle = title || t6("advanced_search.title", { default: "B\xFAsqueda Avanzada" });
-  const [state, setState] = React2.useState({});
-  const [operators, setOperators] = React2.useState({});
+  const [state, setState] = useState({});
+  const [operators, setOperators] = useState({});
   const visibleFields = fields.filter(
     (f) => !f.excludeFromAdvancedSearch && !excludeFields.includes(f.name)
   );
@@ -3025,11 +3019,11 @@ function AdvancedSearchModal({
       { value: "not_in", label: t6("operators.not_in", { default: "No en lista" }) }
     ]
   };
-  const currentFiltersRef = React2__default.default.useRef(currentFilters);
-  React2.useEffect(() => {
+  const currentFiltersRef = React2.useRef(currentFilters);
+  useEffect(() => {
     currentFiltersRef.current = currentFilters;
   }, [currentFilters]);
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
     const s = {};
     const ops = {};
@@ -3098,7 +3092,7 @@ function AdvancedSearchModal({
     });
     return filters;
   };
-  React2.useEffect(() => {
+  useEffect(() => {
     if (!onFilterChange) return;
     const filters = getFiltersFromState();
     const areFiltersEqual = (f1, f2) => {
@@ -3148,27 +3142,27 @@ function AdvancedSearchModal({
     setState(s);
     setOperators(ops);
   };
-  const inner = /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "p-6 space-y-4", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: visibleFields.map((f) => {
+  const inner = /* @__PURE__ */ jsxs("div", { className: "p-6 space-y-4", children: [
+    /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: visibleFields.map((f) => {
       const op = operators[f.name];
       const isBetween = op === "between";
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn(f.colSpan === 2 ? "col-span-1 md:col-span-2" : ""), children: [
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex justify-between items-center mb-1", children: /* @__PURE__ */ jsxRuntime.jsx("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300", children: f.label }) }),
-        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(
+      return /* @__PURE__ */ jsxs("div", { className: cn(f.colSpan === 2 ? "col-span-1 md:col-span-2" : ""), children: [
+        /* @__PURE__ */ jsx("div", { className: "flex justify-between items-center mb-1", children: /* @__PURE__ */ jsx("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300", children: f.label }) }),
+        /* @__PURE__ */ jsxs("div", { className: "flex gap-2", children: [
+          /* @__PURE__ */ jsx(
             "select",
             {
               className: "w-1/3 h-10 px-2 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-xs bg-gray-50 dark:bg-gray-700 dark:text-gray-100",
               value: op,
               onChange: (e) => handleOperatorChange(f.name, e.target.value),
-              children: OPERATORS_BY_TYPE[f.type === "range" ? "range" : f.type === "date" ? "date" : f.type === "select" ? "select" : f.type === "number" ? "number" : f.type === "boolean" ? "boolean" : "string"]?.map((o) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: o.value, children: o.label }, o.value))
+              children: OPERATORS_BY_TYPE[f.type === "range" ? "range" : f.type === "date" ? "date" : f.type === "select" ? "select" : f.type === "number" ? "number" : f.type === "boolean" ? "boolean" : "string"]?.map((o) => /* @__PURE__ */ jsx("option", { value: o.value, children: o.label }, o.value))
             }
           ),
-          /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-1", children: (() => {
+          /* @__PURE__ */ jsx("div", { className: "flex-1", children: (() => {
             const custom = renderField ? renderField(f, state[f.name], (val) => handleChange(f.name, val)) : null;
             if (custom) return custom;
-            return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              (f.type === "string" || f.type === "number" && !isBetween) && /* @__PURE__ */ jsxRuntime.jsx(
+            return /* @__PURE__ */ jsxs(Fragment, { children: [
+              (f.type === "string" || f.type === "number" && !isBetween) && /* @__PURE__ */ jsx(
                 "input",
                 {
                   type: f.type === "number" ? "number" : "text",
@@ -3186,7 +3180,7 @@ function AdvancedSearchModal({
                   }
                 }
               ),
-              f.type === "date" && !isBetween && /* @__PURE__ */ jsxRuntime.jsx(
+              f.type === "date" && !isBetween && /* @__PURE__ */ jsx(
                 "input",
                 {
                   type: "date",
@@ -3199,8 +3193,8 @@ function AdvancedSearchModal({
                   }
                 }
               ),
-              (f.type === "date" || f.type === "range" || f.type === "number") && isBetween && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
-                /* @__PURE__ */ jsxRuntime.jsx(
+              (f.type === "date" || f.type === "range" || f.type === "number") && isBetween && /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
+                /* @__PURE__ */ jsx(
                   "input",
                   {
                     type: f.type === "date" ? "date" : "number",
@@ -3215,7 +3209,7 @@ function AdvancedSearchModal({
                     placeholder: t6("filters.min", { default: "Min" })
                   }
                 ),
-                /* @__PURE__ */ jsxRuntime.jsx(
+                /* @__PURE__ */ jsx(
                   "input",
                   {
                     type: f.type === "date" ? "date" : "number",
@@ -3231,8 +3225,8 @@ function AdvancedSearchModal({
                   }
                 )
               ] }),
-              f.type === "select" && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-                /* @__PURE__ */ jsxRuntime.jsxs(
+              f.type === "select" && /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsxs(
                   "select",
                   {
                     className: "v2-input",
@@ -3251,16 +3245,16 @@ function AdvancedSearchModal({
                       }
                     },
                     children: [
-                      /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: t6("filters.any", { default: "Cualquiera" }) }),
-                      f.options?.map((o) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: o.value, children: o.label }, String(o.value)))
+                      /* @__PURE__ */ jsx("option", { value: "", children: t6("filters.any", { default: "Cualquiera" }) }),
+                      f.options?.map((o) => /* @__PURE__ */ jsx("option", { value: o.value, children: o.label }, String(o.value)))
                     ]
                   }
                 ),
-                (op === "in" || op === "not_in") && Array.isArray(state[f.name]) && state[f.name].length > 0 && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex flex-wrap gap-1 mt-1", children: state[f.name].map((v) => {
+                (op === "in" || op === "not_in") && Array.isArray(state[f.name]) && state[f.name].length > 0 && /* @__PURE__ */ jsx("div", { className: "flex flex-wrap gap-1 mt-1", children: state[f.name].map((v) => {
                   const opt = f.options?.find((o) => String(o.value) === String(v));
-                  return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800", children: [
+                  return /* @__PURE__ */ jsxs("span", { className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800", children: [
                     opt?.label || v,
-                    /* @__PURE__ */ jsxRuntime.jsx(
+                    /* @__PURE__ */ jsx(
                       "button",
                       {
                         type: "button",
@@ -3275,16 +3269,16 @@ function AdvancedSearchModal({
                   ] }, String(v));
                 }) })
               ] }),
-              f.type === "boolean" && /* @__PURE__ */ jsxRuntime.jsxs(
+              f.type === "boolean" && /* @__PURE__ */ jsxs(
                 "select",
                 {
                   className: "v2-input",
                   value: state[f.name] ?? "any",
                   onChange: (e) => handleChange(f.name, e.target.value),
                   children: [
-                    /* @__PURE__ */ jsxRuntime.jsx("option", { value: "any", children: t6("filters.any", { default: "Cualquiera" }) }),
-                    /* @__PURE__ */ jsxRuntime.jsx("option", { value: "true", children: t6("common.yes", { default: "S\xED" }) }),
-                    /* @__PURE__ */ jsxRuntime.jsx("option", { value: "false", children: t6("common.no", { default: "No" }) })
+                    /* @__PURE__ */ jsx("option", { value: "any", children: t6("filters.any", { default: "Cualquiera" }) }),
+                    /* @__PURE__ */ jsx("option", { value: "true", children: t6("common.yes", { default: "S\xED" }) }),
+                    /* @__PURE__ */ jsx("option", { value: "false", children: t6("common.no", { default: "No" }) })
                   ]
                 }
               )
@@ -3293,8 +3287,8 @@ function AdvancedSearchModal({
         ] })
       ] }, f.name);
     }) }),
-    !inline && /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex justify-between items-center pt-6 border-t dark:border-gray-700 mt-6", children: [
-      /* @__PURE__ */ jsxRuntime.jsx(
+    !inline && /* @__PURE__ */ jsxs("div", { className: "flex justify-between items-center pt-6 border-t dark:border-gray-700 mt-6", children: [
+      /* @__PURE__ */ jsx(
         "button",
         {
           type: "button",
@@ -3303,8 +3297,8 @@ function AdvancedSearchModal({
           children: t6("common.clear", { default: "Limpiar" })
         }
       ),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex gap-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxs("div", { className: "flex gap-2", children: [
+        /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
@@ -3313,7 +3307,7 @@ function AdvancedSearchModal({
             children: t6("common.cancel", { default: "Cancelar" })
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx(
+        /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
@@ -3328,18 +3322,18 @@ function AdvancedSearchModal({
   if (inline) {
     return inner;
   }
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "fixed inset-0 z-[100] overflow-y-auto", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "fixed inset-0 bg-black/50 dark:bg-black/70 transition-opacity", onClick: onClose }),
-    /* @__PURE__ */ jsxRuntime.jsx("div", { className: "relative min-h-screen flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-auto", children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "border-b dark:border-gray-700 px-6 py-4 flex justify-between items-center", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("h2", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100", children: modalTitle }),
-        /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxs("div", { className: "fixed inset-0 z-[100] overflow-y-auto", children: [
+    /* @__PURE__ */ jsx("div", { className: "fixed inset-0 bg-black/50 dark:bg-black/70 transition-opacity", onClick: onClose }),
+    /* @__PURE__ */ jsx("div", { className: "relative min-h-screen flex items-center justify-center p-4", children: /* @__PURE__ */ jsxs("div", { className: "relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-auto", children: [
+      /* @__PURE__ */ jsxs("div", { className: "border-b dark:border-gray-700 px-6 py-4 flex justify-between items-center", children: [
+        /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100", children: modalTitle }),
+        /* @__PURE__ */ jsx(
           "button",
           {
             type: "button",
             onClick: onClose,
             className: "text-gray-400 hover:text-gray-500 transition-colors",
-            children: /* @__PURE__ */ jsxRuntime.jsx("svg", { className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M6 18L18 6M6 6l12 12" }) })
+            children: /* @__PURE__ */ jsx("svg", { className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M6 18L18 6M6 6l12 12" }) })
           }
         )
       ] }),
@@ -3348,13 +3342,6 @@ function AdvancedSearchModal({
   ] });
 }
 
-exports.AdvancedSearchModal = AdvancedSearchModal;
-exports.DynamicModal = DynamicModal;
-exports.FormRenderer = FormRenderer;
-exports.KanbanRenderer = KanbanRenderer;
-exports.SidebarRenderer = SidebarRenderer;
-exports.TabRenderer = TabRenderer;
-exports.TableRenderer = TableRenderer;
-exports.TableToolbar = TableToolbar;
-//# sourceMappingURL=chunk-UURDXYLH.js.map
-//# sourceMappingURL=chunk-UURDXYLH.js.map
+export { AdvancedSearchModal, DynamicModal, FormRenderer, KanbanRenderer, SidebarRenderer, TabRenderer, TableRenderer, TableToolbar };
+//# sourceMappingURL=chunk-ZU5G3EKS.mjs.map
+//# sourceMappingURL=chunk-ZU5G3EKS.mjs.map

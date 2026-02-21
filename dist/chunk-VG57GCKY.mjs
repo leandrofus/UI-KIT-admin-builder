@@ -1,4 +1,4 @@
-import { getI18n } from './chunk-ZCAJXFW7.mjs';
+import { getI18n } from './chunk-4LYQCQVT.mjs';
 
 // src/config-system/ConfigValidator.ts
 var DEFAULT_FIELD_TYPES = [
@@ -468,5 +468,5 @@ function translateConfig(obj, i18nInstance) {
 }
 
 export { assertValidConfig, formatValidationErrors, isLikelyTranslationKey, translateConfig, validateConfig, validateFormConfig, validateTableConfig };
-//# sourceMappingURL=chunk-F7KBXQMB.mjs.map
-//# sourceMappingURL=chunk-F7KBXQMB.mjs.map
+//# sourceMappingURL=chunk-VG57GCKY.mjs.map
+//# sourceMappingURL=chunk-VG57GCKY.mjs.map
