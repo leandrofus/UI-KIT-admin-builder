@@ -1,7 +1,5 @@
-'use strict';
-
-var react = require('react');
-var jsxRuntime = require('react/jsx-runtime');
+import { createContext, useState, useContext, useEffect, useCallback } from 'react';
+import { jsx } from 'react/jsx-runtime';
 
 // src/i18n/I18n.tsx
 var defaultEnTranslations = {
@@ -258,9 +256,9 @@ var defaultEsTranslations = {
     optional: "Opcional"
   },
   table: {
-    showing: "Mostrando {from} a {to} de {total} registros",
-    empty: ":(",
-    pageSize: "Mostrar {size} registros",
+    showing: "Mostrando {from} a {to} de {total}",
+    empty: "No hay elementos para mostrar",
+    pageSize: "Elementos por p\xE1gina:",
     firstPage: "Primera",
     lastPage: "\xDAltima",
     nextPage: "Siguiente",
@@ -288,12 +286,12 @@ var defaultEsTranslations = {
     delete: "Eliminar",
     clearSelection: "Limpiar selecci\xF3n",
     pagination: {
-      showing: "Mostrando {start} a {end} de {total} registros",
-      pageSize: "Tama\xF1o de p\xE1gina",
-      first: "Primera p\xE1gina",
-      previous: "P\xE1gina anterior",
-      next: "P\xE1gina siguiente",
-      last: "\xDAltima p\xE1gina"
+      showing: "Mostrando {start}\u2013{end} de {total}",
+      pageSize: "Elementos por p\xE1gina:",
+      first: "Primera",
+      previous: "Anterior",
+      next: "Siguiente",
+      last: "\xDAltima"
     }
   },
   form: {
@@ -694,25 +692,25 @@ function tp(key, count, params) {
 function resolveLabel(key, fallback) {
   return getI18n().resolveLabel(key, fallback);
 }
-var I18nContext = react.createContext(null);
+var I18nContext = createContext(null);
 function I18nProvider({ children, config, i18n }) {
-  const [instance] = react.useState(() => i18n || new I18n(config));
-  return /* @__PURE__ */ jsxRuntime.jsx(I18nContext.Provider, { value: instance, children });
+  const [instance] = useState(() => i18n || new I18n(config));
+  return /* @__PURE__ */ jsx(I18nContext.Provider, { value: instance, children });
 }
 function useI18n() {
-  const context = react.useContext(I18nContext);
+  const context = useContext(I18nContext);
   const i18n = context || getI18n();
-  const [locale, setLocaleState] = react.useState(i18n.locale);
-  react.useEffect(() => {
+  const [locale, setLocaleState] = useState(i18n.locale);
+  useEffect(() => {
     return i18n.subscribe(setLocaleState);
   }, [i18n]);
-  const setLocale = react.useCallback((newLocale) => {
+  const setLocale = useCallback((newLocale) => {
     i18n.setLocale(newLocale);
   }, [i18n]);
-  const translate = react.useCallback((key, params, fallback) => {
+  const translate = useCallback((key, params, fallback) => {
     return i18n.t(key, params, fallback);
   }, [i18n]);
-  const translatePlural = react.useCallback((key, count, params) => {
+  const translatePlural = useCallback((key, count, params) => {
     return i18n.tp(key, count, params);
   }, [i18n]);
   return {
@@ -743,18 +741,6 @@ function useTranslatedValidation() {
   };
 }
 
-exports.I18n = I18n;
-exports.I18nContext = I18nContext;
-exports.I18nProvider = I18nProvider;
-exports.defaultEnTranslations = defaultEnTranslations;
-exports.defaultEsTranslations = defaultEsTranslations;
-exports.getI18n = getI18n;
-exports.initI18n = initI18n;
-exports.resolveLabel = resolveLabel;
-exports.t = t;
-exports.tp = tp;
-exports.tx = tx;
-exports.useI18n = useI18n;
-exports.useTranslatedValidation = useTranslatedValidation;
-//# sourceMappingURL=chunk-GXJ26MCG.js.map
-//# sourceMappingURL=chunk-GXJ26MCG.js.map
+export { I18n, I18nContext, I18nProvider, defaultEnTranslations, defaultEsTranslations, getI18n, initI18n, resolveLabel, t, tp, tx, useI18n, useTranslatedValidation };
+//# sourceMappingURL=chunk-BPSVTVPH.mjs.map
+//# sourceMappingURL=chunk-BPSVTVPH.mjs.map

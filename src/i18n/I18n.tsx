@@ -349,9 +349,9 @@ export const defaultEsTranslations: TranslationDictionary = {
   },
 
   table: {
-    showing: 'Mostrando {from} a {to} de {total} registros',
-    empty: ':(',
-    pageSize: 'Mostrar {size} registros',
+    showing: 'Mostrando {from} a {to} de {total}',
+    empty: 'No hay elementos para mostrar',
+    pageSize: 'Elementos por página:',
     firstPage: 'Primera',
     lastPage: 'Última',
     nextPage: 'Siguiente',
@@ -379,12 +379,12 @@ export const defaultEsTranslations: TranslationDictionary = {
     delete: 'Eliminar',
     clearSelection: 'Limpiar selección',
     pagination: {
-      showing: 'Mostrando {start} a {end} de {total} registros',
-      pageSize: 'Tamaño de página',
-      first: 'Primera página',
-      previous: 'Página anterior',
-      next: 'Página siguiente',
-      last: 'Última página',
+      showing: 'Mostrando {start}–{end} de {total}',
+      pageSize: 'Elementos por página:',
+      first: 'Primera',
+      previous: 'Anterior',
+      next: 'Siguiente',
+      last: 'Última',
     },
   },
 

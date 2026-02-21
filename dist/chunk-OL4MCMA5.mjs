@@ -1,6 +1,6 @@
 import { getModalTitle, getModalSubmitLabel } from './chunk-PWH3M2ZV.mjs';
 import { evaluateConditions, cn, getNestedValue, validateField } from './chunk-ZYRLE26I.mjs';
-import { useI18n, resolveLabel, t } from './chunk-B2W4BHYP.mjs';
+import { useI18n, resolveLabel, t } from './chunk-BPSVTVPH.mjs';
 import React2, { forwardRef, useState, useMemo, useCallback, useImperativeHandle, useEffect, useRef } from 'react';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { createPortal } from 'react-dom';
@@ -3341,5 +3341,5 @@ function AdvancedSearchModal({
 }
 
 export { AdvancedSearchModal, DynamicModal, FormRenderer, KanbanRenderer, SidebarRenderer, TabRenderer, TableRenderer, TableToolbar };
-//# sourceMappingURL=chunk-DC5XOOTV.mjs.map
-//# sourceMappingURL=chunk-DC5XOOTV.mjs.map
+//# sourceMappingURL=chunk-OL4MCMA5.mjs.map
+//# sourceMappingURL=chunk-OL4MCMA5.mjs.map

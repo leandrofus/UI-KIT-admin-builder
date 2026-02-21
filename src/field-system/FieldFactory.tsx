@@ -8,7 +8,7 @@
  */
 
 import React, { useMemo, useCallback } from 'react';
-import { useTranslation } from '../../../../contexts/I18nContext';
+import { useI18n as useTranslation } from '../i18n';
 import type { FieldConfig, FieldValue, DataRecord, FormSection } from '../core/types';
 import { evaluateConditions, validateField } from '../core/validators';
 import { getNestedValue } from '../core/utils';

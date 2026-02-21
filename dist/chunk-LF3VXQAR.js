@@ -2,7 +2,7 @@
 
 var chunkUSZU7PLJ_js = require('./chunk-USZU7PLJ.js');
 var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
-var chunkGXJ26MCG_js = require('./chunk-GXJ26MCG.js');
+var chunkNSJHTZJJ_js = require('./chunk-NSJHTZJJ.js');
 var React2 = require('react');
 var jsxRuntime = require('react/jsx-runtime');
 var reactDom = require('react-dom');
@@ -83,7 +83,7 @@ function TableToolbar(props) {
               type: "text",
               value: localSearch,
               onChange: (e) => handleSearchChange(e.target.value),
-              placeholder: searchPlaceholder || chunkGXJ26MCG_js.t("table.search", { default: "Buscar..." }),
+              placeholder: searchPlaceholder || chunkNSJHTZJJ_js.t("table.search", { default: "Buscar..." }),
               disabled,
               className: "v2-input v2-input-with-icon"
             }
@@ -96,10 +96,10 @@ function TableToolbar(props) {
             onClick: onAdvancedSearch,
             disabled,
             className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-            title: chunkGXJ26MCG_js.t("table.advancedSearch", { default: "B\xFAsqueda avanzada" }),
+            title: chunkNSJHTZJJ_js.t("table.advancedSearch", { default: "B\xFAsqueda avanzada" }),
             children: [
               Icons.advancedSearch,
-              chunkGXJ26MCG_js.t("table.advancedSearch", { default: "Avanzada" })
+              chunkNSJHTZJJ_js.t("table.advancedSearch", { default: "Avanzada" })
             ]
           }
         ),
@@ -114,7 +114,7 @@ function TableToolbar(props) {
                 activeView === "table" ? "bg-white shadow-sm dark:bg-gray-700 dark:text-white" : "bg-transparent text-muted"
               ),
               style: { borderRadius: "6px", minWidth: "40px", display: "flex", alignItems: "center", justifyContent: "center" },
-              title: chunkGXJ26MCG_js.t("table.viewTable", { default: "Vista Tabla" }),
+              title: chunkNSJHTZJJ_js.t("table.viewTable", { default: "Vista Tabla" }),
               children: Icons.table
             }
           ),
@@ -128,7 +128,7 @@ function TableToolbar(props) {
                 activeView === "kanban" ? "bg-white shadow-sm dark:bg-gray-700 dark:text-white" : "bg-transparent text-muted"
               ),
               style: { borderRadius: "6px", minWidth: "40px", display: "flex", alignItems: "center", justifyContent: "center" },
-              title: chunkGXJ26MCG_js.t("table.viewKanban", { default: "Vista Kanban" }),
+              title: chunkNSJHTZJJ_js.t("table.viewKanban", { default: "Vista Kanban" }),
               children: Icons.kanban
             }
           )
@@ -136,7 +136,7 @@ function TableToolbar(props) {
         /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-toolbar-spacer" }),
         /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-toolbar-actions", style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
           selectedCount > 0 ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-table-toolbar-selection-badge", style: { marginRight: "0.5rem" }, children: chunkGXJ26MCG_js.t("table.selected", { count: selectedCount }) }),
+            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-table-toolbar-selection-badge", style: { marginRight: "0.5rem" }, children: chunkNSJHTZJJ_js.t("table.selected", { count: selectedCount }) }),
             onDeleteSelected && /* @__PURE__ */ jsxRuntime.jsxs(
               "button",
               {
@@ -146,7 +146,7 @@ function TableToolbar(props) {
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-danger",
                 children: [
                   Icons.trash,
-                  deleteLabel || chunkGXJ26MCG_js.t("table.delete")
+                  deleteLabel || chunkNSJHTZJJ_js.t("table.delete")
                 ]
               }
             ),
@@ -157,7 +157,7 @@ function TableToolbar(props) {
                 onClick: onToggleEnabled,
                 disabled,
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                title: chunkGXJ26MCG_js.t("table.toggleEnabled", { default: "Habilitar/Deshabilitar" }),
+                title: chunkNSJHTZJJ_js.t("table.toggleEnabled", { default: "Habilitar/Deshabilitar" }),
                 children: Icons.toggle
               }
             ),
@@ -168,7 +168,7 @@ function TableToolbar(props) {
                 onClick: onClearSelection,
                 disabled,
                 className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                children: chunkGXJ26MCG_js.t("table.clearSelection")
+                children: chunkNSJHTZJJ_js.t("table.clearSelection")
               }
             ),
             /* @__PURE__ */ jsxRuntime.jsx("div", { style: { width: 1, height: 24, background: "var(--border-color)", margin: "0 0.25rem" } })
@@ -182,10 +182,10 @@ function TableToolbar(props) {
                   onClick: onRefresh,
                   disabled: disabled || refreshLoading,
                   className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-                  title: chunkGXJ26MCG_js.t("table.refresh", { default: "Refrescar" }),
+                  title: chunkNSJHTZJJ_js.t("table.refresh", { default: "Refrescar" }),
                   children: [
                     Icons.refresh,
-                    chunkGXJ26MCG_js.t("table.refresh", { default: "Refrescar" })
+                    chunkNSJHTZJJ_js.t("table.refresh", { default: "Refrescar" })
                   ]
                 }
               ),
@@ -198,7 +198,7 @@ function TableToolbar(props) {
                   className: "dui-table-toolbar-btn dui-table-toolbar-btn-primary",
                   children: [
                     Icons.plus,
-                    createLabel || chunkGXJ26MCG_js.t("table.create", { default: "Crear" })
+                    createLabel || chunkNSJHTZJJ_js.t("table.create", { default: "Crear" })
                   ]
                 }
               )
@@ -211,10 +211,10 @@ function TableToolbar(props) {
               onClick: onExport,
               disabled,
               className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-              title: chunkGXJ26MCG_js.t("export", { default: "Exportar" }),
+              title: chunkNSJHTZJJ_js.t("export", { default: "Exportar" }),
               children: [
                 /* @__PURE__ */ jsxRuntime.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", style: { width: "1.2em", height: "1.2em" }, children: /* @__PURE__ */ jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" }) }),
-                selectedCount > 0 ? "" : chunkGXJ26MCG_js.t("export", { default: "Exportar" })
+                selectedCount > 0 ? "" : chunkNSJHTZJJ_js.t("export", { default: "Exportar" })
               ]
             }
           ),
@@ -225,9 +225,9 @@ function TableToolbar(props) {
               onClick: onOpenColumns,
               disabled,
               className: "dui-table-toolbar-btn dui-table-toolbar-btn-secondary",
-              title: chunkGXJ26MCG_js.t("columns.title", { default: "Columnas" }),
+              title: chunkNSJHTZJJ_js.t("columns.title", { default: "Columnas" }),
               children: [
-                chunkGXJ26MCG_js.t("columns.title", { default: "Columnas" }),
+                chunkNSJHTZJJ_js.t("columns.title", { default: "Columnas" }),
                 columnsNeedsSync && /* @__PURE__ */ jsxRuntime.jsx("span", { style: { display: "inline-block", width: 8, height: 8, background: "#ef4444", borderRadius: 8, marginLeft: 8 } })
               ]
             }
@@ -239,7 +239,7 @@ function TableToolbar(props) {
   );
 }
 function DefaultEmptyState() {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-empty", children: [
     /* @__PURE__ */ jsxRuntime.jsx(
       "svg",
@@ -265,14 +265,14 @@ function DefaultEmptyState() {
   ] });
 }
 function DefaultLoadingState() {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-loading", children: [
     /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-table-loading-spinner" }),
     /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-table-loading-text", children: t6("table.loading") })
   ] });
 }
 function DefaultErrorState({ error }) {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-table-error", children: [
     /* @__PURE__ */ jsxRuntime.jsx(
       "svg",
@@ -422,7 +422,7 @@ function formatCellValue(value, column, row, emptyValuePlaceholder) {
           (v) => String(v.value).toLowerCase() === String(value).toLowerCase() || String(v.id).toLowerCase() === String(value).toLowerCase()
         );
         if (variant) {
-          const display = chunkGXJ26MCG_js.resolveLabel(variant.label || variant.name || String(variant.value));
+          const display = chunkNSJHTZJJ_js.resolveLabel(variant.label || variant.name || String(variant.value));
           const colorValue = variant.color || "gray";
           const isHex = /^#|^rgb|^hsl/.test(colorValue);
           return /* @__PURE__ */ jsxRuntime.jsx(
@@ -495,7 +495,7 @@ function Pagination({
   onPageChange,
   onPageSizeChange
 }) {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const startRecord = totalCount === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const endRecord = Math.min(currentPage * pageSize, totalCount);
   const pageNumbers = React2.useMemo(() => {
@@ -739,7 +739,7 @@ function TableRendererInner(props, ref) {
     toolbarDisabled = false,
     IconComponent
   } = props;
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const [internalPage, setInternalPage] = React2.useState(1);
   const [internalPageSize, setInternalPageSize] = React2.useState(
     config.pagination?.pageSize ?? 10
@@ -1077,7 +1077,7 @@ function TableRendererInner(props, ref) {
                     const headerStr = typeof column.header === "string" ? column.header : "";
                     const tByKey = t6(`columns.labels.${String(column.key)}`);
                     if (tByKey && tByKey !== `columns.labels.${String(column.key)}`) return tByKey;
-                    return chunkGXJ26MCG_js.resolveLabel(headerStr || String(column.key));
+                    return chunkNSJHTZJJ_js.resolveLabel(headerStr || String(column.key));
                   })() }),
                   column.sortable && /* @__PURE__ */ jsxRuntime.jsx(
                     SortIndicator,
@@ -1262,13 +1262,13 @@ function TableRendererInner(props, ref) {
                             "button",
                             {
                               type: "button",
-                              title: typeof action.label === "string" ? chunkGXJ26MCG_js.resolveLabel(action.label) : void 0,
+                              title: typeof action.label === "string" ? chunkNSJHTZJJ_js.resolveLabel(action.label) : void 0,
                               className: `btn btn-sm ${getVariantClass(action.variant)}`,
                               onClick: (e) => {
                                 e.stopPropagation();
                                 action.onClick?.(row, rowIndex);
                               },
-                              children: renderedIcon ? renderedIcon : typeof action.label === "string" ? chunkGXJ26MCG_js.resolveLabel(action.label) : action.label
+                              children: renderedIcon ? renderedIcon : typeof action.label === "string" ? chunkNSJHTZJJ_js.resolveLabel(action.label) : action.label
                             },
                             action.id
                           );
@@ -1367,7 +1367,7 @@ var TabRenderer = ({
           ),
           children: [
             tab.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-lg", children: tab.icon }),
-            /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkGXJ26MCG_js.resolveLabel(tab.label) })
+            /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkNSJHTZJJ_js.resolveLabel(tab.label) })
           ]
         },
         tab.id
@@ -1386,7 +1386,7 @@ var TabRenderer = ({
         ),
         children: [
           tab.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-lg", children: tab.icon }),
-          /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkGXJ26MCG_js.resolveLabel(tab.label) }),
+          /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkNSJHTZJJ_js.resolveLabel(tab.label) }),
           isActive && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-t-full shadow-[0_-2px_10px_rgba(37,99,235,0.5)]" })
         ]
       },
@@ -1404,7 +1404,7 @@ function DefaultFieldRenderer({
   onChange,
   onBlur
 }) {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const inputId = `field-${field.name}`;
   const hasError = touched && !!error;
   const getInputType = () => {
@@ -1440,7 +1440,7 @@ function DefaultFieldRenderer({
   if (field.type === "select" || field.type === "multiselect") {
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
       /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-        chunkGXJ26MCG_js.resolveLabel(String(field.label)),
+        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsxs(
@@ -1455,13 +1455,13 @@ function DefaultFieldRenderer({
           className: "dui-field__select",
           multiple: field.type === "multiselect",
           children: [
-            !field.required && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunkGXJ26MCG_js.resolveLabel("select_placeholder", "Select...") }),
+            !field.required && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunkNSJHTZJJ_js.resolveLabel("select_placeholder", "Select...") }),
             field.options?.map((option) => /* @__PURE__ */ jsxRuntime.jsx(
               "option",
               {
                 value: String(option.value),
                 disabled: option.disabled,
-                children: chunkGXJ26MCG_js.resolveLabel(String(option.label))
+                children: chunkNSJHTZJJ_js.resolveLabel(String(option.label))
               },
               String(option.value)
             ))
@@ -1488,17 +1488,17 @@ function DefaultFieldRenderer({
             className: field.type === "switch" ? "dui-field__switch" : "dui-field__checkbox"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkGXJ26MCG_js.resolveLabel(String(field.label)) }),
+        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkNSJHTZJJ_js.resolveLabel(String(field.label)) }),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkGXJ26MCG_js.resolveLabel(String(field.helpText)) }),
+      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkNSJHTZJJ_js.resolveLabel(String(field.helpText)) }),
       hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   if (field.type === "textarea") {
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
       /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-        chunkGXJ26MCG_js.resolveLabel(String(field.label)),
+        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsx(
@@ -1511,20 +1511,20 @@ function DefaultFieldRenderer({
           onBlur,
           disabled: disabled || field.disabled,
           readOnly: readOnly || field.readOnly,
-          placeholder: field.placeholder ? chunkGXJ26MCG_js.resolveLabel(String(field.placeholder)) : void 0,
+          placeholder: field.placeholder ? chunkNSJHTZJJ_js.resolveLabel(String(field.placeholder)) : void 0,
           maxLength: field.maxLength,
           className: "dui-field__textarea",
           rows: 4
         }
       ),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkGXJ26MCG_js.resolveLabel(String(field.helpText)) }),
+      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkNSJHTZJJ_js.resolveLabel(String(field.helpText)) }),
       hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
   if (field.type === "radio") {
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
       /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "dui-field__label", children: [
-        chunkGXJ26MCG_js.resolveLabel(String(field.label)),
+        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsx("div", { className: chunkG4EIC5OB_js.cn(
@@ -1545,9 +1545,9 @@ function DefaultFieldRenderer({
             className: "dui-field__radio"
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkGXJ26MCG_js.resolveLabel(String(option.label)) })
+        /* @__PURE__ */ jsxRuntime.jsx("span", { children: chunkNSJHTZJJ_js.resolveLabel(String(option.label)) })
       ] }, String(option.value))) }),
-      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkGXJ26MCG_js.resolveLabel(String(field.helpText)) }),
+      field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkNSJHTZJJ_js.resolveLabel(String(field.helpText)) }),
       hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
     ] });
   }
@@ -1581,7 +1581,7 @@ function DefaultFieldRenderer({
   }
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("dui-field", hasError && "dui-field--error"), children: [
     /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: inputId, className: "dui-field__label", children: [
-      chunkGXJ26MCG_js.resolveLabel(String(field.label)),
+      chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
       field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-field__required", children: "*" })
     ] }),
     /* @__PURE__ */ jsxRuntime.jsx(
@@ -1612,14 +1612,14 @@ function DefaultFieldRenderer({
         onBlur,
         disabled: disabled || field.disabled,
         readOnly: readOnly || field.readOnly,
-        placeholder: field.placeholder ? chunkGXJ26MCG_js.resolveLabel(String(field.placeholder)) : void 0,
+        placeholder: field.placeholder ? chunkNSJHTZJJ_js.resolveLabel(String(field.placeholder)) : void 0,
         min: field.min,
         max: field.max,
         maxLength: field.maxLength,
         className: "dui-field__input"
       }
     ),
-    field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkGXJ26MCG_js.resolveLabel(String(field.helpText)) }),
+    field.helpText && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__help", children: chunkNSJHTZJJ_js.resolveLabel(String(field.helpText)) }),
     hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-field__error", children: error })
   ] });
 }
@@ -1641,8 +1641,8 @@ function DefaultSectionRenderer({
         children: [
           section.icon && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "dui-form-section__icon", children: section.icon }),
           /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-form-section__title-group", children: [
-            /* @__PURE__ */ jsxRuntime.jsx("h3", { className: "dui-form-section__title", children: typeof section.title === "string" ? chunkGXJ26MCG_js.resolveLabel(section.title) : section.title }),
-            section.description && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-form-section__description", children: typeof section.description === "string" ? chunkGXJ26MCG_js.resolveLabel(section.description) : section.description })
+            /* @__PURE__ */ jsxRuntime.jsx("h3", { className: "dui-form-section__title", children: typeof section.title === "string" ? chunkNSJHTZJJ_js.resolveLabel(section.title) : section.title }),
+            section.description && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "dui-form-section__description", children: typeof section.description === "string" ? chunkNSJHTZJJ_js.resolveLabel(section.description) : section.description })
           ] }),
           section.collapsible && /* @__PURE__ */ jsxRuntime.jsx("span", { className: chunkG4EIC5OB_js.cn(
             "dui-form-section__collapse-icon",
@@ -1687,7 +1687,7 @@ function FormRendererInner(props, ref) {
     footer,
     header
   } = props;
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const [internalValues, setInternalValues] = React2.useState(initialValues);
   const [internalErrors, setInternalErrors] = React2.useState({});
   const [touched, setTouched] = React2.useState({});
@@ -2040,7 +2040,7 @@ var SIZE_MAP = {
   full: "dui-modal--full"
 };
 function ConfirmDialog({ open, onConfirm, onCancel, config, loading, entityName }) {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   if (!open) return null;
   const resolvedEntity = entityName || t6("entities.unknown", void 0, "Item");
   return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "dui-modal__confirm-overlay", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "dui-modal__confirm-dialog", children: [
@@ -2104,7 +2104,7 @@ function DynamicModalInner(props, ref) {
     theme = "system",
     entityName
   } = props;
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const effectiveMode = mode ?? "edit";
   const resolvedEntity = entityName || t6("entities.unknown", void 0, "Item");
   const title = typeof titleProp === "string" ? titleProp : chunkUSZU7PLJ_js.getModalTitle(titleProp, effectiveMode);
@@ -2458,7 +2458,7 @@ var SidebarRenderer = ({
   const [openMenu, setOpenMenu] = React2.useState(null);
   const [anchorRect, setAnchorRect] = React2.useState(null);
   const buttonRefs = React2.useRef({});
-  const translate = passedT || chunkGXJ26MCG_js.t;
+  const translate = passedT || chunkNSJHTZJJ_js.t;
   const isActive = (path) => {
     if (!path) return false;
     if (path === "/" || path === "/dashboard") return currentPath === path;
@@ -2972,7 +2972,7 @@ function AdvancedSearchModal({
   excludeFields = [],
   renderField
 }) {
-  const { t: t6 } = chunkGXJ26MCG_js.useI18n();
+  const { t: t6 } = chunkNSJHTZJJ_js.useI18n();
   const modalTitle = title || t6("advanced_search.title", { default: "B\xFAsqueda Avanzada" });
   const [state, setState] = React2.useState({});
   const [operators, setOperators] = React2.useState({});
@@ -3354,5 +3354,5 @@ exports.SidebarRenderer = SidebarRenderer;
 exports.TabRenderer = TabRenderer;
 exports.TableRenderer = TableRenderer;
 exports.TableToolbar = TableToolbar;
-//# sourceMappingURL=chunk-ORBJJGXX.js.map
-//# sourceMappingURL=chunk-ORBJJGXX.js.map
+//# sourceMappingURL=chunk-LF3VXQAR.js.map
+//# sourceMappingURL=chunk-LF3VXQAR.js.map
