@@ -1,7 +1,7 @@
 'use strict';
 
 var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
-var chunkNSJHTZJJ_js = require('./chunk-NSJHTZJJ.js');
+var chunkRSAFNJQW_js = require('./chunk-RSAFNJQW.js');
 var React = require('react');
 var jsxRuntime = require('react/jsx-runtime');
 
@@ -135,7 +135,7 @@ function useFieldRegistry() {
 }
 function useFieldFactory(options = {}) {
   const registry = useFieldRegistry();
-  const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+  const { t: t2 } = chunkRSAFNJQW_js.useI18n();
   const {
     defaultProps = {},
     wrapper: Wrapper,
@@ -344,7 +344,7 @@ var errorTextClass = "text-sm text-red-500 dark:text-red-400 mt-1";
 var helperTextClass = "text-sm text-gray-500 dark:text-gray-400 mt-1";
 var TextField = React.forwardRef(
   function TextField2(props, ref) {
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     const {
       field,
       value = "",
@@ -365,7 +365,7 @@ var TextField = React.forwardRef(
     const hasError = touched && error;
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative flex items-center", children: [
@@ -382,7 +382,7 @@ var TextField = React.forwardRef(
             onBlur,
             disabled,
             readOnly,
-            placeholder: placeholder ? chunkNSJHTZJJ_js.resolveLabel(String(placeholder)) : field.placeholder ? chunkNSJHTZJJ_js.resolveLabel(String(field.placeholder)) : void 0,
+            placeholder: placeholder ? chunkRSAFNJQW_js.resolveLabel(String(placeholder)) : field.placeholder ? chunkRSAFNJQW_js.resolveLabel(String(field.placeholder)) : void 0,
             maxLength: maxLength || field.maxLength,
             autoFocus,
             className: chunkG4EIC5OB_js.cn(
@@ -396,7 +396,7 @@ var TextField = React.forwardRef(
         suffix && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute right-3 text-gray-500", children: suffix })
       ] }),
       hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: chunkNSJHTZJJ_js.resolveLabel(String(field.helpText)) })
+      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: chunkRSAFNJQW_js.resolveLabel(String(field.helpText)) })
     ] });
   }
 );
@@ -432,10 +432,10 @@ var NumberField = React.forwardRef(
       }
       onChange(num);
     }, [onChange, decimals]);
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsx(
@@ -507,10 +507,10 @@ var CurrencyField = React.forwardRef(
       }
       onBlur?.();
     }, [value, onBlur]);
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative flex items-center", children: [
@@ -546,7 +546,7 @@ var CurrencyField = React.forwardRef(
 );
 var TextareaField = React.forwardRef(
   function TextareaField2(props, ref) {
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     const {
       field,
       value = "",
@@ -572,7 +572,7 @@ var TextareaField = React.forwardRef(
     }, [onChange, autoResize, maxHeight]);
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsx(
@@ -587,7 +587,7 @@ var TextareaField = React.forwardRef(
           disabled,
           readOnly,
           rows,
-          placeholder: field.placeholder ? chunkNSJHTZJJ_js.resolveLabel(String(field.placeholder)) : void 0,
+          placeholder: field.placeholder ? chunkRSAFNJQW_js.resolveLabel(String(field.placeholder)) : void 0,
           className: chunkG4EIC5OB_js.cn(
             baseInputClass,
             hasError && errorInputClass,
@@ -603,7 +603,7 @@ var TextareaField = React.forwardRef(
 );
 var SelectField = React.forwardRef(
   function SelectField2(props, ref) {
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     const {
       field,
       value,
@@ -630,7 +630,7 @@ var SelectField = React.forwardRef(
     }, [propOptions, field.options]);
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsxs(
@@ -649,13 +649,13 @@ var SelectField = React.forwardRef(
             "cursor-pointer"
           ),
           children: [
-            allowEmpty && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunkNSJHTZJJ_js.resolveLabel(String(placeholderOption)) }),
+            allowEmpty && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunkRSAFNJQW_js.resolveLabel(String(placeholderOption)) }),
             options.map((option) => /* @__PURE__ */ jsxRuntime.jsx(
               "option",
               {
                 value: option.value,
                 disabled: option.disabled,
-                children: chunkNSJHTZJJ_js.resolveLabel(String(option.label))
+                children: chunkRSAFNJQW_js.resolveLabel(String(option.label))
               },
               option.value
             ))
@@ -669,7 +669,7 @@ var SelectField = React.forwardRef(
 );
 var CheckboxField = React.forwardRef(
   function CheckboxField2(props, ref) {
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     const {
       field,
       value = false,
@@ -715,7 +715,7 @@ var CheckboxField = React.forwardRef(
 );
 var SwitchField = React.forwardRef(
   function SwitchField2(props, ref) {
-    const { t: t2 } = chunkNSJHTZJJ_js.useI18n();
+    const { t: t2 } = chunkRSAFNJQW_js.useI18n();
     const {
       field,
       value = false,
@@ -739,11 +739,11 @@ var SwitchField = React.forwardRef(
     const sizeClasses = sizes[size];
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
       field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { className: labelClass, children: [
-        chunkNSJHTZJJ_js.resolveLabel(String(field.label)),
+        chunkRSAFNJQW_js.resolveLabel(String(field.label)),
         field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
       /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-3", children: [
-        offLabel && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: chunkNSJHTZJJ_js.resolveLabel(String(offLabel)) }),
+        offLabel && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: chunkRSAFNJQW_js.resolveLabel(String(offLabel)) }),
         /* @__PURE__ */ jsxRuntime.jsx(
           "button",
           {
@@ -827,5 +827,5 @@ exports.registerFields = registerFields;
 exports.setDefaultRegistry = setDefaultRegistry;
 exports.useFieldFactory = useFieldFactory;
 exports.useFieldRegistry = useFieldRegistry;
-//# sourceMappingURL=chunk-KD42PDAF.js.map
-//# sourceMappingURL=chunk-KD42PDAF.js.map
+//# sourceMappingURL=chunk-G542UX7V.js.map
+//# sourceMappingURL=chunk-G542UX7V.js.map

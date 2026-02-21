@@ -69,13 +69,18 @@ interface PluralForms {
     other: string;
 }
 /**
- * Default English translations for the UI kit
+ * Default English translations for the UI kit (now empty, provided by host app)
  */
 declare const defaultEnTranslations: TranslationDictionary;
 /**
- * Default Spanish translations for the UI kit
+ * Default Spanish translations for the UI kit (now empty, provided by host app)
  */
 declare const defaultEsTranslations: TranslationDictionary;
+/**
+ * Global variable for overwriting default UI Kit translations.
+ * Mutate this object before initializing the I18n class to apply global overrides.
+ */
+declare const uiKitGlobalTranslations: Record<string, TranslationDictionary>;
 /**
  * I18n Manager - Handles translations and locale management
  */
@@ -83,7 +88,16 @@ declare class I18n {
     private config;
     private currentLocale;
     private listeners;
+    private hasAppliedGlobals;
     constructor(config?: Partial<I18nConfig>);
+    /**
+     * Manually update/merge translations after initialization
+     */
+    updateTranslations(translations: Record<string, TranslationDictionary>): void;
+    /**
+     * Sync with the global uiKitGlobalTranslations variable
+     */
+    syncGlobals(): void;
     /**
      * Get current locale
      */
@@ -123,7 +137,7 @@ declare class I18n {
      * - If missing, returns the provided fallback string
      * - Otherwise, generates a humanized label from the last key segment
      */
-    resolveLabel(key: string, fallback?: string): string;
+    resolveLabel(key: string, fallback?: string, namespace?: string): string;
     /**
      * Humanize last key segment (used as fallback in multiple places)
      */
@@ -191,7 +205,7 @@ declare function tp(key: string, count: number, params?: InterpolationParams): s
 /**
  * Resolve a label for a given key with humanized fallback when missing
  */
-declare function resolveLabel(key: string, fallback?: string): string;
+declare function resolveLabel(key: string, fallback?: string, namespace?: string): string;
 
 /**
  * I18n Context
@@ -239,4 +253,4 @@ declare function useTranslatedValidation(): {
     pattern: () => string;
 };
 
-export { I18n, type I18nConfig, I18nContext, I18nProvider, type I18nProviderProps, type InterpolationParams, type LocaleConfig, type PluralForms, type TranslationDictionary, type TranslationValue, defaultEnTranslations, defaultEsTranslations, getI18n, initI18n, resolveLabel, t, tp, tx, useI18n, useTranslatedValidation };
+export { I18n, type I18nConfig, I18nContext, I18nProvider, type I18nProviderProps, type InterpolationParams, type LocaleConfig, type PluralForms, type TranslationDictionary, type TranslationValue, defaultEnTranslations, defaultEsTranslations, getI18n, initI18n, resolveLabel, t, tp, tx, uiKitGlobalTranslations, useI18n, useTranslatedValidation };

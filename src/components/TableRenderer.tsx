@@ -525,12 +525,14 @@ function formatCellValue<T extends DataRecord>(
     
     case 'badge':
     case 'status': {
+      const namespace = (column as any).translationNamespace || (column.type === 'status' ? 'status' : undefined);
+      
       // Arrays -> render each item as a badge
       if (Array.isArray(value)) {
         return (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', alignItems: 'center' }}>
             {(value as any[]).map((item, i) => {
-              const display = (item && typeof item === 'object') ? (item.label ?? item.name ?? String(item)) : String(item);
+              const display = (item && typeof item === 'object') ? (item.label ?? item.name ?? String(item)) : resolveLabel(String(item), undefined, namespace);
               return <span key={i} className={cn('dui-table-badge')}>{display}</span>;
             })}
           </div>
@@ -545,7 +547,7 @@ function formatCellValue<T extends DataRecord>(
           String(v.id).toLowerCase() === String(value).toLowerCase()
         );
         if (variant) {
-          const display = resolveLabel(variant.label || variant.name || String(variant.value));
+          const display = resolveLabel(variant.label || variant.name || String(variant.value), undefined, namespace);
           const colorValue = variant.color || 'gray';
           const isHex = /^#|^rgb|^hsl/.test(colorValue);
           
@@ -571,14 +573,14 @@ function formatCellValue<T extends DataRecord>(
             className={cn('dui-table-badge')}
             style={color ? { backgroundColor: color, color: '#fff' } : undefined}
           >
-            {String(display)}
+            {resolveLabel(String(display), undefined, namespace)}
           </span>
         );
       }
 
       return (
         <span className={cn('dui-table-badge', `dui-table-badge-${String(value).toLowerCase()}`)}>
-          {String(value)}
+          {resolveLabel(String(value), undefined, namespace)}
         </span>
       );
     }
@@ -1405,11 +1407,14 @@ function TableRendererInner<T extends DataRecord>(
                     <div className="dui-table-th-content">
                       <span className="dui-table-th-text">{(function getColumnLabel() {
                         const headerStr = typeof column.header === 'string' ? column.header : '';
+                        const namespace = (column as any).translationNamespace;
+                        
                         // Prefer explicit translations for the column key
                         const tByKey = t(`columns.labels.${String(column.key)}`);
                         if (tByKey && tByKey !== `columns.labels.${String(column.key)}`) return tByKey;
+                        
                         // Otherwise resolve label from header or humanize
-                        return resolveLabel(headerStr || String(column.key));
+                        return resolveLabel(headerStr || String(column.key), undefined, namespace);
                       })()}</span>
                       {column.sortable && (
                         <SortIndicator 

@@ -18,6 +18,7 @@ export {
   useTranslatedValidation,
   defaultEnTranslations,
   defaultEsTranslations,
+  uiKitGlobalTranslations,
 } from './I18n';
 
 export type {

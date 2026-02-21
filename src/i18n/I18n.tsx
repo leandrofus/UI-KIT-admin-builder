@@ -79,459 +79,14 @@ export interface PluralForms {
 // =============================================================================
 
 /**
- * Default English translations for the UI kit
+ * Default English translations for the UI kit (now empty, provided by host app)
  */
-export const defaultEnTranslations: TranslationDictionary = {
-  // Common
-  common: {
-    save: 'Save',
-    cancel: 'Cancel',
-    delete: 'Delete',
-    edit: 'Edit',
-    create: 'Create',
-    update: 'Update',
-    close: 'Close',
-    confirm: 'Confirm',
-    loading: 'Loading...',
-    error: 'Error',
-    success: 'Success',
-    warning: 'Warning',
-    info: 'Information',
-    yes: 'Yes',
-    no: 'No',
-    ok: 'OK',
-    back: 'Back',
-    next: 'Next',
-    previous: 'Previous',
-    search: 'Search',
-    filter: 'Filter',
-    reset: 'Reset',
-    clear: 'Clear',
-    apply: 'Apply',
-    select: 'Select',
-    selectAll: 'Select All',
-    deselectAll: 'Deselect All',
-    noData: 'No data available',
-    noResults: 'No results found',
-    required: 'Required',
-    optional: 'Optional',
-  },
-
-  // Table
-  table: {
-    showing: 'Showing {from} to {to} of {total} entries',
-    pageSize: 'Show {size} entries',
-    empty: ':(',
-    firstPage: 'First',
-    lastPage: 'Last',
-    nextPage: 'Next',
-    previousPage: 'Previous',
-    goToPage: 'Go to page',
-    sortAscending: 'Sort ascending',
-    sortDescending: 'Sort descending',
-    noRecords: 'No records to display',
-    loading: 'Loading data...',
-    errorLoading: 'Error loading data',
-    selected: '{count} selected',
-    actions: 'Actions',
-    columns: 'Columns',
-    showColumns: 'Show columns',
-    hideColumn: 'Hide column',
-    resetColumns: 'Reset columns',
-    exportData: 'Export',
-    exportCSV: 'Export as CSV',
-    exportExcel: 'Export as Excel',
-    exportPDF: 'Export as PDF',
-    refresh: 'Refresh',
-    search: 'Search...',
-    advancedSearch: 'Advanced Search',
-    create: 'Create',
-    delete: 'Delete',
-    clearSelection: 'Clear selection',
-    pagination: {
-      showing: 'Showing {start} to {end} of {total} entries',
-      pageSize: 'Page size',
-      first: 'First page',
-      previous: 'Previous page',
-      next: 'Next page',
-      last: 'Last page',
-    },
-  },
-
-  // Form
-  form: {
-    submit: 'Submit',
-    submitting: 'Submitting...',
-    saved: 'Changes saved successfully',
-    saveFailed: 'Failed to save changes',
-    unsavedChanges: 'You have unsaved changes',
-    discardChanges: 'Discard changes?',
-    requiredField: 'This field is required',
-    invalidEmail: 'Please enter a valid email address',
-    invalidUrl: 'Please enter a valid URL',
-    invalidNumber: 'Please enter a valid number',
-    minValue: 'Value must be at least {min}',
-    maxValue: 'Value must be at most {max}',
-    minLength: 'Must be at least {min} characters',
-    maxLength: 'Must be at most {max} characters',
-    patternMismatch: 'Invalid format',
-    passwordMismatch: 'Passwords do not match',
-    selectOption: 'Select an option',
-    selectPlaceholder: 'Select...',
-    select: {
-      placeholder: 'Select...'
-    },
-    searchPlaceholder: 'Type to search...',
-    noOptions: 'No options available',
-    addNew: 'Add new',
-    removeItem: 'Remove item',
-    uploadFile: 'Upload file',
-    dropFileHere: 'Drop file here or click to upload',
-    fileTooBig: 'File is too large. Maximum size is {max}',
-    invalidFileType: 'Invalid file type. Allowed types: {types}',
-  },
-
-  // Legacy top-level helpers
-  select: {
-    placeholder: 'Select...'
-  },
-  select_placeholder: 'Select...',
-
-  // Modal
-  modal: {
-    create: 'Create New Item',
-    edit: 'Edit Item',
-    view: 'View Item',
-    delete: 'Delete Item',
-    deleting: 'Deleting...',
-    close: 'Close',
-    confirm: 'Confirm',
-    confirmDelete: 'Are you sure you want to delete this item?',
-    deleteWarning: 'This action cannot be undone.',
-    closeConfirm: 'Close without saving?',
-    cancel: 'Cancel',
-    save: 'Save',
-    saving: 'Saving...',
-    loading: 'Loading...',
-  },
-
-  // Filters
-  filters: {
-    title: 'Filters',
-    addFilter: 'Add filter',
-    removeFilter: 'Remove filter',
-    clearFilters: 'Clear all filters',
-    equals: 'Equals',
-    notEquals: 'Not equals',
-    contains: 'Contains',
-    notContains: 'Does not contain',
-    startsWith: 'Starts with',
-    endsWith: 'Ends with',
-    greaterThan: 'Greater than',
-    lessThan: 'Less than',
-    greaterOrEqual: 'Greater or equal',
-    lessOrEqual: 'Less or equal',
-    between: 'Between',
-    isEmpty: 'Is empty',
-    isNotEmpty: 'Is not empty',
-    isTrue: 'Is true',
-    isFalse: 'Is false',
-    inList: 'In list',
-    notInList: 'Not in list',
-    before: 'Before',
-    after: 'After',
-    today: 'Today',
-    yesterday: 'Yesterday',
-    thisWeek: 'This week',
-    lastWeek: 'Last week',
-    thisMonth: 'This month',
-    lastMonth: 'Last month',
-  },
-
-  // Dates
-  dates: {
-    today: 'Today',
-    yesterday: 'Yesterday',
-    tomorrow: 'Tomorrow',
-    thisWeek: 'This week',
-    lastWeek: 'Last week',
-    nextWeek: 'Next week',
-    thisMonth: 'This month',
-    lastMonth: 'Last month',
-    nextMonth: 'Next month',
-    thisYear: 'This year',
-    lastYear: 'Last year',
-    nextYear: 'Next year',
-    dateRange: 'Date range',
-    startDate: 'Start date',
-    endDate: 'End date',
-  },
-
-  // Validation
-  validation: {
-    required: 'This field is required',
-    email: 'Please enter a valid email address',
-    url: 'Please enter a valid URL',
-    number: 'Please enter a valid number',
-    integer: 'Please enter a whole number',
-    positive: 'Please enter a positive number',
-    negative: 'Please enter a negative number',
-    min: 'Value must be at least {min}',
-    max: 'Value must be at most {max}',
-    minLength: 'Must be at least {min} characters',
-    maxLength: 'Must be at most {max} characters',
-    pattern: 'Invalid format',
-    match: 'Values do not match',
-    unique: 'This value already exists',
-    date: 'Please enter a valid date',
-    time: 'Please enter a valid time',
-    phone: 'Please enter a valid phone number',
-  },
-
-  // Errors
-  errors: {
-    generic: 'An error occurred',
-    network: 'Network error. Please check your connection.',
-    server: 'Server error. Please try again later.',
-    notFound: 'Resource not found',
-    unauthorized: 'You are not authorized to perform this action',
-    forbidden: 'Access forbidden',
-    timeout: 'Request timed out',
-    validation: 'Please correct the errors below',
-  },
-
-  // Confirmation
-  confirm: {
-    delete: 'Are you sure you want to delete this item?',
-    deleteMultiple: 'Are you sure you want to delete {count} items?',
-    discard: 'Are you sure you want to discard your changes?',
-    leave: 'Are you sure you want to leave this page?',
-    action: 'Are you sure you want to proceed?',
-  },
-};
+export const defaultEnTranslations: TranslationDictionary = {};
 
 /**
- * Default Spanish translations for the UI kit
+ * Default Spanish translations for the UI kit (now empty, provided by host app)
  */
-export const defaultEsTranslations: TranslationDictionary = {
-  common: {
-    save: 'Guardar',
-    cancel: 'Cancelar',
-    delete: 'Eliminar',
-    edit: 'Editar',
-    create: 'Crear',
-    update: 'Actualizar',
-    close: 'Cerrar',
-    confirm: 'Confirmar',
-    loading: 'Cargando...',
-    error: 'Error',
-    success: 'Éxito',
-    warning: 'Advertencia',
-    info: 'Información',
-    yes: 'Sí',
-    no: 'No',
-    ok: 'Aceptar',
-    back: 'Atrás',
-    next: 'Siguiente',
-    previous: 'Anterior',
-    search: 'Buscar',
-    filter: 'Filtrar',
-    reset: 'Restablecer',
-    clear: 'Limpiar',
-    apply: 'Aplicar',
-    select: 'Seleccionar',
-    selectAll: 'Seleccionar todo',
-    deselectAll: 'Deseleccionar todo',
-    noData: 'No hay datos disponibles',
-    noResults: 'No se encontraron resultados',
-    required: 'Requerido',
-    optional: 'Opcional',
-  },
-
-  table: {
-    showing: 'Mostrando {from} a {to} de {total}',
-    empty: 'No hay elementos para mostrar',
-    pageSize: 'Elementos por página:',
-    firstPage: 'Primera',
-    lastPage: 'Última',
-    nextPage: 'Siguiente',
-    previousPage: 'Anterior',
-    goToPage: 'Ir a página',
-    sortAscending: 'Ordenar ascendente',
-    sortDescending: 'Ordenar descendente',
-    noRecords: 'No hay registros para mostrar',
-    loading: 'Cargando datos...',
-    errorLoading: 'Error al cargar datos',
-    selected: '{count} seleccionados',
-    actions: 'Acciones',
-    columns: 'Columnas',
-    showColumns: 'Mostrar columnas',
-    hideColumn: 'Ocultar columna',
-    resetColumns: 'Restablecer columnas',
-    exportData: 'Exportar',
-    exportCSV: 'Exportar como CSV',
-    exportExcel: 'Exportar como Excel',
-    exportPDF: 'Exportar como PDF',
-    refresh: 'Actualizar',
-    search: 'Buscar...',
-    advancedSearch: 'Búsqueda avanzada',
-    create: 'Crear',
-    delete: 'Eliminar',
-    clearSelection: 'Limpiar selección',
-    pagination: {
-      showing: 'Mostrando {start}–{end} de {total}',
-      pageSize: 'Elementos por página:',
-      first: 'Primera',
-      previous: 'Anterior',
-      next: 'Siguiente',
-      last: 'Última',
-    },
-  },
-
-  form: {
-    submit: 'Enviar',
-    submitting: 'Enviando...',
-    saved: 'Cambios guardados exitosamente',
-    saveFailed: 'Error al guardar los cambios',
-    unsavedChanges: 'Tienes cambios sin guardar',
-    discardChanges: '¿Descartar cambios?',
-    requiredField: 'Este campo es requerido',
-    invalidEmail: 'Por favor ingresa un correo electrónico válido',
-    invalidUrl: 'Por favor ingresa una URL válida',
-    invalidNumber: 'Por favor ingresa un número válido',
-    minValue: 'El valor debe ser al menos {min}',
-    maxValue: 'El valor debe ser como máximo {max}',
-    minLength: 'Debe tener al menos {min} caracteres',
-    maxLength: 'Debe tener como máximo {max} caracteres',
-    patternMismatch: 'Formato inválido',
-    passwordMismatch: 'Las contraseñas no coinciden',
-    selectOption: 'Selecciona una opción',
-    selectPlaceholder: 'Seleccionar...',
-    select: {
-      placeholder: 'Seleccionar...'
-    },
-    searchPlaceholder: 'Escribe para buscar...',
-    noOptions: 'No hay opciones disponibles',
-    addNew: 'Agregar nuevo',
-    removeItem: 'Eliminar elemento',
-    uploadFile: 'Subir archivo',
-    dropFileHere: 'Arrastra un archivo aquí o haz clic para subir',
-    fileTooBig: 'El archivo es muy grande. Tamaño máximo: {max}',
-    invalidFileType: 'Tipo de archivo inválido. Tipos permitidos: {types}',
-  },
-
-  // Legacy top-level helpers
-  select: {
-    placeholder: 'Seleccionar...'
-  },
-  select_placeholder: 'Seleccionar...',
-
-  modal: {
-    create: 'Crear Nuevo Elemento',
-    edit: 'Editar Elemento',
-    view: 'Ver Elemento',
-    delete: 'Eliminar Elemento',
-    deleting: 'Eliminando...',
-    close: 'Cerrar',
-    confirm: 'Confirmar',
-    confirmDelete: '¿Estás seguro de que deseas eliminar este elemento?',
-    deleteWarning: 'Esta acción no se puede deshacer.',
-    closeConfirm: '¿Cerrar sin guardar?',
-    cancel: 'Cancelar',
-    save: 'Guardar',
-    saving: 'Guardando...',
-    loading: 'Cargando...',
-  },
-
-  filters: {
-    title: 'Filtros',
-    addFilter: 'Agregar filtro',
-    removeFilter: 'Eliminar filtro',
-    clearFilters: 'Limpiar todos los filtros',
-    equals: 'Igual a',
-    notEquals: 'Diferente de',
-    contains: 'Contiene',
-    notContains: 'No contiene',
-    startsWith: 'Comienza con',
-    endsWith: 'Termina con',
-    greaterThan: 'Mayor que',
-    lessThan: 'Menor que',
-    greaterOrEqual: 'Mayor o igual',
-    lessOrEqual: 'Menor o igual',
-    between: 'Entre',
-    isEmpty: 'Está vacío',
-    isNotEmpty: 'No está vacío',
-    isTrue: 'Es verdadero',
-    isFalse: 'Es falso',
-    inList: 'En lista',
-    notInList: 'No en lista',
-    before: 'Antes de',
-    after: 'Después de',
-    today: 'Hoy',
-    yesterday: 'Ayer',
-    thisWeek: 'Esta semana',
-    lastWeek: 'Semana pasada',
-    thisMonth: 'Este mes',
-    lastMonth: 'Mes pasado',
-  },
-
-  dates: {
-    today: 'Hoy',
-    yesterday: 'Ayer',
-    tomorrow: 'Mañana',
-    thisWeek: 'Esta semana',
-    lastWeek: 'Semana pasada',
-    nextWeek: 'Próxima semana',
-    thisMonth: 'Este mes',
-    lastMonth: 'Mes pasado',
-    nextMonth: 'Próximo mes',
-    thisYear: 'Este año',
-    lastYear: 'Año pasado',
-    nextYear: 'Próximo año',
-    dateRange: 'Rango de fechas',
-    startDate: 'Fecha inicio',
-    endDate: 'Fecha fin',
-  },
-
-  validation: {
-    required: 'Este campo es requerido',
-    email: 'Por favor ingresa un correo electrónico válido',
-    url: 'Por favor ingresa una URL válida',
-    number: 'Por favor ingresa un número válido',
-    integer: 'Por favor ingresa un número entero',
-    positive: 'Por favor ingresa un número positivo',
-    negative: 'Por favor ingresa un número negativo',
-    min: 'El valor debe ser al menos {min}',
-    max: 'El valor debe ser como máximo {max}',
-    minLength: 'Debe tener al menos {min} caracteres',
-    maxLength: 'Debe tener como máximo {max} caracteres',
-    pattern: 'Formato inválido',
-    match: 'Los valores no coinciden',
-    unique: 'Este valor ya existe',
-    date: 'Por favor ingresa una fecha válida',
-    time: 'Por favor ingresa una hora válida',
-    phone: 'Por favor ingresa un número de teléfono válido',
-  },
-
-  errors: {
-    generic: 'Ocurrió un error',
-    network: 'Error de red. Por favor verifica tu conexión.',
-    server: 'Error del servidor. Por favor intenta más tarde.',
-    notFound: 'Recurso no encontrado',
-    unauthorized: 'No estás autorizado para realizar esta acción',
-    forbidden: 'Acceso denegado',
-    timeout: 'La solicitud expiró',
-    validation: 'Por favor corrige los errores a continuación',
-  },
-
-  confirm: {
-    delete: '¿Estás seguro de que deseas eliminar este elemento?',
-    deleteMultiple: '¿Estás seguro de que deseas eliminar {count} elementos?',
-    discard: '¿Estás seguro de que deseas descartar los cambios?',
-    leave: '¿Estás seguro de que deseas salir de esta página?',
-    action: '¿Estás seguro de que deseas continuar?',
-  },
-};
+export const defaultEsTranslations: TranslationDictionary = {};
 
 // Simple deep merge helper used for merging translation dictionaries
 function deepMerge(target: any, source: any): any {
@@ -582,8 +137,8 @@ export class I18n {
       { code: 'es', name: 'Español', direction: 'ltr' },
     ],
     translations: {
-      en: defaultEnTranslations,
-      es: defaultEsTranslations,
+      en: {},
+      es: {},
     },
     debug: false,
   };
@@ -677,10 +232,23 @@ export class I18n {
    * Get a nested value from an object using dot notation
    */
   private getNestedValue(obj: TranslationDictionary, path: string): string | undefined {
-    const keys = path.split('.');
-    let current: TranslationValue | undefined = obj;
+    if (!obj || !path) return undefined;
 
-    for (const key of keys) {
+    // Try full path first (for flat dictionaries or keys with dots)
+    if (typeof obj[path] === 'string') return obj[path] as string;
+
+    const keys = path.split('.');
+    let current: any = obj;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      
+      // Try to see if the rest of the path exists as a single key from here
+      const remainingPath = keys.slice(i).join('.');
+      if (current && typeof current === 'object' && typeof current[remainingPath] === 'string') {
+        return current[remainingPath];
+      }
+
       if (current && typeof current === 'object' && key in current) {
         current = current[key];
       } else {
@@ -742,8 +310,8 @@ export class I18n {
         console.warn(`[i18n] Missing translation: ${key} (${this.currentLocale})`);
       }
 
-      // Return a humanized label instead of raw key
-      return this.humanizeKeySegment(key);
+      // Return a distinctive missing key indicator instead of humanized label
+      return `!!${key}!!`;
     }
 
     return this.interpolate(translation, params);
@@ -756,8 +324,17 @@ export class I18n {
    * - If missing, returns the provided fallback string
    * - Otherwise, generates a humanized label from the last key segment
    */
-  resolveLabel(key: string, fallback?: string): string {
-    // Prefer direct translation lookup to avoid recursion
+  resolveLabel(key: string, fallback?: string, namespace?: string): string {
+    // 1. Try namespace-prefixed lookup first if provided
+    if (namespace) {
+      const namespacedKey = `${namespace}.${key}`;
+      const namespacedTranslation = this.getNestedValue(this.config.translations[this.currentLocale] || {}, namespacedKey)
+        || (this.config.fallbackLocale && this.getNestedValue(this.config.translations[this.config.fallbackLocale] || {}, namespacedKey));
+      
+      if (namespacedTranslation && typeof namespacedTranslation === 'string') return namespacedTranslation;
+    }
+
+    // 2. Prefer direct translation lookup
     const direct = this.getNestedValue(this.config.translations[this.currentLocale] || {}, key)
       || (this.config.fallbackLocale && this.getNestedValue(this.config.translations[this.config.fallbackLocale] || {}, key));
 
@@ -899,10 +476,6 @@ export function getI18n(): I18n {
   if (!i18nInstance) {
     i18nInstance = new I18n();
   }
-  // If globals were set after the instance was created, sync them
-  if (i18nInstance && (i18nInstance as any).syncGlobals) {
-    (i18nInstance as any).syncGlobals();
-  }
   return i18nInstance;
 }
 
@@ -941,15 +514,15 @@ export function tp(key: string, count: number, params?: InterpolationParams): st
 /**
  * Resolve a label for a given key with humanized fallback when missing
  */
-export function resolveLabel(key: string, fallback?: string): string {
-  return getI18n().resolveLabel(key, fallback);
+export function resolveLabel(key: string, fallback?: string, namespace?: string): string {
+  return getI18n().resolveLabel(key, fallback, namespace);
 }
 
 // =============================================================================
 // REACT INTEGRATION
 // =============================================================================
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import type { ReactNode } from 'react';
 
 /**
@@ -1004,7 +577,7 @@ export function useI18n() {
     return i18n.tp(key, count, params);
   }, [i18n]);
 
-  return {
+  return useMemo(() => ({
     t: translate,
     tp: translatePlural,
     locale,
@@ -1016,7 +589,7 @@ export function useI18n() {
     formatDate: i18n.formatDate.bind(i18n),
     formatRelativeTime: i18n.formatRelativeTime.bind(i18n),
     i18n,
-  };
+  }), [translate, translatePlural, locale, i18n]);
 }
 
 /**
@@ -1025,7 +598,7 @@ export function useI18n() {
 export function useTranslatedValidation() {
   const { t } = useI18n();
 
-  return {
+  return useMemo(() => ({
     required: () => t('validation.required'),
     email: () => t('validation.email'),
     url: () => t('validation.url'),
@@ -1034,7 +607,7 @@ export function useTranslatedValidation() {
     minLength: (min: number) => t('validation.minLength', { min }),
     maxLength: (max: number) => t('validation.maxLength', { max }),
     pattern: () => t('validation.pattern'),
-  };
+  }), [t]);
 }
 
 export default I18n;
