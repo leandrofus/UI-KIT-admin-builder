@@ -1,13 +1,7 @@
-'use strict';
-
-var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
-var chunk4GBTIAHZ_js = require('./chunk-4GBTIAHZ.js');
-var React = require('react');
-var jsxRuntime = require('react/jsx-runtime');
-
-function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
-
-var React__default = /*#__PURE__*/_interopDefault(React);
+import { cn, evaluateConditions, getNestedValue, validateField } from './chunk-ZYRLE26I.mjs';
+import { useI18n, resolveLabel } from './chunk-ZCAJXFW7.mjs';
+import React, { createContext, forwardRef, useCallback, useState, useMemo, useContext } from 'react';
+import { jsxs, jsx } from 'react/jsx-runtime';
 
 var FieldRegistry = class _FieldRegistry {
   constructor(options = {}) {
@@ -125,9 +119,9 @@ function registerFields(registrations) {
 function getField(type) {
   return getDefaultRegistry().get(type);
 }
-var FieldRegistryContext = React.createContext(null);
+var FieldRegistryContext = createContext(null);
 function useFieldRegistry() {
-  const context = React.useContext(FieldRegistryContext);
+  const context = useContext(FieldRegistryContext);
   if (!context) {
     return getDefaultRegistry();
   }
@@ -135,7 +129,7 @@ function useFieldRegistry() {
 }
 function useFieldFactory(options = {}) {
   const registry = useFieldRegistry();
-  const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+  const { t: t2 } = useI18n();
   const {
     defaultProps = {},
     wrapper: Wrapper,
@@ -144,29 +138,29 @@ function useFieldFactory(options = {}) {
     overrides = {},
     fallback: FallbackComponent
   } = options;
-  const isFieldVisible = React.useCallback((field, formData) => {
+  const isFieldVisible = useCallback((field, formData) => {
     if (field.type === "hidden") return false;
     if (field.showWhen) {
-      return chunkG4EIC5OB_js.evaluateConditions(field.showWhen, formData);
+      return evaluateConditions(field.showWhen, formData);
     }
     return true;
   }, []);
-  const getComputedValue = React.useCallback((field, formData) => {
+  const getComputedValue = useCallback((field, formData) => {
     if (!field.computed || !field.computed.formula) {
-      return chunkG4EIC5OB_js.getNestedValue(formData, field.name);
+      return getNestedValue(formData, field.name);
     }
     const { formula, deps } = field.computed;
     const hasAllDeps = deps.every((dep) => {
-      const value = chunkG4EIC5OB_js.getNestedValue(formData, dep);
+      const value = getNestedValue(formData, dep);
       return value !== void 0 && value !== null && value !== "";
     });
     if (!hasAllDeps) {
-      return chunkG4EIC5OB_js.getNestedValue(formData, field.name);
+      return getNestedValue(formData, field.name);
     }
     try {
       const context = {};
       for (const dep of deps) {
-        const value = chunkG4EIC5OB_js.getNestedValue(formData, dep);
+        const value = getNestedValue(formData, dep);
         context[dep] = typeof value === "number" ? value : parseFloat(String(value)) || 0;
       }
       let expression = formula;
@@ -179,10 +173,10 @@ function useFieldFactory(options = {}) {
       const result = fn();
       return typeof result === "number" && !isNaN(result) ? result : void 0;
     } catch {
-      return chunkG4EIC5OB_js.getNestedValue(formData, field.name);
+      return getNestedValue(formData, field.name);
     }
   }, []);
-  const renderField = React.useCallback((props) => {
+  const renderField = useCallback((props) => {
     const {
       field,
       value: propValue,
@@ -222,24 +216,24 @@ function useFieldFactory(options = {}) {
       disabled: formDisabled || field.disabled,
       readOnly: formReadOnly || field.readOnly || !!field.computed
     };
-    const fieldElement = React__default.default.createElement(Component, {
+    const fieldElement = React.createElement(Component, {
       ...fieldProps,
       key: field.name
     });
-    const withError = ErrorComponent && errors[field.name] && touched[field.name] ? React__default.default.createElement(
-      React__default.default.Fragment,
+    const withError = ErrorComponent && errors[field.name] && touched[field.name] ? React.createElement(
+      React.Fragment,
       null,
       fieldElement,
-      React__default.default.createElement(ErrorComponent, { error: errors[field.name] })
+      React.createElement(ErrorComponent, { error: errors[field.name] })
     ) : fieldElement;
-    const withLabel = LabelComponent ? React__default.default.createElement(
-      React__default.default.Fragment,
+    const withLabel = LabelComponent ? React.createElement(
+      React.Fragment,
       null,
-      React__default.default.createElement(LabelComponent, { field }),
+      React.createElement(LabelComponent, { field }),
       withError
     ) : withError;
     if (Wrapper) {
-      return React__default.default.createElement(Wrapper, { field, children: withLabel, key: field.name });
+      return React.createElement(Wrapper, { field, children: withLabel, key: field.name });
     }
     return withLabel;
   }, [
@@ -253,14 +247,14 @@ function useFieldFactory(options = {}) {
     LabelComponent,
     Wrapper
   ]);
-  const renderSection = React.useCallback((section, formData, handlers) => {
-    if (section.showWhen && !chunkG4EIC5OB_js.evaluateConditions(section.showWhen, formData)) {
+  const renderSection = useCallback((section, formData, handlers) => {
+    if (section.showWhen && !evaluateConditions(section.showWhen, formData)) {
       return null;
     }
     const fields = section.fields.map(
       (field) => renderField({
         field,
-        value: chunkG4EIC5OB_js.getNestedValue(formData, field.name),
+        value: getNestedValue(formData, field.name),
         formData,
         ...handlers
       })
@@ -268,30 +262,30 @@ function useFieldFactory(options = {}) {
     if (fields.length === 0) {
       return null;
     }
-    return React__default.default.createElement(
+    return React.createElement(
       "div",
       {
         key: section.id || section.title,
         className: "form-section",
         "data-section": section.id || section.title
       },
-      section.title && React__default.default.createElement("h3", { className: "section-title" }, typeof section.title === "string" ? t2(section.title) : section.title),
-      section.description && React__default.default.createElement("p", { className: "section-description" }, typeof section.description === "string" ? t2(section.description) : section.description),
-      React__default.default.createElement("div", { className: "section-fields" }, fields)
+      section.title && React.createElement("h3", { className: "section-title" }, typeof section.title === "string" ? t2(section.title) : section.title),
+      section.description && React.createElement("p", { className: "section-description" }, typeof section.description === "string" ? t2(section.description) : section.description),
+      React.createElement("div", { className: "section-fields" }, fields)
     );
   }, [renderField]);
-  const renderSections = React.useCallback((sections, formData, handlers) => {
+  const renderSections = useCallback((sections, formData, handlers) => {
     return sections.map((section) => renderSection(section, formData, handlers)).filter((el) => el !== null);
   }, [renderSection]);
-  const getVisibleFields = React.useCallback((sections, formData) => {
-    return sections.filter((section) => !section.showWhen || chunkG4EIC5OB_js.evaluateConditions(section.showWhen, formData)).flatMap((section) => section.fields).filter((field) => isFieldVisible(field, formData));
+  const getVisibleFields = useCallback((sections, formData) => {
+    return sections.filter((section) => !section.showWhen || evaluateConditions(section.showWhen, formData)).flatMap((section) => section.fields).filter((field) => isFieldVisible(field, formData));
   }, [isFieldVisible]);
-  const validateVisibleFields = React.useCallback((sections, formData) => {
+  const validateVisibleFields = useCallback((sections, formData) => {
     const errors = {};
     const visibleFields = getVisibleFields(sections, formData);
     for (const field of visibleFields) {
-      const value = chunkG4EIC5OB_js.getNestedValue(formData, field.name);
-      const result = chunkG4EIC5OB_js.validateField(value, field, formData);
+      const value = getNestedValue(formData, field.name);
+      const result = validateField(value, field, formData);
       if (!result.valid && result.message) {
         errors[field.name] = result.message;
       }
@@ -342,9 +336,9 @@ var errorInputClass = "border-red-500 focus:ring-red-500 focus:border-red-500 da
 var labelClass = "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1";
 var errorTextClass = "text-sm text-red-500 dark:text-red-400 mt-1";
 var helperTextClass = "text-sm text-gray-500 dark:text-gray-400 mt-1";
-var TextField = React.forwardRef(
+var TextField = forwardRef(
   function TextField2(props, ref) {
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+    const { t: t2 } = useI18n();
     const {
       field,
       value = "",
@@ -363,14 +357,14 @@ var TextField = React.forwardRef(
       suffix
     } = props;
     const hasError = touched && error;
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { htmlFor: field.name, className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative flex items-center", children: [
-        prefix && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute left-3 text-gray-500", children: prefix }),
-        /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxs("div", { className: "relative flex items-center", children: [
+        prefix && /* @__PURE__ */ jsx("div", { className: "absolute left-3 text-gray-500", children: prefix }),
+        /* @__PURE__ */ jsx(
           "input",
           {
             ref,
@@ -382,10 +376,10 @@ var TextField = React.forwardRef(
             onBlur,
             disabled,
             readOnly,
-            placeholder: placeholder ? chunk4GBTIAHZ_js.resolveLabel(String(placeholder)) : field.placeholder ? chunk4GBTIAHZ_js.resolveLabel(String(field.placeholder)) : void 0,
+            placeholder: placeholder ? resolveLabel(String(placeholder)) : field.placeholder ? resolveLabel(String(field.placeholder)) : void 0,
             maxLength: maxLength || field.maxLength,
             autoFocus,
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               baseInputClass,
               hasError && errorInputClass,
               prefix && "pl-10",
@@ -393,14 +387,14 @@ var TextField = React.forwardRef(
             )
           }
         ),
-        suffix && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute right-3 text-gray-500", children: suffix })
+        suffix && /* @__PURE__ */ jsx("div", { className: "absolute right-3 text-gray-500", children: suffix })
       ] }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: chunk4GBTIAHZ_js.resolveLabel(String(field.helpText)) })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: resolveLabel(String(field.helpText)) })
     ] });
   }
 );
-var NumberField = React.forwardRef(
+var NumberField = forwardRef(
   function NumberField2(props, ref) {
     const {
       field,
@@ -419,7 +413,7 @@ var NumberField = React.forwardRef(
       showSpinner = true
     } = props;
     const hasError = touched && error;
-    const handleChange = React.useCallback((e) => {
+    const handleChange = useCallback((e) => {
       const val = e.target.value;
       if (val === "") {
         onChange(void 0);
@@ -432,13 +426,13 @@ var NumberField = React.forwardRef(
       }
       onChange(num);
     }, [onChange, decimals]);
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    const { t: t2 } = useI18n();
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { htmlFor: field.name, className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(
         "input",
         {
           ref,
@@ -453,19 +447,19 @@ var NumberField = React.forwardRef(
           min: min ?? field.min,
           max: max ?? field.max,
           step,
-          className: chunkG4EIC5OB_js.cn(
+          className: cn(
             baseInputClass,
             hasError && errorInputClass,
             !showSpinner && "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           )
         }
       ),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
     ] });
   }
 );
-var CurrencyField = React.forwardRef(
+var CurrencyField = forwardRef(
   function CurrencyField2(props, ref) {
     const {
       field,
@@ -481,17 +475,17 @@ var CurrencyField = React.forwardRef(
       locale = "en-US",
       symbolPosition = "before"
     } = props;
-    const [displayValue, setDisplayValue] = React.useState(() => {
+    const [displayValue, setDisplayValue] = useState(() => {
       if (value === void 0 || value === null) return "";
       return value.toString();
     });
     const hasError = touched && error;
-    const currencySymbol = React.useMemo(() => {
+    const currencySymbol = useMemo(() => {
       const formatter = new Intl.NumberFormat(locale, { style: "currency", currency });
       const parts = formatter.formatToParts(0);
       return parts.find((p) => p.type === "currency")?.value || "$";
     }, [currency, locale]);
-    const handleChange = React.useCallback((e) => {
+    const handleChange = useCallback((e) => {
       const val = e.target.value.replace(/[^0-9.,]/g, "");
       setDisplayValue(val);
       const num = parseFloat(val.replace(",", "."));
@@ -501,21 +495,21 @@ var CurrencyField = React.forwardRef(
         onChange(void 0);
       }
     }, [onChange]);
-    const handleBlur = React.useCallback(() => {
+    const handleBlur = useCallback(() => {
       if (value !== void 0 && value !== null) {
         setDisplayValue(value.toFixed(2));
       }
       onBlur?.();
     }, [value, onBlur]);
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    const { t: t2 } = useI18n();
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { htmlFor: field.name, className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative flex items-center", children: [
-        symbolPosition === "before" && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute left-3 text-gray-500", children: currencySymbol }),
-        /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxs("div", { className: "relative flex items-center", children: [
+        symbolPosition === "before" && /* @__PURE__ */ jsx("div", { className: "absolute left-3 text-gray-500", children: currencySymbol }),
+        /* @__PURE__ */ jsx(
           "input",
           {
             ref,
@@ -529,7 +523,7 @@ var CurrencyField = React.forwardRef(
             disabled,
             readOnly,
             placeholder: t2("currency.placeholder") || "0.00",
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               baseInputClass,
               hasError && errorInputClass,
               symbolPosition === "before" && "pl-8",
@@ -537,16 +531,16 @@ var CurrencyField = React.forwardRef(
             )
           }
         ),
-        symbolPosition === "after" && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "absolute right-3 text-gray-500", children: currencySymbol })
+        symbolPosition === "after" && /* @__PURE__ */ jsx("div", { className: "absolute right-3 text-gray-500", children: currencySymbol })
       ] }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
     ] });
   }
 );
-var TextareaField = React.forwardRef(
+var TextareaField = forwardRef(
   function TextareaField2(props, ref) {
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+    const { t: t2 } = useI18n();
     const {
       field,
       value = "",
@@ -562,7 +556,7 @@ var TextareaField = React.forwardRef(
       maxHeight
     } = props;
     const hasError = touched && error;
-    const handleChange = React.useCallback((e) => {
+    const handleChange = useCallback((e) => {
       onChange(e.target.value);
       if (autoResize) {
         e.target.style.height = "auto";
@@ -570,12 +564,12 @@ var TextareaField = React.forwardRef(
         e.target.style.height = `${newHeight}px`;
       }
     }, [onChange, autoResize, maxHeight]);
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { htmlFor: field.name, className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsx(
         "textarea",
         {
           ref,
@@ -587,8 +581,8 @@ var TextareaField = React.forwardRef(
           disabled,
           readOnly,
           rows,
-          placeholder: field.placeholder ? chunk4GBTIAHZ_js.resolveLabel(String(field.placeholder)) : void 0,
-          className: chunkG4EIC5OB_js.cn(
+          placeholder: field.placeholder ? resolveLabel(String(field.placeholder)) : void 0,
+          className: cn(
             baseInputClass,
             hasError && errorInputClass,
             "resize-y"
@@ -596,14 +590,14 @@ var TextareaField = React.forwardRef(
           style: autoResize ? { overflow: "hidden" } : void 0
         }
       ),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
     ] });
   }
 );
-var SelectField = React.forwardRef(
+var SelectField = forwardRef(
   function SelectField2(props, ref) {
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+    const { t: t2 } = useI18n();
     const {
       field,
       value,
@@ -619,7 +613,7 @@ var SelectField = React.forwardRef(
       allowEmpty = true
     } = props;
     const hasError = touched && error;
-    const options = React.useMemo(() => {
+    const options = useMemo(() => {
       if (propOptions) return propOptions;
       if (field.options) {
         return field.options.map(
@@ -628,12 +622,12 @@ var SelectField = React.forwardRef(
       }
       return [];
     }, [propOptions, field.options]);
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { htmlFor: field.name, className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { htmlFor: field.name, className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(
+      /* @__PURE__ */ jsxs(
         "select",
         {
           ref,
@@ -643,33 +637,33 @@ var SelectField = React.forwardRef(
           onChange: (e) => onChange(e.target.value),
           onBlur,
           disabled: disabled || readOnly,
-          className: chunkG4EIC5OB_js.cn(
+          className: cn(
             baseInputClass,
             hasError && errorInputClass,
             "cursor-pointer"
           ),
           children: [
-            allowEmpty && /* @__PURE__ */ jsxRuntime.jsx("option", { value: "", children: chunk4GBTIAHZ_js.resolveLabel(String(placeholderOption)) }),
-            options.map((option) => /* @__PURE__ */ jsxRuntime.jsx(
+            allowEmpty && /* @__PURE__ */ jsx("option", { value: "", children: resolveLabel(String(placeholderOption)) }),
+            options.map((option) => /* @__PURE__ */ jsx(
               "option",
               {
                 value: option.value,
                 disabled: option.disabled,
-                children: chunk4GBTIAHZ_js.resolveLabel(String(option.label))
+                children: resolveLabel(String(option.label))
               },
               option.value
             ))
           ]
         }
       ),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: t2(String(field.helpText)) })
     ] });
   }
 );
-var CheckboxField = React.forwardRef(
+var CheckboxField = forwardRef(
   function CheckboxField2(props, ref) {
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+    const { t: t2 } = useI18n();
     const {
       field,
       value = false,
@@ -683,9 +677,9 @@ var CheckboxField = React.forwardRef(
       checkboxLabel
     } = props;
     const hasError = touched && error;
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      /* @__PURE__ */ jsxRuntime.jsxs("label", { className: "flex items-center gap-2 cursor-pointer", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      /* @__PURE__ */ jsxs("label", { className: "flex items-center gap-2 cursor-pointer", children: [
+        /* @__PURE__ */ jsx(
           "input",
           {
             ref,
@@ -696,26 +690,26 @@ var CheckboxField = React.forwardRef(
             onChange: (e) => onChange(e.target.checked),
             onBlur,
             disabled: disabled || readOnly,
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               "h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:bg-gray-700",
               "focus:ring-2 focus:ring-blue-500",
               disabled && "cursor-not-allowed opacity-50"
             )
           }
         ),
-        /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-sm text-gray-700 dark:text-gray-300", children: [
+        /* @__PURE__ */ jsxs("span", { className: "text-sm text-gray-700 dark:text-gray-300", children: [
           t2(String(checkboxLabel || field.label)),
-          field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+          field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
         ] })
       ] }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: field.helpText })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: field.helpText })
     ] });
   }
 );
-var SwitchField = React.forwardRef(
+var SwitchField = forwardRef(
   function SwitchField2(props, ref) {
-    const { t: t2 } = chunk4GBTIAHZ_js.useI18n();
+    const { t: t2 } = useI18n();
     const {
       field,
       value = false,
@@ -737,14 +731,14 @@ var SwitchField = React.forwardRef(
       lg: { track: "w-14 h-7", thumb: "h-6 w-6", translate: "translate-x-7" }
     };
     const sizeClasses = sizes[size];
-    return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: chunkG4EIC5OB_js.cn("field-wrapper", className), children: [
-      field.label && /* @__PURE__ */ jsxRuntime.jsxs("label", { className: labelClass, children: [
-        chunk4GBTIAHZ_js.resolveLabel(String(field.label)),
-        field.required && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-red-500 ml-1", children: "*" })
+    return /* @__PURE__ */ jsxs("div", { className: cn("field-wrapper", className), children: [
+      field.label && /* @__PURE__ */ jsxs("label", { className: labelClass, children: [
+        resolveLabel(String(field.label)),
+        field.required && /* @__PURE__ */ jsx("span", { className: "text-red-500 ml-1", children: "*" })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-3", children: [
-        offLabel && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: chunk4GBTIAHZ_js.resolveLabel(String(offLabel)) }),
-        /* @__PURE__ */ jsxRuntime.jsx(
+      /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
+        offLabel && /* @__PURE__ */ jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: resolveLabel(String(offLabel)) }),
+        /* @__PURE__ */ jsx(
           "button",
           {
             ref,
@@ -754,7 +748,7 @@ var SwitchField = React.forwardRef(
             onClick: () => !disabled && !readOnly && onChange(!value),
             onBlur,
             disabled: disabled || readOnly,
-            className: chunkG4EIC5OB_js.cn(
+            className: cn(
               "relative inline-flex shrink-0 cursor-pointer rounded-full",
               "border-2 border-transparent transition-colors duration-200",
               "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
@@ -762,10 +756,10 @@ var SwitchField = React.forwardRef(
               value ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700",
               (disabled || readOnly) && "cursor-not-allowed opacity-50"
             ),
-            children: /* @__PURE__ */ jsxRuntime.jsx(
+            children: /* @__PURE__ */ jsx(
               "span",
               {
-                className: chunkG4EIC5OB_js.cn(
+                className: cn(
                   "pointer-events-none inline-block rounded-full bg-white dark:bg-gray-200 shadow",
                   "transform ring-0 transition duration-200 ease-in-out",
                   sizeClasses.thumb,
@@ -775,15 +769,15 @@ var SwitchField = React.forwardRef(
             )
           }
         ),
-        onLabel && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: t2(String(onLabel)) })
+        onLabel && /* @__PURE__ */ jsx("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: t2(String(onLabel)) })
       ] }),
-      hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: errorTextClass, children: error }),
-      field.helpText && !hasError && /* @__PURE__ */ jsxRuntime.jsx("p", { className: helperTextClass, children: field.helpText })
+      hasError && /* @__PURE__ */ jsx("p", { className: errorTextClass, children: error }),
+      field.helpText && !hasError && /* @__PURE__ */ jsx("p", { className: helperTextClass, children: field.helpText })
     ] });
   }
 );
 var HiddenField = ({ field, value }) => {
-  return /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsx(
     "input",
     {
       type: "hidden",
@@ -808,24 +802,6 @@ var baseFields = {
   hidden: HiddenField
 };
 
-exports.CheckboxField = CheckboxField;
-exports.CurrencyField = CurrencyField;
-exports.FieldRegistry = FieldRegistry;
-exports.FieldRegistryContext = FieldRegistryContext;
-exports.HiddenField = HiddenField;
-exports.NumberField = NumberField;
-exports.SelectField = SelectField;
-exports.SwitchField = SwitchField;
-exports.TextField = TextField;
-exports.TextareaField = TextareaField;
-exports.baseFields = baseFields;
-exports.createFieldFactory = createFieldFactory;
-exports.getDefaultRegistry = getDefaultRegistry;
-exports.getField = getField;
-exports.registerField = registerField;
-exports.registerFields = registerFields;
-exports.setDefaultRegistry = setDefaultRegistry;
-exports.useFieldFactory = useFieldFactory;
-exports.useFieldRegistry = useFieldRegistry;
-//# sourceMappingURL=chunk-NXGYXKUK.js.map
-//# sourceMappingURL=chunk-NXGYXKUK.js.map
+export { CheckboxField, CurrencyField, FieldRegistry, FieldRegistryContext, HiddenField, NumberField, SelectField, SwitchField, TextField, TextareaField, baseFields, createFieldFactory, getDefaultRegistry, getField, registerField, registerFields, setDefaultRegistry, useFieldFactory, useFieldRegistry };
+//# sourceMappingURL=chunk-HOHHO3SI.mjs.map
+//# sourceMappingURL=chunk-HOHHO3SI.mjs.map

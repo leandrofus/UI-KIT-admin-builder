@@ -1,14 +1,14 @@
 'use strict';
 
-var chunkIVPWWQWL_js = require('./chunk-IVPWWQWL.js');
+var chunkUURDXYLH_js = require('./chunk-UURDXYLH.js');
 var chunkJGIGTIL4_js = require('./chunk-JGIGTIL4.js');
 var chunkCXZHMULA_js = require('./chunk-CXZHMULA.js');
-var chunkNXGYXKUK_js = require('./chunk-NXGYXKUK.js');
-var chunkUPZBT5WK_js = require('./chunk-UPZBT5WK.js');
+var chunkQ7VXORTP_js = require('./chunk-Q7VXORTP.js');
+var chunk2TXOJY2D_js = require('./chunk-2TXOJY2D.js');
 var chunkUSZU7PLJ_js = require('./chunk-USZU7PLJ.js');
 var chunkG4EIC5OB_js = require('./chunk-G4EIC5OB.js');
 require('./chunk-T5TTRS5M.js');
-var chunk4GBTIAHZ_js = require('./chunk-4GBTIAHZ.js');
+var chunkJOGM2EW4_js = require('./chunk-JOGM2EW4.js');
 
 // src/index.ts
 var VERSION = "0.1.0";
@@ -41,35 +41,35 @@ var LIB_INFO = {
 
 Object.defineProperty(exports, "AdvancedSearchModal", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.AdvancedSearchModal; }
+  get: function () { return chunkUURDXYLH_js.AdvancedSearchModal; }
 });
 Object.defineProperty(exports, "DynamicModal", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.DynamicModal; }
+  get: function () { return chunkUURDXYLH_js.DynamicModal; }
 });
 Object.defineProperty(exports, "FormRenderer", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.FormRenderer; }
+  get: function () { return chunkUURDXYLH_js.FormRenderer; }
 });
 Object.defineProperty(exports, "KanbanRenderer", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.KanbanRenderer; }
+  get: function () { return chunkUURDXYLH_js.KanbanRenderer; }
 });
 Object.defineProperty(exports, "SidebarRenderer", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.SidebarRenderer; }
+  get: function () { return chunkUURDXYLH_js.SidebarRenderer; }
 });
 Object.defineProperty(exports, "TabRenderer", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.TabRenderer; }
+  get: function () { return chunkUURDXYLH_js.TabRenderer; }
 });
 Object.defineProperty(exports, "TableRenderer", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.TableRenderer; }
+  get: function () { return chunkUURDXYLH_js.TableRenderer; }
 });
 Object.defineProperty(exports, "TableToolbar", {
   enumerable: true,
-  get: function () { return chunkIVPWWQWL_js.TableToolbar; }
+  get: function () { return chunkUURDXYLH_js.TableToolbar; }
 });
 Object.defineProperty(exports, "useColumnConfig", {
   enumerable: true,
@@ -109,107 +109,107 @@ Object.defineProperty(exports, "createServiceAdapter", {
 });
 Object.defineProperty(exports, "CheckboxField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.CheckboxField; }
+  get: function () { return chunkQ7VXORTP_js.CheckboxField; }
 });
 Object.defineProperty(exports, "CurrencyField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.CurrencyField; }
+  get: function () { return chunkQ7VXORTP_js.CurrencyField; }
 });
 Object.defineProperty(exports, "FieldRegistry", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.FieldRegistry; }
+  get: function () { return chunkQ7VXORTP_js.FieldRegistry; }
 });
 Object.defineProperty(exports, "FieldRegistryContext", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.FieldRegistryContext; }
+  get: function () { return chunkQ7VXORTP_js.FieldRegistryContext; }
 });
 Object.defineProperty(exports, "HiddenField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.HiddenField; }
+  get: function () { return chunkQ7VXORTP_js.HiddenField; }
 });
 Object.defineProperty(exports, "NumberField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.NumberField; }
+  get: function () { return chunkQ7VXORTP_js.NumberField; }
 });
 Object.defineProperty(exports, "SelectField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.SelectField; }
+  get: function () { return chunkQ7VXORTP_js.SelectField; }
 });
 Object.defineProperty(exports, "SwitchField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.SwitchField; }
+  get: function () { return chunkQ7VXORTP_js.SwitchField; }
 });
 Object.defineProperty(exports, "TextField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.TextField; }
+  get: function () { return chunkQ7VXORTP_js.TextField; }
 });
 Object.defineProperty(exports, "TextareaField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.TextareaField; }
+  get: function () { return chunkQ7VXORTP_js.TextareaField; }
 });
 Object.defineProperty(exports, "baseFields", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.baseFields; }
+  get: function () { return chunkQ7VXORTP_js.baseFields; }
 });
 Object.defineProperty(exports, "createFieldFactory", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.createFieldFactory; }
+  get: function () { return chunkQ7VXORTP_js.createFieldFactory; }
 });
 Object.defineProperty(exports, "getDefaultRegistry", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.getDefaultRegistry; }
+  get: function () { return chunkQ7VXORTP_js.getDefaultRegistry; }
 });
 Object.defineProperty(exports, "getField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.getField; }
+  get: function () { return chunkQ7VXORTP_js.getField; }
 });
 Object.defineProperty(exports, "registerField", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.registerField; }
+  get: function () { return chunkQ7VXORTP_js.registerField; }
 });
 Object.defineProperty(exports, "registerFields", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.registerFields; }
+  get: function () { return chunkQ7VXORTP_js.registerFields; }
 });
 Object.defineProperty(exports, "setDefaultRegistry", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.setDefaultRegistry; }
+  get: function () { return chunkQ7VXORTP_js.setDefaultRegistry; }
 });
 Object.defineProperty(exports, "useFieldFactory", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.useFieldFactory; }
+  get: function () { return chunkQ7VXORTP_js.useFieldFactory; }
 });
 Object.defineProperty(exports, "useFieldRegistry", {
   enumerable: true,
-  get: function () { return chunkNXGYXKUK_js.useFieldRegistry; }
+  get: function () { return chunkQ7VXORTP_js.useFieldRegistry; }
 });
 Object.defineProperty(exports, "assertValidConfig", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.assertValidConfig; }
+  get: function () { return chunk2TXOJY2D_js.assertValidConfig; }
 });
 Object.defineProperty(exports, "formatValidationErrors", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.formatValidationErrors; }
+  get: function () { return chunk2TXOJY2D_js.formatValidationErrors; }
 });
 Object.defineProperty(exports, "isLikelyTranslationKey", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.isLikelyTranslationKey; }
+  get: function () { return chunk2TXOJY2D_js.isLikelyTranslationKey; }
 });
 Object.defineProperty(exports, "translateConfig", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.translateConfig; }
+  get: function () { return chunk2TXOJY2D_js.translateConfig; }
 });
 Object.defineProperty(exports, "validateConfig", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.validateConfig; }
+  get: function () { return chunk2TXOJY2D_js.validateConfig; }
 });
 Object.defineProperty(exports, "validateFormConfig", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.validateFormConfig; }
+  get: function () { return chunk2TXOJY2D_js.validateFormConfig; }
 });
 Object.defineProperty(exports, "validateTableConfig", {
   enumerable: true,
-  get: function () { return chunkUPZBT5WK_js.validateTableConfig; }
+  get: function () { return chunk2TXOJY2D_js.validateTableConfig; }
 });
 Object.defineProperty(exports, "ConfigLoader", {
   enumerable: true,
@@ -369,47 +369,47 @@ Object.defineProperty(exports, "validateUrl", {
 });
 Object.defineProperty(exports, "I18n", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.I18n; }
+  get: function () { return chunkJOGM2EW4_js.I18n; }
 });
 Object.defineProperty(exports, "I18nContext", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.I18nContext; }
+  get: function () { return chunkJOGM2EW4_js.I18nContext; }
 });
 Object.defineProperty(exports, "I18nProvider", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.I18nProvider; }
+  get: function () { return chunkJOGM2EW4_js.I18nProvider; }
 });
 Object.defineProperty(exports, "getI18n", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.getI18n; }
+  get: function () { return chunkJOGM2EW4_js.getI18n; }
 });
 Object.defineProperty(exports, "initI18n", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.initI18n; }
+  get: function () { return chunkJOGM2EW4_js.initI18n; }
 });
 Object.defineProperty(exports, "resolveLabel", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.resolveLabel; }
+  get: function () { return chunkJOGM2EW4_js.resolveLabel; }
 });
 Object.defineProperty(exports, "t", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.t; }
+  get: function () { return chunkJOGM2EW4_js.t; }
 });
 Object.defineProperty(exports, "tp", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.tp; }
+  get: function () { return chunkJOGM2EW4_js.tp; }
 });
 Object.defineProperty(exports, "tx", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.tx; }
+  get: function () { return chunkJOGM2EW4_js.tx; }
 });
 Object.defineProperty(exports, "useI18n", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.useI18n; }
+  get: function () { return chunkJOGM2EW4_js.useI18n; }
 });
 Object.defineProperty(exports, "useTranslatedValidation", {
   enumerable: true,
-  get: function () { return chunk4GBTIAHZ_js.useTranslatedValidation; }
+  get: function () { return chunkJOGM2EW4_js.useTranslatedValidation; }
 });
 exports.LIB_INFO = LIB_INFO;
 exports.VERSION = VERSION;

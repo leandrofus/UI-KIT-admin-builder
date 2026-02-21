@@ -126,8 +126,7 @@ declare class I18n {
      * Resolve a human-friendly label for a key.
      *
      * - Returns the translated value if available
-     * - If missing, returns the provided fallback string
-     * - Otherwise, generates a humanized label from the last key segment
+     * - Otherwise, returns the key indicator !!key!! to force host app mapping.
      */
     resolveLabel(key: string, fallback?: string, namespace?: string): string;
     /**

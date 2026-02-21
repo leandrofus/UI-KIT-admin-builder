@@ -287,8 +287,7 @@ export class I18n {
    * Resolve a human-friendly label for a key.
    *
    * - Returns the translated value if available
-   * - If missing, returns the provided fallback string
-   * - Otherwise, generates a humanized label from the last key segment
+   * - Otherwise, returns the key indicator !!key!! to force host app mapping.
    */
   resolveLabel(key: string, fallback?: string, namespace?: string): string {
     // 1. Try namespace-prefixed lookup first if provided
@@ -306,9 +305,8 @@ export class I18n {
 
     if (direct && typeof direct === 'string') return direct;
 
-    if (fallback) return fallback;
-
-    return this.humanizeKeySegment(key);
+    // ALWAYS return the key indicator if translation is missing.
+    return `!!${key}!!`;
   }
 
   /**

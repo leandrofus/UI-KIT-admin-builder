@@ -1,7 +1,5 @@
-'use strict';
-
-var react = require('react');
-var jsxRuntime = require('react/jsx-runtime');
+import { createContext, useState, useContext, useEffect, useCallback, useMemo } from 'react';
+import { jsx } from 'react/jsx-runtime';
 
 // src/i18n/I18n.tsx
 function deepMerge(target, source) {
@@ -159,8 +157,7 @@ var I18n = class {
    * Resolve a human-friendly label for a key.
    *
    * - Returns the translated value if available
-   * - If missing, returns the provided fallback string
-   * - Otherwise, generates a humanized label from the last key segment
+   * - Otherwise, returns the key indicator !!key!! to force host app mapping.
    */
   resolveLabel(key, fallback, namespace) {
     if (namespace) {
@@ -170,8 +167,7 @@ var I18n = class {
     }
     const direct = this.getNestedValue(this.config.translations[this.currentLocale] || {}, key) || this.config.fallbackLocale && this.getNestedValue(this.config.translations[this.config.fallbackLocale] || {}, key);
     if (direct && typeof direct === "string") return direct;
-    if (fallback) return fallback;
-    return this.humanizeKeySegment(key);
+    return `!!${key}!!`;
   }
   /**
    * Humanize last key segment (used as fallback in multiple places)
@@ -288,28 +284,28 @@ function tp(key, count, params) {
 function resolveLabel(key, fallback, namespace) {
   return getI18n().resolveLabel(key, fallback, namespace);
 }
-var I18nContext = react.createContext(null);
+var I18nContext = createContext(null);
 function I18nProvider({ children, config, i18n }) {
-  const [instance] = react.useState(() => i18n || new I18n(config));
-  return /* @__PURE__ */ jsxRuntime.jsx(I18nContext.Provider, { value: instance, children });
+  const [instance] = useState(() => i18n || new I18n(config));
+  return /* @__PURE__ */ jsx(I18nContext.Provider, { value: instance, children });
 }
 function useI18n() {
-  const context = react.useContext(I18nContext);
+  const context = useContext(I18nContext);
   const i18n = context || getI18n();
-  const [locale, setLocaleState] = react.useState(i18n.locale);
-  react.useEffect(() => {
+  const [locale, setLocaleState] = useState(i18n.locale);
+  useEffect(() => {
     return i18n.subscribe(setLocaleState);
   }, [i18n]);
-  const setLocale = react.useCallback((newLocale) => {
+  const setLocale = useCallback((newLocale) => {
     i18n.setLocale(newLocale);
   }, [i18n]);
-  const translate = react.useCallback((key, params, fallback) => {
+  const translate = useCallback((key, params, fallback) => {
     return i18n.t(key, params, fallback);
   }, [i18n]);
-  const translatePlural = react.useCallback((key, count, params) => {
+  const translatePlural = useCallback((key, count, params) => {
     return i18n.tp(key, count, params);
   }, [i18n]);
-  return react.useMemo(() => ({
+  return useMemo(() => ({
     t: translate,
     tp: translatePlural,
     locale,
@@ -325,7 +321,7 @@ function useI18n() {
 }
 function useTranslatedValidation() {
   const { t: t2 } = useI18n();
-  return react.useMemo(() => ({
+  return useMemo(() => ({
     required: () => t2("validation.required"),
     email: () => t2("validation.email"),
     url: () => t2("validation.url"),
@@ -337,17 +333,6 @@ function useTranslatedValidation() {
   }), [t2]);
 }
 
-exports.I18n = I18n;
-exports.I18nContext = I18nContext;
-exports.I18nProvider = I18nProvider;
-exports.getI18n = getI18n;
-exports.initI18n = initI18n;
-exports.resolveLabel = resolveLabel;
-exports.t = t;
-exports.tp = tp;
-exports.tx = tx;
-exports.uiKitGlobalTranslations = uiKitGlobalTranslations;
-exports.useI18n = useI18n;
-exports.useTranslatedValidation = useTranslatedValidation;
-//# sourceMappingURL=chunk-4GBTIAHZ.js.map
-//# sourceMappingURL=chunk-4GBTIAHZ.js.map
+export { I18n, I18nContext, I18nProvider, getI18n, initI18n, resolveLabel, t, tp, tx, uiKitGlobalTranslations, useI18n, useTranslatedValidation };
+//# sourceMappingURL=chunk-ZCAJXFW7.mjs.map
+//# sourceMappingURL=chunk-ZCAJXFW7.mjs.map
