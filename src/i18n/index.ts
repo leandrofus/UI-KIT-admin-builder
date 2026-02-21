@@ -16,8 +16,6 @@ export {
   resolveLabel,
   useI18n,
   useTranslatedValidation,
-  defaultEnTranslations,
-  defaultEsTranslations,
   uiKitGlobalTranslations,
 } from './I18n';
 

@@ -1,11 +1,7 @@
-'use strict';
-
-var react = require('react');
-var jsxRuntime = require('react/jsx-runtime');
+import { createContext, useState, useContext, useEffect, useCallback, useMemo } from 'react';
+import { jsx } from 'react/jsx-runtime';
 
 // src/i18n/I18n.tsx
-var defaultEnTranslations = {};
-var defaultEsTranslations = {};
 function deepMerge(target, source) {
   if (!source) return target;
   const out = Array.isArray(target) ? [...target] : { ...target || {} };
@@ -26,32 +22,24 @@ var I18n = class {
     this.listeners = /* @__PURE__ */ new Set();
     this.hasAppliedGlobals = false;
     const baseDefaults = {
-      defaultLocale: "en",
-      fallbackLocale: "en",
-      locales: [
-        { code: "en", name: "English", direction: "ltr" },
-        { code: "es", name: "Espa\xF1ol", direction: "ltr" }
+      defaultLocale: config.defaultLocale || "en",
+      fallbackLocale: config.fallbackLocale || "en",
+      locales: config.locales || [
+        { code: "en", name: "English", direction: "ltr" }
       ],
-      translations: {
-        en: {},
-        es: {}
-      },
-      debug: false
+      translations: config.translations || {},
+      debug: config.debug || false
     };
-    const providedTranslations = config && config.translations || {};
-    const mergedTranslations = { ...baseDefaults.translations };
+    const providedTranslations = config.translations || {};
+    const mergedTranslations = { ...providedTranslations };
     Object.keys(uiKitGlobalTranslations).forEach((locale) => {
       mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, uiKitGlobalTranslations[locale]);
     });
-    Object.keys(providedTranslations).forEach((locale) => {
-      mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, providedTranslations[locale]);
-    });
     this.config = {
       ...baseDefaults,
-      ...config,
       translations: mergedTranslations
     };
-    this.currentLocale = config && config.defaultLocale || this.config.defaultLocale;
+    this.currentLocale = this.config.defaultLocale;
     this.hasAppliedGlobals = Object.keys(uiKitGlobalTranslations).length > 0;
   }
   /**
@@ -305,28 +293,28 @@ function tp(key, count, params) {
 function resolveLabel(key, fallback, namespace) {
   return getI18n().resolveLabel(key, fallback, namespace);
 }
-var I18nContext = react.createContext(null);
+var I18nContext = createContext(null);
 function I18nProvider({ children, config, i18n }) {
-  const [instance] = react.useState(() => i18n || new I18n(config));
-  return /* @__PURE__ */ jsxRuntime.jsx(I18nContext.Provider, { value: instance, children });
+  const [instance] = useState(() => i18n || new I18n(config));
+  return /* @__PURE__ */ jsx(I18nContext.Provider, { value: instance, children });
 }
 function useI18n() {
-  const context = react.useContext(I18nContext);
+  const context = useContext(I18nContext);
   const i18n = context || getI18n();
-  const [locale, setLocaleState] = react.useState(i18n.locale);
-  react.useEffect(() => {
+  const [locale, setLocaleState] = useState(i18n.locale);
+  useEffect(() => {
     return i18n.subscribe(setLocaleState);
   }, [i18n]);
-  const setLocale = react.useCallback((newLocale) => {
+  const setLocale = useCallback((newLocale) => {
     i18n.setLocale(newLocale);
   }, [i18n]);
-  const translate = react.useCallback((key, params, fallback) => {
+  const translate = useCallback((key, params, fallback) => {
     return i18n.t(key, params, fallback);
   }, [i18n]);
-  const translatePlural = react.useCallback((key, count, params) => {
+  const translatePlural = useCallback((key, count, params) => {
     return i18n.tp(key, count, params);
   }, [i18n]);
-  return react.useMemo(() => ({
+  return useMemo(() => ({
     t: translate,
     tp: translatePlural,
     locale,
@@ -342,7 +330,7 @@ function useI18n() {
 }
 function useTranslatedValidation() {
   const { t: t2 } = useI18n();
-  return react.useMemo(() => ({
+  return useMemo(() => ({
     required: () => t2("validation.required"),
     email: () => t2("validation.email"),
     url: () => t2("validation.url"),
@@ -354,19 +342,6 @@ function useTranslatedValidation() {
   }), [t2]);
 }
 
-exports.I18n = I18n;
-exports.I18nContext = I18nContext;
-exports.I18nProvider = I18nProvider;
-exports.defaultEnTranslations = defaultEnTranslations;
-exports.defaultEsTranslations = defaultEsTranslations;
-exports.getI18n = getI18n;
-exports.initI18n = initI18n;
-exports.resolveLabel = resolveLabel;
-exports.t = t;
-exports.tp = tp;
-exports.tx = tx;
-exports.uiKitGlobalTranslations = uiKitGlobalTranslations;
-exports.useI18n = useI18n;
-exports.useTranslatedValidation = useTranslatedValidation;
-//# sourceMappingURL=chunk-RSAFNJQW.js.map
-//# sourceMappingURL=chunk-RSAFNJQW.js.map
+export { I18n, I18nContext, I18nProvider, getI18n, initI18n, resolveLabel, t, tp, tx, uiKitGlobalTranslations, useI18n, useTranslatedValidation };
+//# sourceMappingURL=chunk-UYGL6BIX.mjs.map
+//# sourceMappingURL=chunk-UYGL6BIX.mjs.map

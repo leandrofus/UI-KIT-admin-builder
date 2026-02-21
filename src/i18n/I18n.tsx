@@ -74,20 +74,6 @@ export interface PluralForms {
   other: string;
 }
 
-// =============================================================================
-// DEFAULT TRANSLATIONS
-// =============================================================================
-
-/**
- * Default English translations for the UI kit (now empty, provided by host app)
- */
-export const defaultEnTranslations: TranslationDictionary = {};
-
-/**
- * Default Spanish translations for the UI kit (now empty, provided by host app)
- */
-export const defaultEsTranslations: TranslationDictionary = {};
-
 // Simple deep merge helper used for merging translation dictionaries
 function deepMerge(target: any, source: any): any {
   if (!source) return target;
@@ -128,41 +114,32 @@ export class I18n {
   private hasAppliedGlobals: boolean = false;
 
   constructor(config: Partial<I18nConfig> = {}) {
-  // Base defaults
-  const baseDefaults: I18nConfig = {
-    defaultLocale: 'en',
-    fallbackLocale: 'en',
-    locales: [
-      { code: 'en', name: 'English', direction: 'ltr' },
-      { code: 'es', name: 'Español', direction: 'ltr' },
-    ],
-    translations: {
-      en: {},
-      es: {},
-    },
-    debug: false,
-  };
+    // Truly empty defaults
+    const baseDefaults: I18nConfig = {
+      defaultLocale: config.defaultLocale || 'en',
+      fallbackLocale: config.fallbackLocale || 'en',
+      locales: config.locales || [
+        { code: 'en', name: 'English', direction: 'ltr' },
+      ],
+      translations: config.translations || {},
+      debug: config.debug || false,
+    };
 
-    // Deep-merge provided translations into the base defaults so apps can override
-    const providedTranslations = (config && (config.translations as any)) || {};
-    const mergedTranslations: Record<string, TranslationDictionary> = { ...(baseDefaults.translations as any) };
+    // Deep-merge provided translations into the base defaults
+    const providedTranslations = config.translations || {};
+    const mergedTranslations: Record<string, TranslationDictionary> = { ...providedTranslations };
 
-    // Apply global UI kit custom translations first
+    // Apply global UI kit custom translations if any
     Object.keys(uiKitGlobalTranslations).forEach(locale => {
       mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, uiKitGlobalTranslations[locale]);
     });
 
-    Object.keys(providedTranslations).forEach(locale => {
-      mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, providedTranslations[locale]);
-    });
-
     this.config = {
       ...baseDefaults,
-      ...config,
       translations: mergedTranslations,
     };
 
-    this.currentLocale = (config && (config.defaultLocale as string)) || this.config.defaultLocale;
+    this.currentLocale = this.config.defaultLocale;
     this.hasAppliedGlobals = Object.keys(uiKitGlobalTranslations).length > 0;
   }
 

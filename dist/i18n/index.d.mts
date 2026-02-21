@@ -69,14 +69,6 @@ interface PluralForms {
     other: string;
 }
 /**
- * Default English translations for the UI kit (now empty, provided by host app)
- */
-declare const defaultEnTranslations: TranslationDictionary;
-/**
- * Default Spanish translations for the UI kit (now empty, provided by host app)
- */
-declare const defaultEsTranslations: TranslationDictionary;
-/**
  * Global variable for overwriting default UI Kit translations.
  * Mutate this object before initializing the I18n class to apply global overrides.
  */
@@ -253,4 +245,4 @@ declare function useTranslatedValidation(): {
     pattern: () => string;
 };
 
-export { I18n, type I18nConfig, I18nContext, I18nProvider, type I18nProviderProps, type InterpolationParams, type LocaleConfig, type PluralForms, type TranslationDictionary, type TranslationValue, defaultEnTranslations, defaultEsTranslations, getI18n, initI18n, resolveLabel, t, tp, tx, uiKitGlobalTranslations, useI18n, useTranslatedValidation };
+export { I18n, type I18nConfig, I18nContext, I18nProvider, type I18nProviderProps, type InterpolationParams, type LocaleConfig, type PluralForms, type TranslationDictionary, type TranslationValue, getI18n, initI18n, resolveLabel, t, tp, tx, uiKitGlobalTranslations, useI18n, useTranslatedValidation };

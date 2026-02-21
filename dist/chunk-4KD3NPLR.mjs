@@ -1,6 +1,4 @@
-'use strict';
-
-var chunkRSAFNJQW_js = require('./chunk-RSAFNJQW.js');
+import { getI18n } from './chunk-UYGL6BIX.mjs';
 
 // src/config-system/ConfigValidator.ts
 var DEFAULT_FIELD_TYPES = [
@@ -446,7 +444,7 @@ function isLikelyTranslationKey(s) {
   return /[.]/.test(s) && /^[A-Za-z0-9._-]+$/.test(s);
 }
 function translateConfig(obj, i18nInstance) {
-  const i18n = i18nInstance ?? chunkRSAFNJQW_js.getI18n();
+  const i18n = i18nInstance ?? getI18n();
   function rec(value) {
     if (Array.isArray(value)) return value.map(rec);
     if (value !== null && typeof value === "object") {
@@ -469,12 +467,6 @@ function translateConfig(obj, i18nInstance) {
   return rec(obj);
 }
 
-exports.assertValidConfig = assertValidConfig;
-exports.formatValidationErrors = formatValidationErrors;
-exports.isLikelyTranslationKey = isLikelyTranslationKey;
-exports.translateConfig = translateConfig;
-exports.validateConfig = validateConfig;
-exports.validateFormConfig = validateFormConfig;
-exports.validateTableConfig = validateTableConfig;
-//# sourceMappingURL=chunk-34IGRDEU.js.map
-//# sourceMappingURL=chunk-34IGRDEU.js.map
+export { assertValidConfig, formatValidationErrors, isLikelyTranslationKey, translateConfig, validateConfig, validateFormConfig, validateTableConfig };
+//# sourceMappingURL=chunk-4KD3NPLR.mjs.map
+//# sourceMappingURL=chunk-4KD3NPLR.mjs.map

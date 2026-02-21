@@ -332,8 +332,6 @@ export {
   tx,
   tp,
   resolveLabel,
-  defaultEnTranslations,
-  defaultEsTranslations,
 } from './i18n/I18n';
 export type {
   TranslationValue,
