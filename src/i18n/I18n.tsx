@@ -271,23 +271,12 @@ export class I18n {
 
     // Handle missing translation
     if (!translation) {
-      // Compatibility with app-level t: check if fallback is in params
-      const effectiveFallback = fallback || (params as any)?.default || (params as any)?.defaultValue;
-
-      // Use effective fallback string
-      if (effectiveFallback) {
-        return this.interpolate(effectiveFallback, params);
-      }
-
-      if (this.config.onMissingTranslation) {
-        return this.config.onMissingTranslation(key, this.currentLocale);
-      }
-
       if (this.config.debug) {
         console.warn(`[i18n] Missing translation: ${key} (${this.currentLocale})`);
       }
 
-      // Return a distinctive missing key indicator instead of humanized label
+      // ALWAYS return the key indicator if translation is missing.
+      // This forces the host app to provide all necessary translations.
       return `!!${key}!!`;
     }
 

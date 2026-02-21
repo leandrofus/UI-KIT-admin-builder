@@ -1,12 +1,12 @@
-export { AdvancedSearchModal, DynamicModal, FormRenderer, KanbanRenderer, SidebarRenderer, TabRenderer, TableRenderer, TableToolbar } from './chunk-WS3JADCM.mjs';
+export { AdvancedSearchModal, DynamicModal, FormRenderer, KanbanRenderer, SidebarRenderer, TabRenderer, TableRenderer, TableToolbar } from './chunk-2CWBNIND.mjs';
 export { useColumnConfig, useFormState, usePaginatedData, useServerTableData, useTableSelection } from './chunk-7FJC5PAY.mjs';
 export { commonTransformers, createAxiosAdapter, createFormAdapter, createServiceAdapter } from './chunk-BSVYXR3N.mjs';
-export { CheckboxField, CurrencyField, FieldRegistry, FieldRegistryContext, HiddenField, NumberField, SelectField, SwitchField, TextField, TextareaField, baseFields, createFieldFactory, getDefaultRegistry, getField, registerField, registerFields, setDefaultRegistry, useFieldFactory, useFieldRegistry } from './chunk-LN3BGQS2.mjs';
-export { assertValidConfig, formatValidationErrors, isLikelyTranslationKey, translateConfig, validateConfig, validateFormConfig, validateTableConfig } from './chunk-4KD3NPLR.mjs';
+export { CheckboxField, CurrencyField, FieldRegistry, FieldRegistryContext, HiddenField, NumberField, SelectField, SwitchField, TextField, TextareaField, baseFields, createFieldFactory, getDefaultRegistry, getField, registerField, registerFields, setDefaultRegistry, useFieldFactory, useFieldRegistry } from './chunk-BCA6TW4V.mjs';
+export { assertValidConfig, formatValidationErrors, isLikelyTranslationKey, translateConfig, validateConfig, validateFormConfig, validateTableConfig } from './chunk-TFPRTBEK.mjs';
 export { ConfigLoader, createConfigLoader, getModalSubmitLabel, getModalTitle, parseConfig, parseFormConfig, parseModalConfig, parseTableConfig } from './chunk-PWH3M2ZV.mjs';
 export { calculatePagination, cn, compareValues, debounce, deepMerge, evaluateConditions, filterBySearchTerm, formatDate, formatPhone, formatValue, generateId, getNestedValue, getRowKey, hasNestedValue, matchesSearchTerm, omit, paginateData, pick, setNestedValue, sortData, throttle, validateEmail, validateField, validateForm, validateMax, validateMaxLength, validateMin, validateMinLength, validatePattern, validateRequired, validateUrl } from './chunk-ZYRLE26I.mjs';
 import './chunk-Z4UKVVBJ.mjs';
-export { I18n, I18nContext, I18nProvider, getI18n, initI18n, resolveLabel, t, tp, tx, useI18n, useTranslatedValidation } from './chunk-UYGL6BIX.mjs';
+export { I18n, I18nContext, I18nProvider, getI18n, initI18n, resolveLabel, t, tp, tx, useI18n, useTranslatedValidation } from './chunk-ITO3Q7BY.mjs';
 
 // src/index.ts
 var VERSION = "0.1.0";

@@ -1,6 +1,6 @@
 'use strict';
 
-var chunkFNVTC5WT_js = require('./chunk-FNVTC5WT.js');
+var chunk4GBTIAHZ_js = require('./chunk-4GBTIAHZ.js');
 
 // src/config-system/ConfigValidator.ts
 var DEFAULT_FIELD_TYPES = [
@@ -446,7 +446,7 @@ function isLikelyTranslationKey(s) {
   return /[.]/.test(s) && /^[A-Za-z0-9._-]+$/.test(s);
 }
 function translateConfig(obj, i18nInstance) {
-  const i18n = i18nInstance ?? chunkFNVTC5WT_js.getI18n();
+  const i18n = i18nInstance ?? chunk4GBTIAHZ_js.getI18n();
   function rec(value) {
     if (Array.isArray(value)) return value.map(rec);
     if (value !== null && typeof value === "object") {
@@ -476,5 +476,5 @@ exports.translateConfig = translateConfig;
 exports.validateConfig = validateConfig;
 exports.validateFormConfig = validateFormConfig;
 exports.validateTableConfig = validateTableConfig;
-//# sourceMappingURL=chunk-QQY7Q2UR.js.map
-//# sourceMappingURL=chunk-QQY7Q2UR.js.map
+//# sourceMappingURL=chunk-UPZBT5WK.js.map
+//# sourceMappingURL=chunk-UPZBT5WK.js.map

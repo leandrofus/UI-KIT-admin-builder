@@ -148,13 +148,6 @@ var I18n = class {
       );
     }
     if (!translation) {
-      const effectiveFallback = fallback || params?.default || params?.defaultValue;
-      if (effectiveFallback) {
-        return this.interpolate(effectiveFallback, params);
-      }
-      if (this.config.onMissingTranslation) {
-        return this.config.onMissingTranslation(key, this.currentLocale);
-      }
       if (this.config.debug) {
         console.warn(`[i18n] Missing translation: ${key} (${this.currentLocale})`);
       }
@@ -356,5 +349,5 @@ exports.tx = tx;
 exports.uiKitGlobalTranslations = uiKitGlobalTranslations;
 exports.useI18n = useI18n;
 exports.useTranslatedValidation = useTranslatedValidation;
-//# sourceMappingURL=chunk-FNVTC5WT.js.map
-//# sourceMappingURL=chunk-FNVTC5WT.js.map
+//# sourceMappingURL=chunk-4GBTIAHZ.js.map
+//# sourceMappingURL=chunk-4GBTIAHZ.js.map
