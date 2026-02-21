@@ -570,6 +570,7 @@ export class I18n {
   private config: I18nConfig;
   private currentLocale: string;
   private listeners: Set<(locale: string) => void> = new Set();
+  private hasAppliedGlobals: boolean = false;
 
   constructor(config: Partial<I18nConfig> = {}) {
   // Base defaults
@@ -607,6 +608,29 @@ export class I18n {
     };
 
     this.currentLocale = (config && (config.defaultLocale as string)) || this.config.defaultLocale;
+    this.hasAppliedGlobals = Object.keys(uiKitGlobalTranslations).length > 0;
+  }
+
+  /**
+   * Manually update/merge translations after initialization
+   */
+  updateTranslations(translations: Record<string, TranslationDictionary>): void {
+    Object.keys(translations).forEach(locale => {
+      this.config.translations[locale] = deepMerge(
+        this.config.translations[locale] || {},
+        translations[locale]
+      );
+    });
+    this.notifyListeners();
+  }
+
+  /**
+   * Sync with the global uiKitGlobalTranslations variable
+   */
+  syncGlobals(): void {
+    if (Object.keys(uiKitGlobalTranslations).length > 0) {
+      this.updateTranslations(uiKitGlobalTranslations);
+    }
   }
 
   /**
@@ -874,6 +898,10 @@ let i18nInstance: I18n | null = null;
 export function getI18n(): I18n {
   if (!i18nInstance) {
     i18nInstance = new I18n();
+  }
+  // If globals were set after the instance was created, sync them
+  if (i18nInstance && (i18nInstance as any).syncGlobals) {
+    (i18nInstance as any).syncGlobals();
   }
   return i18nInstance;
 }
