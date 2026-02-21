@@ -550,6 +550,16 @@ function deepMerge(target: any, source: any): any {
 }
 
 // =============================================================================
+// GLOBAL TRANSLATION OVERRIDES
+// =============================================================================
+
+/**
+ * Global variable for overwriting default UI Kit translations.
+ * Mutate this object before initializing the I18n class to apply global overrides.
+ */
+export const uiKitGlobalTranslations: Record<string, TranslationDictionary> = {};
+
+// =============================================================================
 // I18N CLASS
 // =============================================================================
 
@@ -580,6 +590,11 @@ export class I18n {
     // Deep-merge provided translations into the base defaults so apps can override
     const providedTranslations = (config && (config.translations as any)) || {};
     const mergedTranslations: Record<string, TranslationDictionary> = { ...(baseDefaults.translations as any) };
+
+    // Apply global UI kit custom translations first
+    Object.keys(uiKitGlobalTranslations).forEach(locale => {
+      mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, uiKitGlobalTranslations[locale]);
+    });
 
     Object.keys(providedTranslations).forEach(locale => {
       mergedTranslations[locale] = deepMerge(mergedTranslations[locale] || {}, providedTranslations[locale]);
